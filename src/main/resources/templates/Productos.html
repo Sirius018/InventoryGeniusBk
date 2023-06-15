@@ -176,10 +176,11 @@
 				      <th scope="col">Código</th>
 				      <th scope="col">Nombre</th>
 				      <th scope="col">Descripción</th>
+						<th scope="col">cod_unico_prov</th>
 				      <th scope="col">Fecha Ingreso</th>
   				      <th scope="col">Fecha Salida</th>
   				      <th scope="col">Stock</th>
-  				      <th scope="col">Categoría</th>	
+  				      <th scope="col">Categoría</th>
 				    </tr>
 				  </thead>
 				  <tbody>
@@ -187,9 +188,11 @@
 				      <td th:text="${pr.cod_unico_prod}"></td>
 				      <td th:text="${pr.nombre_prod}"></td>
 				      <td th:text="${pr.descripcion_prod}"></td>
+						<td th:text="${pr.cod_unico_prov}"></td>
 				      <td th:text="${pr.fecha_ingreso}"></td>
 				      <td th:text="${pr.fecha_salida}"></td>
 				      <td th:text="${pr.stk_prod}"></td>
+						<td th:text="${pr.cod_categoria}"></td>
 				     </tr>				 				   
 				  </tbody>
 				</table>
