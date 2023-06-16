@@ -142,15 +142,7 @@
             transition: .5s;
         }
 
-        table{
-            margin-left: auto;
-            margin-right: auto;
-            text-align: center;
-        }
 
-        table td{
-            font-size: 13px;
-        }
     </style>
 </head>
 <body>
@@ -184,50 +176,43 @@
 </header>
 
 <form class="content-navbar">
-    <div class="row">
+    <div class="form-row">
         <div class="col">
-            <label for="inputId">Id</label>
-            <input type="text" class="form-control" id="inputId" placeholder="">
+            <label for="inputEmail4">Id</label>
+            <input type="text" class="form-control" id="inputEmail4" placeholder="">
         </div>
         <div class="col">
-            <label for="inputCodio">Codigo</label>
-            <input type="text" class="form-control" id="inputCodio" placeholder="">
-        </div>
-    </div>
+            <label for="Codigo">Codigo</label>
+            <input type="text" class="form-control" id="Codigo" placeholder="">
 
-    <div class="row">
-        <div class="col">
-            <label for="inputEmpresa">Empresa</label>
-            <input type="text" class="form-control" id="inputEmpresa" placeholder="">
-        </div>
-        <div class="col">
-            <label for="inputRuc">Ruc</label>
-            <input type="text" class="form-control" id="inputRuc" placeholder="">
-            <div class="row">
-
-            </div>
         </div>
 
-        <div class="col">
-            <label for="inputDescripcion">Descripcion</label>
-            <input type="text" class="form-control" id="inputDescripcion" placeholder="">
+        <div class="form-group col-md-6">
+            <label for="Empresa">Empresa</label>
+            <input type="text" class="form-control" id="Empresa" placeholder="">
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <label for="inputE-mail">E-mail</label>
-            <input type="email" class="form-control" id="inputE-mail" placeholder="">
+        <div class="form-group col-md-6">
+            <label for="Ruc">Ruc</label>
+            <input type="text" class="form-control" id="Ruc" placeholder="">
         </div>
-        <div class="col">
-            <label for="inputDireccion">Direccion</label>
-            <input type="text" class="form-control" id="inputDireccion" placeholder="">
+
+
+        <div class="form-group col-md-6">
+            <label for="Descripcion">Descripcion</label>
+            <input type="text" class="form-control" id="Descripcion" placeholder="">
         </div>
-    </div>
+
+        <div class="form-group col-md-6">
+            <label for="E-mail">E-mail</label>
+            <input type="text" class="form-control" id="E-mail" placeholder="">
+        </div>
 
 
+        <div class="form-group col-md-6">
+            <label for="Direc">Direc</label>
+            <input type="text" class="form-control" id="Direc" placeholder="">
+        </div>
 
-    <div class="row">
         <div class="form-group col-md-6">
             <label for="Pais">Pais</label>
             <input type="text" class="form-control" id="Pais" placeholder="">
@@ -244,26 +229,27 @@
             <label for="Telf2">Telf2</label>
             <input type="text" class="form-control" id="Telf2" placeholder="">
         </div>
-
+        <br>
+        <button type="submit" class="btn btn-success">Registrar</button>
     </div>
 
-    <br>
-    <button type="submit" class="btn btn-success">Registrar</button>
-
 </form>
+
 <div class="container">
     <table id="tablaEmpresas" class="table table-bordered">
         <thead>
         <tr>
-            <th scope="col" class="bg-success">cod_prov</th>
-            <th scope="col" class="bg-success">cod_unico_prov</th>
-            <th scope="col" class="bg-success">nombre_prov</th>
-            <th scope="col" class="bg-success">ruc_prov</th>
-            <th scope="col" class="bg-success">correo_prov</th>
-            <th scope="col" class="bg-success">direccion_prov</th>
-            <th scope="col" class="bg-success">nacionalidad_prov</th>
-            <th scope="col" class="bg-success">id_pais</th>
-            <th scope="col" class="bg-success">telefono_one_prov</th>
+            <th scope="col">cod_prov</th>
+            <th scope="col">cod_unico_prov</th>
+            <th scope="col">nombre_prov</th>
+            <th scope="col">ruc_prov</th>
+            <th scope="col">descripcion_prov</th>
+            <th scope="col">correo_prov</th>
+            <th scope="col">direccion_prov</th>
+            <th scope="col">nacionalidad_prov</th>
+            <th scope="col">id_pais</th>
+            <th scope="col">telefono_one_prov</th>
+            <th scope="col">telefono_two_prov</th>
         </tr>
         </thead>
         <tbody>
@@ -272,28 +258,20 @@
             <td th:text="${pr.cod_unico_prov}"></td>
             <td th:text="${pr.nombre_prov}"></td>
             <td th:text="${pr.ruc_prov}"></td>
+            <td th:text="${pr.descripcion_prov}"></td>
             <td th:text="${pr.correo_prov}"></td>
             <td th:text="${pr.direccion_prov}"></td>
             <td th:text="${pr.nacionalidad_prov}"></td>
             <td th:text="${pr.id_pais}"></td>
             <td th:text="${pr.telefono_one_prov}"></td>
+            <td th:text="${pr.telefono_two_prov}"></td>
         </tr>
         </tbody>
 
     </table>
 </div>
 
-<script src="https://code.jquwry.com/jquery-3.4.1.js"
-        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymousWWWWWWWWWWW"></script>
-<script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('tablaEmpresas').DataTable();
-    });
 
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 </body>
 </html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>

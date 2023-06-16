@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.inventorygenius.model.Categoria;
+import com.inventorygenius.repository.ICategoriaRepository;
 import com.inventorygenius.repository.IProductoRepository;
 
 @Controller
@@ -13,8 +15,17 @@ public class ProductoController {
 	@Autowired
 	private IProductoRepository repoProducto;
 	
+	@Autowired
+	private ICategoriaRepository repoCategoria;
 	
 	
+	 @GetMapping("/formulario")
+	    public String mostrarFormulario(Model model) {
+	        Iterable<Categoria> categorias = repoCategoria.findAll();
+	        model.addAttribute("LstCategorias", categorias);
+	        return "Productos";
+	    }
+	 
 	@GetMapping("/listado")
 	public String listarProductos(Model model) {
 		model.addAttribute("listaProducto", repoProducto.findAll());
