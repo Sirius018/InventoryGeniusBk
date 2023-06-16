@@ -186,7 +186,7 @@
 			<input type="text" class="form-control" id="inputId" placeholder="">
 		</div>
 		<div class="col">
-			<label for="inputCodio">Nombre</label>
+			<label for="inputCodio">Producto</label>
 			<input type="text" class="form-control" id="inputCodio" placeholder="">
 		</div>
 	</div>
@@ -197,43 +197,47 @@
 			<input type="text" class="form-control" id="inputEmpresa" placeholder="">
 		</div>
 		<div class="col">
-			<label for="inputRuc">cod_unico_prov</label>
+			<label for="inputRuc">Cod Unico Prov</label>
 			<input type="text" class="form-control" id="inputRuc" placeholder="">
-			<div class="row">
-			</div>
 		</div>
+	</div>
+
+	<div class="row">
 		<div class="col">
-			<label for="inputDescripcion">Fecha Ingreso</label>
+			<label for="inputDescripcion">Fecha Reg.</label>
 			<input type="text" class="form-control" id="inputDescripcion" placeholder="">
 		</div>
-	</div>
-
-	<div class="row">
 		<div class="col">
-			<label for="inputE-mail">Fecha Salida</label>
+			<label for="inputE-mail">Fecha Sal.</label>
 			<input type="email" class="form-control" id="inputE-mail" placeholder="">
 		</div>
+	</div>
+
+	<div class="row">
 		<div class="col">
-			<label for="inputDireccion">Stock</label>
-			<input type="text" class="form-control" id="inputDireccion" placeholder="">
+			<label for="inputDireccion">Stk</label>
+			<input type="text" class="form-control" id="inputDireccion" placeholder="" style="width: 100%;">
+		</div>
+		<div class="col">
+			<label for="Pais">Pais</label>
+			<input type="text" class="form-control" id="Pais" placeholder="">
 		</div>
 	</div>
 
 	<div class="row">
-    <div class="form-group col-md-6">
-        <label for="inputCat">Categoría</label>
-        <select id="inputCat" th:field="*{cod_categoria}" class="form-control">
-            <option value="-1">Seleccione...</option>
-            <option th:each="categoria : ${LstCategorias}" th:value="${categoria.cod_categoria}"
-                    th:text="${categoria.categoria}"></option>
-        </select>
-    </div>
-</div>
+		<div class="col">
+			<label for="Telf">Categoria</label>
+			<input type="text" class="form-control" id="Telf" placeholder="">
+		</div>
+		<div class="col">
+			<label for="Telf2">Telf</label>
+			<input type="text" class="form-control" id="Telf2" placeholder="">
+		</div>
+	</div>
 
 
 	<br>
 	<button type="submit" class="btn btn-success">Registrar</button>
-
 </form>
 <div class="container">
 	<table id="tablaEmpresas" class="table table-bordered">
@@ -241,9 +245,9 @@
 		<thead>
 		<tr>
 			<th scope="col"class="bg-success">Código</th>
-			<th scope="col"class="bg-success">Nombre</th>
+			<th scope="col"class="bg-success">Producto</th>
 			<th scope="col"class="bg-success">Descripción</th>
-			<th scope="col"class="bg-success">cod_unico_prov</th>
+			<th scope="col"class="bg-success">Cod Unico</th>
 			<th scope="col"class="bg-success">Fecha Ingreso</th>
 			<th scope="col"class="bg-success">Fecha Salida</th>
 			<th scope="col"class="bg-success">Stock</th>

@@ -14,17 +14,19 @@ public class ProductoController {
 	/*crear los objetos para el repositorio*/
 	@Autowired
 	private IProductoRepository repoProducto;
-	
+	/*
 	@Autowired
-	private ICategoriaRepository repoCategoria;
+	private ICategoriaRepository repoCategoria;*/
 	
-	
+	/*
 	 @GetMapping("/formulario")
 	    public String mostrarFormulario(Model model) {
 	        Iterable<Categoria> categorias = repoCategoria.findAll();
 	        model.addAttribute("LstCategorias", categorias);
 	        return "Productos";
 	    }
+
+	 */
 	 
 	@GetMapping("/listado")
 	public String listarProductos(Model model) {
