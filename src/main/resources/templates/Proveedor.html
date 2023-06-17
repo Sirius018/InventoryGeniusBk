@@ -183,39 +183,36 @@
     </div>
 </header>
 
-<form class="content-navbar">
+<form action="/proveedor/guardar" method="post" th:object="${proveedor}" class="content-navbar">
     <div class="row">
         <div class="col">
             <label for="inputId">Order</label>
-            <input type="text" class="form-control" id="inputId" placeholder="">
+            <input type="text" class="form-control" id="inputId" placeholder=""  th:field="*{cod_prov}">
         </div>
         <div class="col">
             <label for="inputCodio">Cod Unico</label>
-            <input type="text" class="form-control" id="inputCodio" placeholder="">
+            <input type="text" class="form-control" id="inputCodio" placeholder=""  th:field="*{cod_unico_prov}">
         </div>
     </div>
 
     <div class="row">
         <div class="col">
             <label for="inputEmpresa">Proveedor</label>
-            <input type="text" class="form-control" id="inputEmpresa" placeholder="">
+            <input type="text" class="form-control" id="inputEmpresa" placeholder=""  th:field="*{nombre_prov}">
         </div>
         <div class="col">
             <label for="inputRuc">Ruc</label>
-            <input type="text" class="form-control" id="inputRuc" placeholder="">
+            <input type="text" class="form-control" id="inputRuc" placeholder=""  th:field="*{ruc_prov}">
         </div>
-
-
     </div>
-
     <div class="row">
         <div class="col">
-            <label for="inputDescripcion">Descripcion</label>
-            <input type="text" class="form-control" id="inputDescripcion" placeholder="">
+            <label for="inputDescripcion">Correo</label>
+            <input type="text" class="form-control" id="inputDescripcion" placeholder=""  th:field="*{correo_prov}">
         </div>
         <div class="col">
-            <label for="inputE-mail">E-mail</label>
-            <input type="email" class="form-control" id="inputE-mail" placeholder="">
+            <label for="inputE-mail">Direccion</label>
+            <input type="email" class="form-control" id="inputE-mail" placeholder=""  th:field="*{direccion_prov}">
         </div>
 
     </div>
@@ -224,29 +221,25 @@
 
     <div class="row">
         <div class="col">
-            <label for="inputDireccion">Direccion</label>
-            <input type="text" class="form-control" id="inputDireccion" placeholder="">
+            <label for="inputDireccion">Tipo</label>
+            <input type="text" class="form-control" id="inputDireccion" placeholder=""  th:field="*{nacionalidad_prov}">
         </div>
         <div class="form-group col-md-6">
-            <label for="Pais">Tipo</label>
-            <input type="text" class="form-control" id="Pais" placeholder="">
+            <label for="Pais">Pais</label>
+            <input type="text" class="form-control" id="Pais" placeholder=""  th:field="*{id_pais}">
         </div>
     </div>
 
     <div class="row">
         <div class="form-group col-md-6">
-            <label for="Telf">Pais</label>
-            <input type="text" class="form-control" id="Telf" placeholder="">
+            <label for="Telf">Telefono</label>
+            <input type="text" class="form-control" id="Telf" placeholder=""  th:field="*{telefono_two_prov}">
         </div>
 
-        <div class="form-group col-md-6">
-            <label for="Telf2">Telefono</label>
-            <input type="text" class="form-control" id="Telf2" placeholder="">
-        </div>
     </div>
 
     <br>
-    <button type="submit" class="btn btn-success">Registrar</button>
+    <button type="submit" th:text="${btnRegistrarProveedor}" class="btn btn-success">Registrar</button>
 
 </form>
 <div class="container">
