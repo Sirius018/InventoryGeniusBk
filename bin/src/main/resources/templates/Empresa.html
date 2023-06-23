@@ -139,6 +139,16 @@
             color: #fff;
             transition: .5s;
         }
+
+        table{
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        table td{
+            font-size: 13px;
+        }
     </style>
 </head>
 <body>
@@ -172,79 +182,82 @@
 </header>
 
 <form class="content-navbar">
-    <div class="form-row">
+    <div class="row">
         <div class="col">
-            <label for="inputEmail4">Id</label>
-            <input type="text" class="form-control" id="inputEmail4" placeholder="">
+            <label for="inputId">Orden</label>
+            <input type="text" class="form-control" id="inputId" placeholder="">
         </div>
         <div class="col">
-        <label for="Codigo">Codigo</label>
-        <input type="text" class="form-control" id="Codigo" placeholder="">
-
+            <label for="inputCodio">Codigo</label>
+            <input type="text" class="form-control" id="inputCodio" placeholder="">
+        </div>
     </div>
 
-            <div class="form-group col-md-6">
-                <label for="Empresa">Empresa</label>
-                <input type="text" class="form-control" id="Empresa" placeholder="">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="Ruc">Ruc</label>
-                <input type="text" class="form-control" id="Ruc" placeholder="">
-            </div>
-
-
-                <div class="form-group col-md-6">
-                    <label for="Descripcion">Descripcion</label>
-                    <input type="text" class="form-control" id="Descripcion" placeholder="">
-                </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="E-mail">E-mail</label>
-                        <input type="text" class="form-control" id="E-mail" placeholder="">
-                    </div>
-
-
-                        <div class="form-group col-md-6">
-                            <label for="Direc">Direc</label>
-                            <input type="text" class="form-control" id="Direc" placeholder="">
-                        </div>
-
-                            <div class="form-group col-md-6">
-                                <label for="Pais">Pais</label>
-                                <input type="text" class="form-control" id="Pais" placeholder="">
-                            </div>
-
-
-
-                                    <div class="form-group col-md-6">
-                                    <label for="Telf">Telf</label>
-                                    <input type="text" class="form-control" id="Telf" placeholder="">
-                                </div>
-
-                                <div class="form-group col-md-6">
-                                        <label for="Telf2">Telf2</label>
-                                        <input type="text" class="form-control" id="Telf2" placeholder="">
-                                    </div>
-            <br>
-        <button type="submit" class="btn btn-success">Registrar</button>
+    <div class="row">
+        <div class="col">
+            <label for="inputEmpresa">Empresa</label>
+            <input type="text" class="form-control" id="inputEmpresa" placeholder="">
+        </div>
+        <div class="col">
+            <label for="inputRuc">Ruc</label>
+            <input type="text" class="form-control" id="inputRuc" placeholder="">
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col">
+            <label for="inputDescripcion">Correo</label>
+            <input type="text" class="form-control" id="inputDescripcion" placeholder="">
+        </div>
+        <div class="col">
+            <label for="inputE-mail">E-mail</label>
+            <input type="email" class="form-control" id="inputE-mail" placeholder="">
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col">
+            <label for="inputDireccion">Direccion</label>
+            <input type="text" class="form-control" id="inputDireccion" placeholder="">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="Pais">Pais</label>
+            <input type="text" class="form-control" id="Pais" placeholder="">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="Telf">Telf</label>
+            <input type="text" class="form-control" id="Telf" placeholder="">
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="Telf2">Telf2</label>
+            <input type="text" class="form-control" id="Telf2" placeholder="">
+        </div>
+    </div>
+
+    <br>
+    <button type="submit" class="btn btn-success">Registrar</button>
 
 </form>
 
 <div class="container">
-    <table id="tablaEmpresas" class="table table-bordered">
+    <table id="tablaEmpresas" class="table table-bordered " >
         <thead>
         <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Cod</th>
-            <th scope="col">Empresa</th>
-            <th scope="col">Ruc</th>
-            <th scope="col">Descripcion</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Direc.</th>
-            <th scope="col">Pais</th>
-            <th scope="col">Telf</th>
-            <th scope="col">Telf2</th>
+            <th scope="col"class="bg-success">Orden</th>
+            <th scope="col"class="bg-success">Cod</th>
+            <th scope="col"class="bg-success">Empresa</th>
+            <th scope="col"class="bg-success">Ruc</th>
+            <th scope="col"class="bg-success">E-mail</th>
+            <th scope="col"class="bg-success">Direccion</th>
+            <th scope="col"class="bg-success">Pais</th>
+            <th scope="col"class="bg-success">Telefono 1</th>
+            <th scope="col"class="bg-success">Telefono 2</th>
         </tr>
         </thead>
         <tbody>
@@ -253,7 +266,6 @@
             <td th:text="${pr.cod_unico_emp}"></td>
             <td th:text="${pr.nombre_emp}"></td>
             <td th:text="${pr.ruc_emp}"></td>
-            <td th:text="${pr.descripcion_emp}"></td>
             <td th:text="${pr.correo_emp}"></td>
             <td th:text="${pr.direccion_emp}"></td>
             <td th:text="${pr.id_pais}"></td>

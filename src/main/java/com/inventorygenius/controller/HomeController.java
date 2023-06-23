@@ -6,10 +6,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 	
-	/* abrir este despues de logearte */
-	@GetMapping("/home/config")
-	public String configs() {
+	
+	
+	@GetMapping("/home/HomeAcount")
+	public String navbarAcount() {
 		return "Home_Acount";
+	} 
+	
+	
+	@GetMapping("/home/NewAcount")
+	public String newAcount() {
+		return "LoginCreate";
+	} 
+	
+	
+	/* abrir este despues de logearte */
+	@GetMapping("/home/Acount")
+	public String signAcount() {
+		return "LoginSign";
 	} 
 	
 	/* primera pagina que debe ejecutarse */
