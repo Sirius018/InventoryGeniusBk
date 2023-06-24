@@ -13,7 +13,7 @@ public class EmpresaController {
     private IEmpresaRepository repoEmpresa;
 
 
-    @GetMapping("/listarEmpresa")
+    @GetMapping("/home/HomeAcount/listadoEmpresa")
     public String listaEmp(Model model) {
         model.addAttribute("listaEmpresa", repoEmpresa.findAll());
         return "Empresa";

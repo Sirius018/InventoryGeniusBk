@@ -25,7 +25,7 @@ public class ProductoController {
 
 	 */
 	 
-	@GetMapping("/listado")
+	@GetMapping("/home/HomeAcount/listadoProducto")
 	public String listarProductos(Model model) {
 		model.addAttribute("listaProducto", repoProducto.findAll());
 		return "Productos";

@@ -17,7 +17,7 @@ public class ProveedorController {
 	private IProveedorRepository repoProv;
 	
 	
-	
+	/*
 	@PostMapping("/proveedor/guardar")
 	public String grabarCrudProducto(@ModelAttribute Proveedor proveedor, Model model) {
 		System.out.println(proveedor);
@@ -33,10 +33,10 @@ public class ProveedorController {
 		model.addAttribute("btnRegistrarProveedor", "Registrar");
 		
 		return "Proveedor";
-	}
+	}*/
 	
 	
-	@GetMapping("/listadoProveedores")
+	@GetMapping("/home/HomeAcount/listadoProveedores")
 	public String listarProveedor(Model model) {
 		model.addAttribute("listaProveedor", repoProv.findAll());
 		return "Proveedor";
