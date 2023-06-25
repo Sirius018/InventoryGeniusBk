@@ -14,31 +14,16 @@ import com.inventorygenius.repository.IProveedorRepository;
 public class ProveedorController {
 
 	@Autowired
-	private IProveedorRepository repoProv;
+	private IProveedorRepository repoProveedor;
 	
 	
-	/*
-	@PostMapping("/proveedor/guardar")
-	public String grabarCrudProducto(@ModelAttribute Proveedor proveedor, Model model) {
-		System.out.println(proveedor);
-		try {
-			model.addAttribute("LstProductos", repoProv.findAll());
-			repoProv.save(proveedor);
-			model.addAttribute("mensaje","Registro OK");
-			System.out.println(proveedor);
-			
-		} catch (Exception e) {
-			model.addAttribute("mensaje","Error al Registrar");
-		}
-		model.addAttribute("btnRegistrarProveedor", "Registrar");
-		
-		return "Proveedor";
-	}*/
+
+
 	
 	
 	@GetMapping("/home/HomeAcount/listadoProveedores")
 	public String listarProveedor(Model model) {
-		model.addAttribute("listaProveedor", repoProv.findAll());
+		model.addAttribute("listaProveedor", repoProveedor.findAll());
 		return "Proveedor";
 	}
 }
