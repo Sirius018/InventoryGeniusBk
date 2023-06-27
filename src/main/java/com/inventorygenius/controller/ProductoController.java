@@ -5,12 +5,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.inventorygenius.repository.IProductoRepository;
+import com.inventorygenius.repository.ITipoRepository;
 
 @Controller
 public class ProductoController {
 	/*crear los objetos para el repositorio*/
 	@Autowired
 	private IProductoRepository repoProducto;
+	
+
 	/*
 	@Autowired
 	private ICategoriaRepository repoCategoria;*/
@@ -28,8 +31,25 @@ public class ProductoController {
 	@GetMapping("/home/HomeAcount/listadoProducto")
 	public String listarProductos(Model model) {
 		model.addAttribute("listaProducto", repoProducto.findAll());
+		
+
+		
 		return "Productos";
 	}
 	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

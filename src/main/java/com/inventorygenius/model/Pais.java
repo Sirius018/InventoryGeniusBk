@@ -11,5 +11,5 @@ import lombok.Data;
 public class Pais {
 	@Id
 	private int id_pais;
-	private String tipo;
+	private String nombre_pais;
 }

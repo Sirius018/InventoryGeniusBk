@@ -24,10 +24,13 @@ public class Proveedor {
     private int id_pais;
     private String telefono_one_prov;
     private String telefono_two_prov;
+    public int id_tip;
+    
+    
     
     @ManyToOne
-    @JoinColumn(name="nacionalidad_prov", insertable = false, updatable = false)
-    private Pais objProve;
+    @JoinColumn(name="id_tip", insertable = false, updatable = false)
+    public Tipo objTipo;
     
     @ManyToOne
     @JoinColumn(name="id_pais", insertable = false, updatable = false)

@@ -241,7 +241,6 @@ insert into Empresa values
 
 
 
-select*from Productos;
 DROP TABLE IF EXISTS Productos;
 CREATE TABLE Productos (
   cod_unico_prod CHAR(5) NOT NULL,
@@ -480,15 +479,14 @@ CREATE TABLE Usuario (
   `cod_uni_User` INT PRIMARY KEY,
   `cod_order` INT,
   `Usuario` VARCHAR(50),
-  `password` VARCHAR(50),
-  `permisos` ENUM('admin', 'user1','user2','user3')
+  `password` VARCHAR(50)
 );
 
-INSERT INTO Usuario (cod_uni_User, cod_order, Usuario, password, permisos) VALUES
-(1, 1, 'admin', 'admin', 'admin'),
-(2, 2, 'user1', 'user1', 'user1'),
-(3, 3, 'user2', 'user2', 'user2'),
-(4, 4, 'user3', 'user3', 'user3');
+INSERT INTO Usuario (cod_uni_User, cod_order, Usuario, password) VALUES
+(1, 1, 'admin', 'admin'),
+(2, 2, 'Noob', 'asd'),
+(3, 3, 'midd', '123'),
+(4, 4, 'nuton', 'buton');
 
 
 
@@ -617,3 +615,4 @@ inner join Pais pa on p.id_pais = pa.id_pais
 INNER JOIN Tipo tip ON p.nacionalidad_prov = tip.id_tip
 order by p.cod_prov asc;
 */
+

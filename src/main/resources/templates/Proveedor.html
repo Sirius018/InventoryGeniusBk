@@ -222,11 +222,22 @@
     <div class="row">
         <div class="col">
             <label for="inputDireccion">Tipo</label>
-            <input type="text" class="form-control" id="inputDireccion" placeholder=""  >
+            <select id="inputTipo" class="form-control" th:field="*{id_tip}" >
+						<option th:each="t : ${lstTipo}" th:value="${t.id_tip}" 
+						th:text="${t.tipo}"
+						> </option>
+						
+					</select>
         </div>
+        
+        
         <div class="form-group col-md-6">
             <label for="Pais">Pais</label>
-            <input type="text" class="form-control" id="Pais" placeholder=""  >
+             <select id="inputPais" class="form-control" th:field="*{id_pais}" >
+						<option th:each="p : ${lstPais}" th:value="${p.id_pais}" 
+						th:text="${p.nombre_pais}"
+						> </option>
+					</select>
         </div>
     </div>
 

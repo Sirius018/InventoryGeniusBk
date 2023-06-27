@@ -7,11 +7,10 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name="Empresa")
+@Table(name="Tipo")
 public class Tipo {
 	@Id
-	private int id_tip;
-	
-	private String tipo;
+	public int id_tip;
+	public String tipo;
 
 }
