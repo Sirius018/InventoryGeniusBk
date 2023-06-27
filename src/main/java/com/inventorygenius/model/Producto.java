@@ -12,18 +12,22 @@ import lombok.Data;
 @Table(name="Productos")
 public class Producto {
 	@Id
-	private String cod_unico_prod;
-	
-	private String nombre_prod;
-	private String descripcion_prod;
-	private String cod_unico_prov;
-	private String fecha_ingreso;
-	private String fecha_salida;
-	private int stk_prod;
-	private String cod_categoria;
-	
+	public String cod_unico_prod;
+	public String nombre_prod;
+	public String descripcion_prod;
+	public int cod_prov;
+	public String fecha_ingreso;
+	public String fecha_salida;
+	public int stk_prod;
+	public String cod_categoria;
+
 	@ManyToOne
 	@JoinColumn(name="cod_categoria", insertable = false, updatable = false)
-	private Categoria objCategoria;
+	public Categoria objCategoria;
+
+	@ManyToOne
+	@JoinColumn(name="cod_prov", insertable = false, updatable = false)
+	public Proveedor objProveedor;
+
 
 }

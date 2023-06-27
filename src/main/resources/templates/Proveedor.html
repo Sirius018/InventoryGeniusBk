@@ -161,7 +161,7 @@
         <div class="menu-toggle"></div>
         <nav>
             <ul>
-                <li><a class="active" href="/home/config"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                <li><a class="active" href="/home/HomeAcount"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
                 <li class="nav-item dropdown">
                     <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -186,42 +186,35 @@
 <form action="/proveedor/guardar" method="post" th:object="${proveedor}" class="content-navbar">
     <div class="row">
         <div class="col">
-            <label for="inputId">Order</label>
-            <input type="text" class="form-control" id="inputId" placeholder="" >
+            <label for="inputEmpresa">Código Proveedor</label>
+            <input type="text" th:field="*{cod_prov}"
+                   class="form-control" id="inputCod" placeholder="00000" readonly>
         </div>
-        <div class="col">
-            <label for="inputCod">Cod Unico</label>
-            <input type="text" th:field="*{cod_unico_prov}"
-                   class="form-control" id="inputCod" placeholder="Código">
-        </div>
-    </div>
-
-    <div class="row">
         <div class="col">
             <label for="inputEmpresa">Proveedor</label>
             <input type="text" th:field="*{nombre_prov}"
-                   class="form-control" id="inputCod" placeholder="Código">
+                   class="form-control" id="inputCod" placeholder="">
         </div>
+    </div>
+    <div class="row">
         <div class="col">
             <label for="inputRuc">Ruc</label>
             <input type="text" th:field="*{ruc_prov}"
-                   class="form-control" id="inputCod" placeholder="Código">
+                   class="form-control" id="inputCod" placeholder="11 digitos (obligatorio)">
         </div>
-    </div>
-    <div class="row">
         <div class="col">
             <label for="inputDescripcion">Correo</label>
             <input type="text" th:field="*{correo_prov}"
-                   class="form-control" id="inputCod" placeholder="Código">
-        </div>
-        <div class="col">
-            <label for="inputE-mail">Direccion</label>
-            <input type="text" th:field="*{direccion_prov}"
-                   class="form-control" id="inputCod" placeholder="Código">
+                   class="form-control" id="inputCod" placeholder="(obligatorio)">
         </div>
     </div>
     <div class="row">
-        <div class="col">
+        <div class="col col-md-6">
+            <label for="inputE-mail">Direccion</label>
+            <input type="text" th:field="*{direccion_prov}"
+                   class="form-control" id="inputCod" placeholder="(obligatorio)">
+        </div>
+        <div class="col col-md-3">
             <label for="inputDireccion">Tipo</label>
             <select id="inputTipo" class="form-control" th:field="*{id_tip}" >
                 <option th:each="t : ${lstTipo}" th:value="${t.id_tip}"
@@ -229,7 +222,7 @@
                 > </option>
             </select>
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-3">
             <label for="Pais">Pais</label>
             <select id="inputPais" class="form-control" th:field="*{id_pais}" >
                 <option th:each="p : ${lstPais}" th:value="${p.id_pais}"
@@ -243,25 +236,29 @@
         <div class="form-group col-md-6">
             <label for="Telf">Telefono</label>
             <input type="text" th:field="*{telefono_one_prov}"
-                   class="form-control" id="inputCod" placeholder="Código">
+                   class="form-control" id="inputCod" placeholder="(01)xxxxxxx)">
         </div>
         <div class="form-group col-md-6">
             <label for="Telf">Otro Telefono</label>
             <input type="text" th:field="*{telefono_two_prov}"
-                   class="form-control" id="inputCod" placeholder="Código">
+                   class="form-control" id="inputCod" placeholder="9xxxxxxxx">
         </div>
     </div>
 
     <br>
-    <button type="submit" class="btn btn-success">Registrar</button>
-
+    <button th:text="${boton}" type="submit" class="btn btn-success"></button>
+    </br>
+    <div th:class="${clase}" role="alert" th:text="${mensaje}"></div>
 </form>
+
+
+
+
 <div class="container">
     <table id="tablaEmpresas" class="table table-bordered">
         <thead>
         <tr>
             <th scope="col" class="bg-success">Order</th>
-            <th scope="col" class="bg-success">Cod Unico</th>
             <th scope="col" class="bg-success">Proveedor</th>
             <th scope="col" class="bg-success">Ruc</th>
             <th scope="col" class="bg-success">Correo</th>
@@ -269,19 +266,25 @@
             <th scope="col" class="bg-success">Tipo</th>
             <th scope="col" class="bg-success">Pais</th>
             <th scope="col" class="bg-success">Telefono</th>
+            <th scope="col" class="bg-success"></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="pr : ${listaProveedor}">
             <td th:text="${pr.cod_prov}"></td>
-            <td th:text="${pr.cod_unico_prov}"></td>
             <td th:text="${pr.nombre_prov}"></td>
             <td th:text="${pr.ruc_prov}"></td>
             <td th:text="${pr.correo_prov}"></td>
             <td th:text="${pr.direccion_prov}"></td>
-            <td th:text="${pr.nacionalidad_prov}"></td>
+            <td th:text="${pr.id_tip}"></td>
             <td th:text="${pr.id_pais}"></td>
-            <td th:text="${pr.telefono_one_prov}"></td>
+            <td th:text="${pr.telefono_two_prov}"></td>
+            <td>
+                <form action="/buscarproveedor"  method="post">
+                    <input type="hidden" name="cod_prov" th:value="${pr.cod_prov}">
+                    <button class="btn btn-primary">Seleccionar</button>
+                </form>
+            </td>
         </tr>
         </tbody>
 
