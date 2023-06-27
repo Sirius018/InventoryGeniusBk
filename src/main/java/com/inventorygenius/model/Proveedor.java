@@ -11,27 +11,23 @@ import lombok.Data;
 @Entity
 @Table(name="Proveedores")
 public class Proveedor {
-	@Id
-	private int cod_prov;
-	
-    private String cod_unico_prov;    
+    @Id
+    private int cod_prov;
+    private String cod_unico_prov;
     private String nombre_prov;
     private String ruc_prov;
     private String descripcion_prov;
     private String correo_prov;
     private String direccion_prov;
-    private int nacionalidad_prov;
+    public int id_tip;
     private int id_pais;
     private String telefono_one_prov;
     private String telefono_two_prov;
-    public int id_tip;
-    
-    
-    
+
     @ManyToOne
     @JoinColumn(name="id_tip", insertable = false, updatable = false)
     public Tipo objTipo;
-    
+
     @ManyToOne
     @JoinColumn(name="id_pais", insertable = false, updatable = false)
     private Pais objPais;

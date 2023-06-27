@@ -169,8 +169,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/home/HomeAcount/listadoProveedores">Proveedores</a></li>
-                          <li><a class="dropdown-item" href="/home/HomeAcount/listadoProducto">productos</a></li>
-                          <li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresas</a></li>
+                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoProducto">productos</a></li>
+                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresas</a></li>
 
                     </ul>
                 </li>
@@ -190,63 +190,66 @@
             <input type="text" class="form-control" id="inputId" placeholder="" >
         </div>
         <div class="col">
-            <label for="inputCodio">Cod Unico</label>
-            <input type="text" class="form-control" id="inputCodio" placeholder=""  >
+            <label for="inputCod">Cod Unico</label>
+            <input type="text" th:field="*{cod_unico_prov}"
+                   class="form-control" id="inputCod" placeholder="Código">
         </div>
     </div>
 
     <div class="row">
         <div class="col">
             <label for="inputEmpresa">Proveedor</label>
-            <input type="text" class="form-control" id="inputEmpresa" placeholder=""  >
+            <input type="text" th:field="*{nombre_prov}"
+                   class="form-control" id="inputCod" placeholder="Código">
         </div>
         <div class="col">
             <label for="inputRuc">Ruc</label>
-            <input type="text" class="form-control" id="inputRuc" placeholder=""  >
+            <input type="text" th:field="*{ruc_prov}"
+                   class="form-control" id="inputCod" placeholder="Código">
         </div>
     </div>
     <div class="row">
         <div class="col">
             <label for="inputDescripcion">Correo</label>
-            <input type="text" class="form-control" id="inputDescripcion" placeholder=""  >
+            <input type="text" th:field="*{correo_prov}"
+                   class="form-control" id="inputCod" placeholder="Código">
         </div>
         <div class="col">
             <label for="inputE-mail">Direccion</label>
-            <input type="email" class="form-control" id="inputE-mail" placeholder=""  >
+            <input type="text" th:field="*{direccion_prov}"
+                   class="form-control" id="inputCod" placeholder="Código">
         </div>
-
     </div>
-
-
-
     <div class="row">
         <div class="col">
             <label for="inputDireccion">Tipo</label>
             <select id="inputTipo" class="form-control" th:field="*{id_tip}" >
-						<option th:each="t : ${lstTipo}" th:value="${t.id_tip}" 
-						th:text="${t.tipo}"
-						> </option>
-						
-					</select>
+                <option th:each="t : ${lstTipo}" th:value="${t.id_tip}"
+                        th:text="${t.tipo}"
+                > </option>
+            </select>
         </div>
-        
-        
         <div class="form-group col-md-6">
             <label for="Pais">Pais</label>
-             <select id="inputPais" class="form-control" th:field="*{id_pais}" >
-						<option th:each="p : ${lstPais}" th:value="${p.id_pais}" 
-						th:text="${p.nombre_pais}"
-						> </option>
-					</select>
+            <select id="inputPais" class="form-control" th:field="*{id_pais}" >
+                <option th:each="p : ${lstPais}" th:value="${p.id_pais}"
+                        th:text="${p.nombre_pais}"
+                > </option>
+            </select>
         </div>
     </div>
 
     <div class="row">
         <div class="form-group col-md-6">
             <label for="Telf">Telefono</label>
-            <input type="text" class="form-control" id="Telf" placeholder=""  >
+            <input type="text" th:field="*{telefono_one_prov}"
+                   class="form-control" id="inputCod" placeholder="Código">
         </div>
-
+        <div class="form-group col-md-6">
+            <label for="Telf">Otro Telefono</label>
+            <input type="text" th:field="*{telefono_two_prov}"
+                   class="form-control" id="inputCod" placeholder="Código">
+        </div>
     </div>
 
     <br>

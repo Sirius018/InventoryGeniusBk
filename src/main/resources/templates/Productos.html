@@ -157,7 +157,7 @@
 		<div class="menu-toggle"></div>
 		<nav>
 			<ul>
-				<li><a class="active" href="/home/config"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<li><a class="active" href="/home/HomeAcount"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
 				<li class="nav-item dropdown">
 					<a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -179,59 +179,48 @@
 	</div>
 </header>
 
-<form class="content-navbar">
+<form class="content-navbar" action="/crud/security/productos/guardar" method="post" th:object="${producto}">
 	<div class="row">
 		<div class="col">
 			<label for="inputId">Código</label>
-			<input type="text" class="form-control" id="inputId" placeholder="">
+			<input type="text" class="form-control" id="inputId" placeholder="" >
 		</div>
 		<div class="col">
 			<label for="inputCodio">Producto</label>
-			<input type="text" class="form-control" id="inputCodio" placeholder="">
+			<input type="text" class="form-control" id="inputCodio" placeholder="" >
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col">
 			<label for="inputEmpresa">Descripción</label>
-			<input type="text" class="form-control" id="inputEmpresa" placeholder="">
+			<input type="text" class="form-control" id="inputEmpresa" placeholder="" >
 		</div>
 		<div class="col">
 			<label for="inputRuc">Cod Unico Prov</label>
-			<input type="text" class="form-control" id="inputRuc" placeholder="">
+			<input type="text" class="form-control" id="inputRuc" placeholder="" >
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col">
 			<label for="inputDescripcion">Fecha Reg.</label>
-			<input type="text" class="form-control" id="inputDescripcion" placeholder="">
+			<input type="text" class="form-control" id="inputDescripcion" placeholder="" >
 		</div>
 		<div class="col">
 			<label for="inputE-mail">Fecha Sal.</label>
-			<input type="email" class="form-control" id="inputE-mail" placeholder="">
+			<input type="email" class="form-control" id="inputE-mail" placeholder="" >
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col">
 			<label for="inputDireccion">Stk</label>
-			<input type="text" class="form-control" id="inputDireccion" placeholder="" style="width: 100%;">
+			<input type="text" class="form-control" id="inputDireccion" placeholder="" style="width: 100%;" >
 		</div>
-		<div class="col">
-			<label for="Pais">Pais</label>
-			<input type="text" class="form-control" id="Pais" placeholder="">
-		</div>
-	</div>
-
-	<div class="row">
 		<div class="col">
 			<label for="Telf">Categoria</label>
-			<input type="text" class="form-control" id="Telf" placeholder="">
-		</div>
-		<div class="col">
-			<label for="Telf2">Telf</label>
-			<input type="text" class="form-control" id="Telf2" placeholder="">
+			<input type="text" class="form-control" id="Telf" placeholder="" >
 		</div>
 	</div>
 
