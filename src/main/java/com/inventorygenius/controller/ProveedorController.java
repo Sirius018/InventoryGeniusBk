@@ -1,6 +1,5 @@
 package com.inventorygenius.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +11,19 @@ import com.inventorygenius.model.Proveedor;
 import com.inventorygenius.repository.IPaisRepository;
 import com.inventorygenius.repository.IProveedorRepository;
 import com.inventorygenius.repository.ITipoRepository;
+
+import jakarta.servlet.http.HttpServletResponse;
+
+import java.io.OutputStream;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
+
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 
 @Controller
 public class ProveedorController {
@@ -25,6 +37,36 @@ public class ProveedorController {
 	@Autowired
 	private IPaisRepository repoPais;
 
+	@Autowired
+	private DataSource dataSource; 
+	
+	@Autowired
+	private ResourceLoader resourceLoader; 
+	
+	
+	@GetMapping("/proveedor/listadopdf")
+	public void reporteProveedor(HttpServletResponse response) {
+		// descargar directamente en un archivo
+		// response.setHeader("Content-Disposition", "attachment; filename=\"reporte.pdf\";");
+		
+		// el pdf se muestre en pantalla
+		response.setHeader("Content-Disposition", "inline;"); 
+		// tipo de contenido
+		response.setContentType("application/pdf");
+		try {
+			// obtener el recurso a utilizar -> jasper
+			String ru = resourceLoader.getResource("classpath:reportes/ReporteProveedor.jasper").getURI().getPath();
+			// combina el jasper + data / Ojo!!! null -> la conexión no tiene parámetros
+			JasperPrint jasperPrint = JasperFillManager.fillReport(ru, null, dataSource.getConnection());
+			// genera un archivo temporal
+			OutputStream outStream = response.getOutputStream();
+			// muestra el archivo
+			JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	
+	}
+	
 
 	@GetMapping("/home/HomeAcount/listadoProveedores")
 	public String listarProveedor(Model model) {

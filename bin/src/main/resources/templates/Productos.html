@@ -157,7 +157,7 @@
 		<div class="menu-toggle"></div>
 		<nav>
 			<ul>
-				<li><a class="active" href="/home/config"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+				<li><a class="active" href="/home/HomeAcount"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
 				<li class="nav-item dropdown">
 					<a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -179,66 +179,74 @@
 	</div>
 </header>
 
-<form class="content-navbar">
+<form action="/producto/guardar" method="post" th:object="${producto}" class="content-navbar">
 	<div class="row">
 		<div class="col">
-			<label for="inputId">Código</label>
-			<input type="text" class="form-control" id="inputId" placeholder="">
+			<label for="inpCodigo">Código</label>
+			<input type="text" th:field="*{cod_unico_prod}" class="form-control" id="inpCodigo" placeholder="5 digitos (obligatorio)" pattern="\d{5}" required>
+			<small class="text-danger" id="codigoError"></small>
+			<small class="text-danger" th:if="${#fields.hasErrors('cod_unico_prod')}" th:errors="*{cod_unico_prod}"></small>
 		</div>
 		<div class="col">
-			<label for="inputCodio">Producto</label>
-			<input type="text" class="form-control" id="inputCodio" placeholder="">
+			<label for="inpProducto">Producto</label>
+			<input type="text" th:field="*{nombre_prod}" class="form-control" id="inpProducto" placeholder="(obligatorio)" maxlength="100" required>
+			<small class="text-danger" id="productoError"></small>
+			<small class="text-danger" th:if="${#fields.hasErrors('nombre_prod')}" th:errors="*{nombre_prod}"></small>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col">
-			<label for="inputEmpresa">Descripción</label>
-			<input type="text" class="form-control" id="inputEmpresa" placeholder="">
+			<label for="inpDescription">Descripción</label>
+			<input type="text" th:field="*{descripcion_prod}" class="form-control" id="inpDescription" placeholder="">
 		</div>
 		<div class="col">
-			<label for="inputRuc">Cod Unico Prov</label>
-			<input type="text" class="form-control" id="inputRuc" placeholder="">
+			<label for="inputRuc">Proveedor</label>
+			<select class="form-control" th:field="*{cod_prov}">
+				<option th:each="v : ${lstProveedor}" th:value="${v.cod_prov}"
+						th:text="${v.nombre_prov}"
+				>1</option>
+			</select>
 		</div>
 	</div>
 
 	<div class="row">
 		<div class="col">
-			<label for="inputDescripcion">Fecha Reg.</label>
-			<input type="text" class="form-control" id="inputDescripcion" placeholder="">
+			<label for="inpFechaRegistro">Fecha Reg.</label>
+			<input type="date" th:field="*{fecha_ingreso}" class="form-control" id="inpFechaRegistro" placeholder="" required>
+			<small class="text-danger" th:if="${#fields.hasErrors('fecha_ingreso')}" th:errors="*{fecha_ingreso}"></small>
 		</div>
 		<div class="col">
-			<label for="inputE-mail">Fecha Sal.</label>
-			<input type="email" class="form-control" id="inputE-mail" placeholder="">
+			<label for="inpFechaSalida">Fecha Sal.</label>
+			<input type="date" th:field="*{fecha_salida}" class="form-control" id="inpFechaSalida" placeholder="" required>
+			<small class="text-danger" th:if="${#fields.hasErrors('fecha_salida')}" th:errors="*{fecha_salida}"></small>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col">
-			<label for="inputDireccion">Stk</label>
-			<input type="text" class="form-control" id="inputDireccion" placeholder="" style="width: 100%;">
+		<div class="col col-md-3">
+			<label for="inputDireccion">Stock</label>
+			<input type="number" th:field="*{stk_prod}" class="form-control" id="inpstk" placeholder="(obligatorio)" required min="1" step="1" oninput="validarStock()" />
+			<small class="text-danger" id="stkError"></small>
+			<small class="text-danger" th:if="${#fields.hasErrors('stk_prod')}" th:errors="*{stk_prod}"></small>
 		</div>
-		<div class="col">
-			<label for="Pais">Pais</label>
-			<input type="text" class="form-control" id="Pais" placeholder="">
+
+		<div class="col col-md-3">
+			<label for="">Categoria</label>
+			<select class="form-control" th:field="*{cod_categoria}">
+				<option th:each="c : ${lstCategoria}" th:value="${c.cod_categoria}"
+						th:text="${c.categoria}"
+				> </option>
+			</select>
 		</div>
 	</div>
-
-	<div class="row">
-		<div class="col">
-			<label for="Telf">Categoria</label>
-			<input type="text" class="form-control" id="Telf" placeholder="">
-		</div>
-		<div class="col">
-			<label for="Telf2">Telf</label>
-			<input type="text" class="form-control" id="Telf2" placeholder="">
-		</div>
-	</div>
-
-
 	<br>
-	<button type="submit" class="btn btn-success">Registrar</button>
+	<button th:text="${boton}" type="submit" class="btn btn-success"></button>
+	</br>
+	<div th:class="${clase}" role="alert" th:text="${mensaje}"></div>
 </form>
+
+
 <div class="container">
 	<table id="tablaEmpresas" class="table table-bordered">
 
@@ -246,30 +254,56 @@
 		<tr>
 			<th scope="col"class="bg-success">Código</th>
 			<th scope="col"class="bg-success">Producto</th>
+			<th scope="col"class="bg-success">Proveedor</th>
 			<th scope="col"class="bg-success">Descripción</th>
-			<th scope="col"class="bg-success">Cod Unico</th>
 			<th scope="col"class="bg-success">Fecha Ingreso</th>
 			<th scope="col"class="bg-success">Fecha Salida</th>
 			<th scope="col"class="bg-success">Stock</th>
-			<th scope="col"class="bg-success">Categoría</th>
+			<th scope="col"class="bg-success">Categoria</th>
+			<th scope="col"class="bg-success"></th>
 		</tr>
 		</thead>
 		<tbody>
-		<tr th:each="pr : ${listaProducto}">
-			<td th:text="${pr.cod_unico_prod}"></td>
-			<td th:text="${pr.nombre_prod}"></td>
-			<td th:text="${pr.descripcion_prod}"></td>
-			<td th:text="${pr.cod_unico_prov}"></td>
-			<td th:text="${pr.fecha_ingreso}"></td>
-			<td th:text="${pr.fecha_salida}"></td>
-			<td th:text="${pr.stk_prod}"></td>
-			<td th:text="${pr.cod_categoria}"></td>
-
+		<tr th:each="o : ${listaProducto}">
+			<td th:text="${o.cod_unico_prod}"></td>
+			<td th:text="${o.nombre_prod}"></td>
+			<td th:text="${o.cod_prov}"></td>
+			<td th:text="${o.descripcion_prod}"></td>
+			<td th:text="${o.fecha_ingreso}"></td>
+			<td th:text="${o.fecha_salida}"></td>
+			<td th:text="${o.stk_prod}"></td>
+			<td th:text="${o.cod_categoria}"></td>
+			<td>
+				<form action="/buscarproducto"  method="post">
+					<input type="hidden" name="cod_unico_prod" th:value="${o.cod_unico_prod}">
+					<button class="btn btn-primary">Seleccionar</button>
+				</form>
+			</td>
 		</tr>
 		</tbody>
 	</table>
 </div>
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 <script src="../static/js/home.js"></script>
+
+
+<script>
+	function validarStock() {
+		var stockInput = document.getElementById("inpstk");
+		var stockError = document.getElementById("stkError");
+
+		if (stockInput.value == 0) {
+			stockError.textContent = "El stock debe ser mayor que 0.";
+			stockInput.setCustomValidity("El stock debe ser mayor que 0.");
+		} else {
+			stockError.textContent = "";
+			stockInput.setCustomValidity("");
+		}
+	}
+</script>
+
 </body>
 </html>

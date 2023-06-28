@@ -161,7 +161,7 @@
         <div class="menu-toggle"></div>
         <nav>
             <ul>
-                <li><a class="active" href="/home/config"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                <li><a class="active" href="/home/HomeAcount"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
                 <li class="nav-item dropdown">
                     <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -169,8 +169,8 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/home/HomeAcount/listadoProveedores">Proveedores</a></li>
-                          <li><a class="dropdown-item" href="/home/HomeAcount/listadoProducto">productos</a></li>
-                          <li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresas</a></li>
+                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoProducto">productos</a></li>
+                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresas</a></li>
 
                     </ul>
                 </li>
@@ -186,68 +186,88 @@
 <form action="/proveedor/guardar" method="post" th:object="${proveedor}" class="content-navbar">
     <div class="row">
         <div class="col">
-            <label for="inputId">Order</label>
-            <input type="text" class="form-control" id="inputId" placeholder="" >
+            <label for="cod_prov">Código Proveedor</label>
+            <input type="text" th:field="*{cod_prov}"
+                   class="form-control" id="inputCod" placeholder="00000" readonly>
         </div>
         <div class="col">
-            <label for="inputCodio">Cod Unico</label>
-            <input type="text" class="form-control" id="inputCodio" placeholder=""  >
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col">
-            <label for="inputEmpresa">Proveedor</label>
-            <input type="text" class="form-control" id="inputEmpresa" placeholder=""  >
-        </div>
-        <div class="col">
-            <label for="inputRuc">Ruc</label>
-            <input type="text" class="form-control" id="inputRuc" placeholder=""  >
+            <label for="nombre_prov">Proveedor</label>
+            <input type="text" th:field="*{nombre_prov}"
+                   class="form-control" id="nombre_prov" placeholder="Obligatorio (máximo 250 caracteres)" required maxlength="250">
+            <small class="text-danger" id="nombreProvError"></small>
+            <small class="text-danger" th:if="${#fields.hasErrors('nombre_prov')}" th:errors="*{nombre_prov}"></small>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <label for="inputDescripcion">Correo</label>
-            <input type="text" class="form-control" id="inputDescripcion" placeholder=""  >
+            <label for="ruc_prov">Ruc</label>
+            <input type="text" th:field="*{ruc_prov}"
+                   class="form-control" id="ruc_prov" placeholder="11 dígitos (obligatorio)" pattern="\d{11}" required>
+            <small class="text-danger" id="rucProvError"></small>
+            <small class="text-danger" th:if="${#fields.hasErrors('ruc_prov')}" th:errors="*{ruc_prov}"></small>
         </div>
         <div class="col">
-            <label for="inputE-mail">Direccion</label>
-            <input type="email" class="form-control" id="inputE-mail" placeholder=""  >
+            <label for="correo_prov">Correo</label>
+            <input type="email" th:field="*{correo_prov}"
+                   class="form-control" id="correo_prov" placeholder="Obligatorio (ejemplo: adasd@gmail.com)" required>
+            <small class="text-danger" id="correoProvError"></small>
+            <small class="text-danger" th:if="${#fields.hasErrors('correo_prov')}" th:errors="*{correo_prov}"></small>
         </div>
-
+    </div>
+    <div class="row">
+        <div class="col col-md-6">
+            <label for="direccion_prov">Dirección</label>
+            <input type="text" th:field="*{direccion_prov}"
+                   class="form-control" id="direccion_prov" placeholder="Obligatorio" required>
+            <small class="text-danger" id="direccionProvError"></small>
+            <small class="text-danger" th:if="${#fields.hasErrors('direccion_prov')}" th:errors="*{direccion_prov}"></small>
+        </div>
+        <div class="col col-md-3">
+            <label for="id_tip">Tipo</label>
+            <select id="inputTipo" class="form-control" th:field="*{id_tip}">
+                <option th:each="t : ${lstTipo}" th:value="${t.id_tip}"
+                        th:text="${t.tipo}"
+                ></option>
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="Pais">País</label>
+            <select id="inputPais" class="form-control" th:field="*{id_pais}">
+                <option th:each="p : ${lstPais}" th:value="${p.id_pais}"
+                        th:text="${p.nombre_pais}"
+                ></option>
+            </select>
+        </div>
     </div>
 
-
-
     <div class="row">
-        <div class="col">
-            <label for="inputDireccion">Tipo</label>
-            <input type="text" class="form-control" id="inputDireccion" placeholder=""  >
+        <div class="form-group col-md-6">
+            <label for="telefono_one_prov">Teléfono</label>
+            <input type="text" th:field="*{telefono_one_prov}"
+                   class="form-control" id="telefono_one_prov" placeholder="(01)xxxxxxx">
         </div>
         <div class="form-group col-md-6">
-            <label for="Pais">Pais</label>
-            <input type="text" class="form-control" id="Pais" placeholder=""  >
+            <label for="telefono_two_prov">Otro Teléfono</label>
+            <input type="text" th:field="*{telefono_two_prov}"
+                   class="form-control" id="telefono_two_prov" placeholder="9xxxxxxxx">
         </div>
-    </div>
-
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label for="Telf">Telefono</label>
-            <input type="text" class="form-control" id="Telf" placeholder=""  >
-        </div>
-
     </div>
 
     <br>
-    <button type="submit" class="btn btn-success">Registrar</button>
-
+    <button th:text="${boton}" type="submit" class="btn btn-success"></button>
+    </br>
+    <div th:class="${clase}" role="alert" th:text="${mensaje}"></div>
 </form>
+
+
+
+
+
 <div class="container">
     <table id="tablaEmpresas" class="table table-bordered">
         <thead>
         <tr>
             <th scope="col" class="bg-success">Order</th>
-            <th scope="col" class="bg-success">Cod Unico</th>
             <th scope="col" class="bg-success">Proveedor</th>
             <th scope="col" class="bg-success">Ruc</th>
             <th scope="col" class="bg-success">Correo</th>
@@ -255,19 +275,25 @@
             <th scope="col" class="bg-success">Tipo</th>
             <th scope="col" class="bg-success">Pais</th>
             <th scope="col" class="bg-success">Telefono</th>
+            <th scope="col" class="bg-success"></th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="pr : ${listaProveedor}">
             <td th:text="${pr.cod_prov}"></td>
-            <td th:text="${pr.cod_unico_prov}"></td>
             <td th:text="${pr.nombre_prov}"></td>
             <td th:text="${pr.ruc_prov}"></td>
             <td th:text="${pr.correo_prov}"></td>
             <td th:text="${pr.direccion_prov}"></td>
-            <td th:text="${pr.nacionalidad_prov}"></td>
+            <td th:text="${pr.id_tip}"></td>
             <td th:text="${pr.id_pais}"></td>
-            <td th:text="${pr.telefono_one_prov}"></td>
+            <td th:text="${pr.telefono_two_prov}"></td>
+            <td>
+                <form action="/buscarproveedor"  method="post">
+                    <input type="hidden" name="cod_prov" th:value="${pr.cod_prov}">
+                    <button class="btn btn-primary">Seleccionar</button>
+                </form>
+            </td>
         </tr>
         </tbody>
 
