@@ -25,7 +25,6 @@
 
         :root{
             --bg-aside:#1D2F3D;
-            --tip-letra-footer: font-family: 'Geologica', sans-serif;
         }
         li{
             list-style: none;
@@ -186,7 +185,7 @@
 <form action="/proveedor/guardar" method="post" th:object="${proveedor}" class="content-navbar">
     <div class="row">
         <div class="col">
-            <label for="cod_prov">Código Proveedor</label>
+            <label for="inputCod">Código Proveedor</label>
             <input type="text" th:field="*{cod_prov}"
                    class="form-control" id="inputCod" placeholder="00000" readonly>
         </div>
@@ -209,7 +208,7 @@
         <div class="col">
             <label for="correo_prov">Correo</label>
             <input type="email" th:field="*{correo_prov}"
-                   class="form-control" id="correo_prov" placeholder="Obligatorio (ejemplo: adasd@gmail.com)" required>
+                   class="form-control" id="correo_prov" placeholder="Obligatorio (ejemplo: nombre@gmail.com)" required>
             <small class="text-danger" id="correoProvError"></small>
             <small class="text-danger" th:if="${#fields.hasErrors('correo_prov')}" th:errors="*{correo_prov}"></small>
         </div>

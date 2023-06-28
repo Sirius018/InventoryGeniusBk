@@ -207,13 +207,13 @@
     <div class="row">
         <div class="col">
             <label for="ruc_emp">RUC</label>
-            <input type="text" th:field="*{ruc_emp}" class="form-control" id="ruc_emp" placeholder="(obligatorio)" pattern="[0-9]{11}" required>
+            <input type="text" th:field="*{ruc_emp}" class="form-control" id="ruc_emp" placeholder="11 dígitos (obligatorio)" pattern="[0-9]{11}" required>
             <div class="invalid-feedback">Ingresa un RUC de 11 dígitos numéricos.</div>
         </div>
         <div class="col">
             <label for="correo_emp">Correo</label>
             <input type="email" th:field="*{correo_emp}" class="form-control" id="correo_emp" placeholder="(obligatorio)" required>
-            <div class="invalid-feedback">Ingresa un correo válido (ejemplo: adasd@gmail.com).</div>
+            <div class="invalid-feedback">Ingresa un correo válido (ejemplo: nombre@gmail.com).</div>
         </div>
     </div>
 
