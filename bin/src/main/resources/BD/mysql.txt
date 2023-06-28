@@ -10,6 +10,7 @@ create table `Tipo`(
   tipo varchar(100)  not null
 );
 
+
 insert into Tipo values
 (100, "Nacional"),
 (200,"Internacional")
@@ -89,7 +90,7 @@ CREATE TABLE `Empresa` (
   `id_emp` int auto_increment,
   `cod_unico_emp` int not null,
   `nombre_emp` varchar(255) NOT NULL,
-  `ruc_emp` char(11) not null,
+  `ruc_emp` varchar(11) not null,
   `descripcion_emp` varchar(250) default NULL,
   `correo_emp` varchar(100) NOT NULL,
   `direccion_emp` varchar(255) not NULL,
@@ -239,42 +240,40 @@ insert into Empresa values
 (null, 891672, "Nebula Technologies", "17639788361", null, "NebulaTechnologies@gmail.com", "Av. Esperanza, Calle 13333 Mz. EEEE Lt. 135", 62, "(01)9421555", "930351289");
 
 
+DROP TABLE IF EXISTS Proveedores;
+CREATE TABLE Proveedores (
+  cod_prov INT AUTO_INCREMENT,
+  nombre_prov VARCHAR(250) NOT NULL,
+  ruc_prov varchar(11) NOT NULL,
+  correo_prov VARCHAR(100) NOT NULL,
+	direccion_prov VARCHAR(255) NOT NULL,
+  /*cambio*/
+  id_tip INT NOT NULL,
+  id_pais INT NOT NULL,
+  telefono_one_prov VARCHAR(100) NOT NULL,
+  telefono_two_prov VARCHAR(100) NULL,
+  PRIMARY KEY (cod_prov),
+  FOREIGN KEY (id_pais) REFERENCES Pais (id_pais),
+  FOREIGN KEY (id_tip) REFERENCES Tipo (id_tip)
+);
+
+
 
 
 DROP TABLE IF EXISTS Productos;
 CREATE TABLE Productos (
-  cod_unico_prod CHAR(5) NOT NULL,
-  nombre_prod VARCHAR(250) NOT NULL,
-  descripcion_prod VARCHAR(1000) DEFAULT NULL,
-  cod_unico_prov CHAR(5),
+  cod_unico_prod VARCHAR(5) NOT NULL,
+  nombre_prod VARCHAR(100) NOT NULL,
+  descripcion_prod VARCHAR(500) DEFAULT NULL,
+  cod_prov int,
   fecha_ingreso DATETIME,
   fecha_salida DATETIME,
   stk_prod INT,
   cod_categoria VARCHAR(4),
   PRIMARY KEY (cod_unico_prod),
-  FOREIGN KEY (cod_categoria) REFERENCES Categoria (cod_categoria)
+  FOREIGN KEY (cod_categoria) REFERENCES Categoria (cod_categoria),
+    FOREIGN KEY (cod_prov) REFERENCES Proveedores (cod_prov)
 );
-
-DROP TABLE IF EXISTS Proveedores;
-CREATE TABLE Proveedores (
-  cod_prov INT AUTO_INCREMENT,
-  cod_unico_prov CHAR(5) NOT NULL,
-  nombre_prov VARCHAR(250) NOT NULL,
-  ruc_prov CHAR(11) NOT NULL,
-  descripcion_prov VARCHAR(250) DEFAULT NULL,
-  correo_prov VARCHAR(100) NOT NULL,
-  direccion_prov VARCHAR(255) NOT NULL,
-  nacionalidad_prov INT NOT NULL,
-  id_pais INT NOT NULL,
-  telefono_one_prov VARCHAR(100) NOT NULL,
-  telefono_two_prov VARCHAR(100) NOT NULL,
-  PRIMARY KEY (cod_prov),
-  FOREIGN KEY (id_pais) REFERENCES Pais (id_pais),
-  FOREIGN KEY (nacionalidad_prov) REFERENCES Tipo (id_tip)
-);
-
-ALTER TABLE Proveedores ADD INDEX idx_cod_unico_prov (cod_unico_prov);
-ALTER TABLE Productos ADD FOREIGN KEY (cod_unico_prov) REFERENCES Proveedores (cod_unico_prov);
 
 
 /*SELECT * FROM Proveedores;*/
@@ -282,196 +281,164 @@ ALTER TABLE Productos ADD FOREIGN KEY (cod_unico_prov) REFERENCES Proveedores (c
 
 
 insert into Proveedores values
-(null, "39023", "Technova", "15282316985",null, "Technova@gmail.com", "Av. Maravilla, Calle 6767 Mz. QQQ Lt. 69",200, 91,"(01)6661810", "926778626"),
-(null, "68326", "Nexisys", "11559284896",null, "Nexisys@gmail.com", "Calle Ilusión, Av. 6868 Mz. RRR Lt. 70",200, 46,"(01)7434927", "901434423"),
-(null, "63053", "Alphatech", "14066496267",null, "Alphatech@gmail.com", "Av. Imaginación, Calle 6969 Mz. SSS Lt. 71",200, 141,"(01)7581209", "903003048"),
-(null, "33388", "Cognify", "13928497483",null, "Cognify@gmail.com", "Calle Fantasía, Av. 7070 Mz. TTT Lt. 72",200, 132,"(01)8620598", "933913413"),
-(null, "72210", "Novatek", "16350631887",null, "Novatek@gmail.com", "Av. Magia, Calle 7171 Mz. UUU Lt. 73",200, 103,"(01)3585816", "959844844"),
-(null, "53188", "Synthetix", "10518005870",null, "Synthetix@gmail.com", "Calle Encanto, Av. 7272 Mz. VVV Lt. 74",100, 22,"(01)6991407", "974720836"),
-(null, "45792", "Innovent", "14263111895",null, "Innovent@gmail.com", "Av. Esperanza, Calle 7373 Mz. WWW Lt. 75",200, 65,"(01)6330284", "907934297"),
-(null, "50000", "Mindware", "13961938423",null, "Mindware@gmail.com", "Calle Victoria, Av. 7474 Mz. XXX Lt. 76",200, 82,"(01)1669528", "960695142"),
-(null, "43712", "Intellisys", "15545797619",null, "Intellisys@gmail.com", "Av. Alegría, Calle 7575 Mz. YYY Lt. 77",200, 21,"(01)9485994", "900702210"),
-(null, "46965", "Optimumtech", "18886786076",null, "Optimumtech@gmail.com", "Calle Imaginaria, Av. 7676 Mz. ZZZ Lt. 78",200, 4,"(01)7947123", "967242633"),
-(null, "31493", "Neotec", "16952149937",null, "Neotec@gmail.com", "Av. Sueños, Calle 7777 Mz. AAAA Lt. 79",200, 32,"(01)1903086", "994587540"),
-(null, "88033", "Smartsoft", "19449952632",null, "Smartsoft@gmail.com", "Calle del Arcoíris, Av. 7878 Mz. BBBB Lt. 80",100, 22,"(01)5264401", "999005290"),
-(null, "51114", "Cybersphere", "11343235148",null, "Cybersphere@gmail.com", "Av. Encanto, Calle 7979 Mz. CCCC Lt. 81",200, 131,"(01)7741075", "991111027"),
-(null, "22928", "Techsphere", "11024338089",null, "Techsphere@gmail.com", "Calle Mágica, Av. 8080 Mz. DDDD Lt. 82",200, 131,"(01)8787177", "948852600"),
-(null, "47246", "Virtutec", "18729989502",null, "Virtutec@gmail.com", "Av. Felicidad, Calle 8181 Mz. EEEE Lt. 83",200, 101,"(01)8500574", "906200103"),
-(null, "63219", "Databridge", "11529459036",null, "Databridge@gmail.com", "Calle Imaginación, Av. 8282 Mz. FFFF Lt. 84",200, 34,"(01)4698384", "925737147"),
-(null, "60494", "Mindstream", "18528433656",null, "Mindstream@gmail.com", "Av. Estrella, Calle 8383 Mz. GGGG Lt. 85",200, 11,"(01)5631426", "962348495"),
-(null, "28519", "Novusphere", "12400366201",null, "Novusphere@gmail.com", "Calle Ensueño, Av. 8484 Mz. HHHH Lt. 86",200, 81,"(01)4489994", "951123154"),
-(null, "24865", "CipherSoft", "19296060878",null, "CipherSoft@gmail.com", "Av. Aventura, Calle 8585 Mz. IIII Lt. 87",200, 127,"(01)4788207", "918886948"),
-(null, "31962", "VirtueCore", "15179810275",null, "VirtueCore@gmail.com", "Calle Sueños, Av. 8686 Mz. JJJJ Lt. 88",200, 112,"(01)3008485", "977591336"),
-(null, "88383", "Nexify", "14422080107",null, "Nexify@gmail.com", "Av. Maravilla, Calle 8787 Mz. KKKK Lt. 89",200, 10,"(01)3144909", "937116056"),
-(null, "26809", "Omnitech", "17750759812",null, "Omnitech@gmail.com", "Calle Ilusión, Av. 8888 Mz. LLLL Lt. 90",100, 22,"(01)3799407", "986397566"),
-(null, "58124", "Brainwave", "16882396906",null, "Brainwave@gmail.com", "Av. Imaginación, Calle 8989 Mz. MMMM Lt. 91",200, 111,"(01)8875111", "997816085"),
-(null, "20961", "Helixsoft", "11159118751",null, "Helixsoft@gmail.com", "Calle Fantasía, Av. 9090 Mz. NNNN Lt. 92",200, 92,"(01)5724412", "986976162"),
-(null, "68540", "Cyberscape", "14277783182",null, "Cyberscape@gmail.com", "Av. Magia, Calle 9191 Mz. OOOO Lt. 93",200, 86,"(01)9266772", "919929947"),
-(null, "70778", "Intellilink", "10583144330",null, "Intellilink@gmail.com", "Calle Encanto, Av. 9292 Mz. PPPP Lt. 94",200, 132,"(01)6458640", "917634940"),
-(null, "39042", "Hypernova", "16080329267",null, "Hypernova@gmail.com", "Av. Esperanza, Calle 9393 Mz. QQQQ Lt. 95",200, 15,"(01)9873768", "990912182"),
-(null, "61771", "Logicbyte", "18802546194",null, "Logicbyte@gmail.com", "Calle Victoria, Av. 9494 Mz. RRRR Lt. 96",200, 85,"(01)6332281", "929247118"),
-(null, "35891", "Ignitiontech", "14956372458",null, "Ignitiontech@gmail.com", "Av. Alegría, Calle 9595 Mz. SSSS Lt. 97",200, 112,"(01)9279361", "901400365"),
-(null, "53041", "QuantumLeap", "18808986325",null, "QuantumLeap@gmail.com", "Calle Imaginaria, Av. 9696 Mz. TTTT Lt. 98",200, 121,"(01)9820672", "939762688"),
-(null, "58552", "ApexNet", "19607676332",null, "ApexNet@gmail.com", "Av. Sueños, Calle 9797 Mz. UUUU Lt. 99",200, 106,"(01)3792341", "955206685"),
-(null, "88180", "PulseTech", "11819513209",null, "PulseTech@gmail.com", "Calle del Arcoíris, Av. 9898 Mz. VVVV Lt. 100",200, 88,"(01)1007388", "974224404"),
-(null, "17025", "InfinitiLogic", "17371236729",null, "InfinitiLogic@gmail.com", "Av. Encanto, Calle 9999 Mz. WWWW Lt. 101",100, 22,"(01)1020306", "995267393"),
-(null, "88634", "LinkGenius", "14109149814",null, "LinkGenius@gmail.com", "Calle Mágica, Av. 10000 Mz. XXXX Lt. 102",200, 81,"(01)4650517", "973880229"),
-(null, "75605", "DigiSavvy", "14182919193",null, "DigiSavvy@gmail.com", "Av. Felicidad, Calle 10101 Mz. YYYY Lt. 103",200, 93,"(01)2625674", "979365665"),
-(null, "16768", "ZenithSoft", "19331626230",null, "ZenithSoft@gmail.com", "Calle Imaginación, Av. 10202 Mz. ZZZZ Lt. 104",200, 104,"(01)6486561", "995069338"),
-(null, "93378", "ByteForge", "13669482706",null, "ByteForge@gmail.com", "Av. Estrella, Calle 10303 Mz. AAAA Lt. 105",200, 139,"(01)1238944", "949101632"),
-(null, "12278", "FusionWise", "13491673368",null, "FusionWise@gmail.com", "Calle Ensueño, Av. 10404 Mz. BBBB Lt. 106",100, 22,"(01)2228438", "989438436"),
-(null, "21382", "StellarTech", "14476661447",null, "StellarTech@gmail.com", "Av. Aventura, Calle 10505 Mz. CCCC Lt. 107",200, 120,"(01)3589571", "965141137"),
-(null, "80863", "TitanForge", "15011325853",null, "TitanForge@gmail.com", "Calle Sueños, Av. 10606 Mz. DDDD Lt. 108",200, 112,"(01)8771476", "929214716"),
-(null, "64562", "NetWise", "13854222614",null, "NetWise@gmail.com", "Av. Maravilla, Calle 10707 Mz. EEEE Lt. 109",200, 17,"(01)9913273", "932268026"),
-(null, "48789", "Innovonix", "16510572311",null, "Innovonix@gmail.com", "Calle Ilusión, Av. 10808 Mz. FFFF Lt. 110",200, 101,"(01)8032970", "947637209"),
-(null, "69012", "SurgeSoft", "13030519769",null, "SurgeSoft@gmail.com", "Av. Imaginación, Calle 10909 Mz. GGGG Lt. 111",200, 103,"(01)6075764", "941062176"),
-(null, "84867", "Nexaro", "10170925749",null, "Nexaro@gmail.com", "Calle Fantasía, Av. 11010 Mz. HHHH Lt. 112",200, 129,"(01)9864277", "955097780"),
-(null, "91236", "SkyBridge", "11636037173",null, "SkyBridge@gmail.com", "Av. Magia, Calle 11111 Mz. IIII Lt. 113",200, 110,"(01)8842394", "905783358"),
-(null, "73780", "Synthronix", "10416009002",null, "Synthronix@gmail.com", "Calle Encanto, Av. 11212 Mz. JJJJ Lt. 114",200, 1,"(01)2396278", "941864256"),
-(null, "51185", "Neocortex", "19837107147",null, "Neocortex@gmail.com", "Av. Esperanza, Calle 11313 Mz. KKKK Lt. 115",200, 4,"(01)8123147", "966719351"),
-(null, "30145", "Intellitronix", "12845540248",null, "Intellitronix@gmail.com", "Calle Victoria, Av. 11414 Mz. LLLL Lt. 116",200, 125,"(01)2285757", "954318193"),
-(null, "89109", "Cyberconix", "15796903674",null, "Cyberconix@gmail.com", "Av. Alegría, Calle 11515 Mz. MMMM Lt. 117",200, 33,"(01)3316650", "997063829"),
-(null, "28999", "Nanotechia", "16293810410",null, "Nanotechia@gmail.com", "Calle Imaginaria, Av. 11616 Mz. NNNN Lt. 118",100, 22,"(01)3412179", "956199456"),
-(null, "91878", "Genesystech", "12416544113",null, "Genesystech@gmail.com", "Av. Sueños, Calle 11717 Mz. OOOO Lt. 119",200, 117,"(01)2082222", "906676386"),
-(null, "80867", "Cybrosys", "17912419507",null, "Cybrosys@gmail.com", "Calle del Arcoíris, Av. 11818 Mz. PPPP Lt. 120",200, 65,"(01)6064214", "998689980"),
-(null, "25669", "Technorion", "13176255367",null, "Technorion@gmail.com", "Av. Encanto, Calle 11919 Mz. QQQQ Lt. 121",200, 106,"(01)4112468", "922112200"),
-(null, "64445", "Veritasoft", "18760592269",null, "Veritasoft@gmail.com", "Calle Mágica, Av. 12020 Mz. RRRR Lt. 122",200, 74,"(01)7012849", "982587876"),
-(null, "18191", "Sensitech", "14528816851",null, "Sensitech@gmail.com", "Av. Felicidad, Calle 12121 Mz. SSSS Lt. 123",200, 52,"(01)1843808", "904551680"),
-(null, "44812", "Cogentrix", "13925214926",null, "Cogentrix@gmail.com", "Calle Imaginación, Av. 12222 Mz. TTTT Lt. 124",200, 27,"(01)2093843", "991039568"),
-(null, "95121", "Metronix", "19648568465",null, "Metronix@gmail.com", "Av. Estrella, Calle 12323 Mz. UUUU Lt. 125",100, 22,"(01)6612503", "980505402"),
-(null, "39786", "Alphapulse", "11385837171",null, "Alphapulse@gmail.com", "Calle Ensueño, Av. 12424 Mz. VVVV Lt. 126",200, 81,"(01)3816454", "926508518"),
-(null, "94581", "Synergonix", "14176925558",null, "Synergonix@gmail.com", "Av. Aventura, Calle 12525 Mz. WWWW Lt. 127",200, 81,"(01)6077192", "977819619"),
-(null, "17234", "Intelligenix", "19420334800",null, "Intelligenix@gmail.com", "Calle Sueños, Av. 12626 Mz. XXXX Lt. 128",200, 57,"(01)1616672", "934235464"),
-(null, "68922", "Hyperlinkia", "16116978631",null, "Hyperlinkia@gmail.com", "Av. Maravilla, Calle 12727 Mz. YYYY Lt. 129",200, 69,"(01)3300896", "942612972"),
-(null, "79465", "Infinitronix", "15758774722",null, "Infinitronix@gmail.com", "Calle Ilusión, Av. 12828 Mz. ZZZZ Lt. 130",100, 22,"(01)2229774", "909830150"),
-(null, "45242", "Nexogen", "12613037358",null, "Nexogen@gmail.com", "Av. Imaginación, Calle 12929 Mz. AAAA Lt. 131",200, 80,"(01)5241500", "970764633"),
-(null, "58834", "Helionix", "12714583283",null, "Helionix@gmail.com", "Calle Fantasía, Av. 13030 Mz. BBBB Lt. 132",200, 44,"(01)8682103", "946273298"),
-(null, "55082", "Cybrosphere", "11595551424",null, "Cybrosphere@gmail.com", "Av. Magia, Calle 13131 Mz. CCCC Lt. 133",200, 126,"(01)3340838", "958833221"),
-(null, "54734", "DataFusion", "18615274130",null, "DataFusion@gmail.com", "Calle Encanto, Av. 13232 Mz. DDDD Lt. 134",200, 43,"(01)7259772", "936510253"),
-(null, "52829", "InnovioTech", "18358923254",null, "InnovioTech@gmail.com", "Av. Esperanza, Calle 13333 Mz. EEEE Lt. 135",100, 22,"(01)9524422", "996833973"),
-(null, "11875", "Quantumsoft", "13257640561",null, "Quantumsoft@gmail.com", "Av. Maravilla, Calle 6767 Mz. QQQ Lt. 69",200, 70,"(01)1512296", "984119341"),
-(null, "97620", "Nexiscape", "13970978914",null, "Nexiscape@gmail.com", "Calle Ilusión, Av. 6868 Mz. RRR Lt. 70",200, 39,"(01)4209372", "904827904"),
-(null, "80978", "Syntektronix", "11737033001",null, "Syntektronix@gmail.com", "Av. Imaginación, Calle 6969 Mz. SSS Lt. 71",200, 125,"(01)6061128", "971844320"),
-(null, "34369", "Cordia", "18732375033",null, "Cordia@gmail.com", "Calle Fantasía, Av. 7070 Mz. TTT Lt. 72",200, 139,"(01)7390188", "965602874"),
-(null, "45656", "Robotentic", "13398452861",null, "Robotentic@gmail.com", "Av. Magia, Calle 7171 Mz. UUU Lt. 73",200, 21,"(01)3677227", "984958675"),
-(null, "91170", "SolBets", "17596399859",null, "SolBets@gmail.com", "Calle Encanto, Av. 7272 Mz. VVV Lt. 74",200, 109,"(01)7795585", "949503672"),
-(null, "47591", "Systpost", "10839178892",null, "Systpost@gmail.com", "Av. Esperanza, Calle 7373 Mz. WWW Lt. 75",200, 4,"(01)5052236", "992769599"),
-(null, "87478", "OnlyOne", "18660460849",null, "OnlyOne@gmail.com", "Calle Victoria, Av. 7474 Mz. XXX Lt. 76",200, 31,"(01)6261380", "989930771"),
-(null, "42258", "SkyGame", "11482663360",null, "SkyGame@gmail.com", "Av. Alegría, Calle 7575 Mz. YYY Lt. 77",200, 84,"(01)8825808", "949350919"),
-(null, "83291", "PixelPro Games", "16415402292",null, "PixelProGames@gmail.com", "Calle Imaginaria, Av. 7676 Mz. ZZZ Lt. 78",200, 67,"(01)1948561", "949155340"),
-(null, "83983", "Dreamland Entertainment", "11833046228",null, "DreamlandEntertainment@gmail.com", "Av. Sueños, Calle 7777 Mz. AAAA Lt. 79",100, 22,"(01)7097484", "996089579"),
-(null, "62805", "Galactic Games Inc.", "13949556619",null, "GalacticGamesInc.@gmail.com", "Calle del Arcoíris, Av. 7878 Mz. BBBB Lt. 80",200, 36,"(01)4694960", "966285579"),
-(null, "51918", "Horizon Gaming Co.", "11377356497",null, "HorizonGamingCo.@gmail.com", "Av. Encanto, Calle 7979 Mz. CCCC Lt. 81",200, 13,"(01)6488212", "979428438"),
-(null, "47092", "Velocity Studios", "19346425831",null, "VelocityStudios@gmail.com", "Calle Mágica, Av. 8080 Mz. DDDD Lt. 82",100, 22,"(01)2701680", "979902120"),
-(null, "57184", "Gravity Games", "17408641454",null, "GravityGames@gmail.com", "Av. Felicidad, Calle 8181 Mz. EEEE Lt. 83",200, 82,"(01)4067514", "960998311"),
-(null, "82282", "Chromatic Creations", "19438330697",null, "ChromaticCreations@gmail.com", "Calle Imaginación, Av. 8282 Mz. FFFF Lt. 84",200, 16,"(01)3435979", "997273500"),
-(null, "67546", "FusionPlay", "18890351215",null, "FusionPlay@gmail.com", "Av. Estrella, Calle 8383 Mz. GGGG Lt. 85",200, 86,"(01)6985009", "999163044"),
-(null, "51299", "Elemental Entertainment", "16839334784",null, "ElementalEntertainment@gmail.com", "Calle Ensueño, Av. 8484 Mz. HHHH Lt. 86",200, 78,"(01)6244940", "945924992"),
-(null, "67188", "Mystic Gaming Solutions", "13168134567",null, "MysticGamingSolutions@gmail.com", "Av. Aventura, Calle 8585 Mz. IIII Lt. 87",200, 71,"(01)5838081", "907903550"),
-(null, "78519", "NeoArcade", "12852404043",null, "NeoArcade@gmail.com", "Calle Sueños, Av. 8686 Mz. JJJJ Lt. 88",200, 51,"(01)2034765", "930088256"),
-(null, "60256", "Quantum Games", "12560100571",null, "QuantumGames@gmail.com", "Av. Maravilla, Calle 8787 Mz. KKKK Lt. 89",200, 143,"(01)3556940", "935814683"),
-(null, "80539", "Starlight Interactive", "16306132114",null, "StarlightInteractive@gmail.com", "Calle Ilusión, Av. 8888 Mz. LLLL Lt. 90",200, 122,"(01)8361430", "952710413"),
-(null, "26292", "Electric Playground", "12089576585",null, "ElectricPlayground@gmail.com", "Av. Imaginación, Calle 8989 Mz. MMMM Lt. 91",200, 82,"(01)6645031", "988246229"),
-(null, "27417", "Digital Dreamers", "12107453458",null, "DigitalDreamers@gmail.com", "Calle Fantasía, Av. 9090 Mz. NNNN Lt. 92",200, 129,"(01)4439970", "917046179"),
-(null, "47337", "Cyberspace Studios", "10975385815",null, "CyberspaceStudios@gmail.com", "Av. Magia, Calle 9191 Mz. OOOO Lt. 93",100, 22,"(01)9694835", "909947916"),
-(null, "48523", "Beyond Reality Gaming", "12926537383",null, "BeyondRealityGaming@gmail.com", "Calle Encanto, Av. 9292 Mz. PPPP Lt. 94",200, 143,"(01)9027814", "938863805"),
-(null, "39625", "Virtual Visions", "15189118633",null, "VirtualVisions@gmail.com", "Av. Esperanza, Calle 9393 Mz. QQQQ Lt. 95",200, 139,"(01)7418095", "911817080"),
-(null, "64283", "Moonlit Games", "17858420958",null, "MoonlitGames@gmail.com", "Calle Victoria, Av. 9494 Mz. RRRR Lt. 96",200, 107,"(01)9661588", "942283164"),
-(null, "20224", "Spectral Games Inc.", "14338695044",null, "SpectralGamesInc.@gmail.com", "Av. Alegría, Calle 9595 Mz. SSSS Lt. 97",100, 22,"(01)2971978", "929532544"),
-(null, "41026", "NovaTech Consoles", "17303413385",null, "NovaTechConsoles@gmail.com", "Calle Imaginaria, Av. 9696 Mz. TTTT Lt. 98",200, 116,"(01)3389927", "944837820"),
-(null, "54711", "Titan Gaming Systems", "16878214557",null, "TitanGamingSystems@gmail.com", "Av. Sueños, Calle 9797 Mz. UUUU Lt. 99",200, 33,"(01)8568248", "988592516"),
-(null, "12174", "Skyline Entertainment", "10449576688",null, "SkylineEntertainment@gmail.com", "Calle del Arcoíris, Av. 9898 Mz. VVVV Lt. 100",200, 77,"(01)5047311", "962915335"),
-(null, "37914", "Quantum Console Co.", "10187418454",null, "QuantumConsoleCo.@gmail.com", "Av. Encanto, Calle 9999 Mz. WWWW Lt. 101",200, 32,"(01)5147425", "986161431"),
-(null, "29852", "Stellar Gaming Inc.", "14937938315",null, "StellarGamingInc.@gmail.com", "Calle Mágica, Av. 10000 Mz. XXXX Lt. 102",200, 47,"(01)9916675", "924653218"),
-(null, "31539", "FuturePlay Consoles", "12832073222",null, "FuturePlayConsoles@gmail.com", "Av. Felicidad, Calle 10101 Mz. YYYY Lt. 103",200, 79,"(01)2671193", "952594695"),
-(null, "37985", "Zenith Gaming Solutions", "16050624404",null, "ZenithGamingSolutions@gmail.com", "Calle Imaginación, Av. 10202 Mz. ZZZZ Lt. 104",200, 116,"(01)2815972", "979789760"),
-(null, "60746", "Infinity Console Systems", "14927446985",null, "InfinityConsoleSystems@gmail.com", "Av. Estrella, Calle 10303 Mz. AAAA Lt. 105",200, 49,"(01)2179108", "939174045"),
-(null, "96098", "Phoenix Entertainment Co.", "11164497949",null, "PhoenixEntertainmentCo.@gmail.com", "Calle Ensueño, Av. 10404 Mz. BBBB Lt. 106",200, 55,"(01)3104132", "964972428");
+(null,  "Technova", "15282316985", "Technova@gmail.com", "Av. Maravilla, Calle 6767 Mz. QQQ Lt. 69",200, 91,"(01)6661810", "926778626"),
+(null, "Nexisys", "11559284896", "Nexisys@gmail.com", "Calle Ilusión, Av. 6868 Mz. RRR Lt. 70",200, 46,"(01)7434927", "901434423"),
+(null,  "Alphatech", "14066496267", "Alphatech@gmail.com", "Av. Imaginación, Calle 6969 Mz. SSS Lt. 71",200, 141,"(01)7581209", "903003048"),
+(null,  "Cognify", "13928497483", "Cognify@gmail.com", "Calle Fantasía, Av. 7070 Mz. TTT Lt. 72",200, 132,"(01)8620598", "933913413"),
+(null,  "Novatek", "16350631887", "Novatek@gmail.com", "Av. Magia, Calle 7171 Mz. UUU Lt. 73",200, 103,"(01)3585816", "959844844"),
+(null, "Synthetix", "10518005870", "Synthetix@gmail.com", "Calle Encanto, Av. 7272 Mz. VVV Lt. 74",100, 22,"(01)6991407", "974720836"),
+(null,  "Innovent", "14263111895", "Innovent@gmail.com", "Av. Esperanza, Calle 7373 Mz. WWW Lt. 75",200, 65,"(01)6330284", "907934297"),
+(null,  "Mindware", "13961938423", "Mindware@gmail.com", "Calle Victoria, Av. 7474 Mz. XXX Lt. 76",200, 82,"(01)1669528", "960695142"),
+(null,  "Intellisys", "15545797619", "Intellisys@gmail.com", "Av. Alegría, Calle 7575 Mz. YYY Lt. 77",200, 21,"(01)9485994", "900702210"),
+(null,  "Optimumtech", "18886786076", "Optimumtech@gmail.com", "Calle Imaginaria, Av. 7676 Mz. ZZZ Lt. 78",200, 4,"(01)7947123", "967242633"),
+(null,  "Neotec", "16952149937", "Neotec@gmail.com", "Av. Sueños, Calle 7777 Mz. AAAA Lt. 79",200, 32,"(01)1903086", "994587540"),
+(null, "Smartsoft", "19449952632", "Smartsoft@gmail.com", "Calle del Arcoíris, Av. 7878 Mz. BBBB Lt. 80",100, 22,"(01)5264401", "999005290"),
+(null,  "Cybersphere", "11343235148", "Cybersphere@gmail.com", "Av. Encanto, Calle 7979 Mz. CCCC Lt. 81",200, 131,"(01)7741075", "991111027"),
+(null,  "Techsphere", "11024338089", "Techsphere@gmail.com", "Calle Mágica, Av. 8080 Mz. DDDD Lt. 82",200, 131,"(01)8787177", "948852600"),
+(null,  "Virtutec", "18729989502", "Virtutec@gmail.com", "Av. Felicidad, Calle 8181 Mz. EEEE Lt. 83",200, 101,"(01)8500574", "906200103"),
+(null,  "Databridge", "11529459036", "Databridge@gmail.com", "Calle Imaginación, Av. 8282 Mz. FFFF Lt. 84",200, 34,"(01)4698384", "925737147"),
+(null,  "Mindstream", "18528433656", "Mindstream@gmail.com", "Av. Estrella, Calle 8383 Mz. GGGG Lt. 85",200, 11,"(01)5631426", "962348495"),
+(null,  "Novusphere", "12400366201", "Novusphere@gmail.com", "Calle Ensueño, Av. 8484 Mz. HHHH Lt. 86",200, 81,"(01)4489994", "951123154"),
+(null, "CipherSoft", "19296060878", "CipherSoft@gmail.com", "Av. Aventura, Calle 8585 Mz. IIII Lt. 87",200, 127,"(01)4788207", "918886948"),
+(null,  "VirtueCore", "15179810275", "VirtueCore@gmail.com", "Calle Sueños, Av. 8686 Mz. JJJJ Lt. 88",200, 112,"(01)3008485", "977591336"),
+(null, "Nexify", "14422080107", "Nexify@gmail.com", "Av. Maravilla, Calle 8787 Mz. KKKK Lt. 89",200, 10,"(01)3144909", "937116056"),
+(null,  "Omnitech", "17750759812", "Omnitech@gmail.com", "Calle Ilusión, Av. 8888 Mz. LLLL Lt. 90",100, 22,"(01)3799407", "986397566"),
+(null,  "Brainwave", "16882396906", "Brainwave@gmail.com", "Av. Imaginación, Calle 8989 Mz. MMMM Lt. 91",200, 111,"(01)8875111", "997816085"),
+(null, "Helixsoft", "11159118751", "Helixsoft@gmail.com", "Calle Fantasía, Av. 9090 Mz. NNNN Lt. 92",200, 92,"(01)5724412", "986976162"),
+(null,  "Cyberscape", "14277783182", "Cyberscape@gmail.com", "Av. Magia, Calle 9191 Mz. OOOO Lt. 93",200, 86,"(01)9266772", "919929947"),
+(null,  "Intellilink", "10583144330", "Intellilink@gmail.com", "Calle Encanto, Av. 9292 Mz. PPPP Lt. 94",200, 132,"(01)6458640", "917634940"),
+(null,  "Hypernova", "16080329267", "Hypernova@gmail.com", "Av. Esperanza, Calle 9393 Mz. QQQQ Lt. 95",200, 15,"(01)9873768", "990912182"),
+(null,  "Logicbyte", "18802546194", "Logicbyte@gmail.com", "Calle Victoria, Av. 9494 Mz. RRRR Lt. 96",200, 85,"(01)6332281", "929247118"),
+(null,  "Ignitiontech", "14956372458", "Ignitiontech@gmail.com", "Av. Alegría, Calle 9595 Mz. SSSS Lt. 97",200, 112,"(01)9279361", "901400365"),
+(null,  "QuantumLeap", "18808986325", "QuantumLeap@gmail.com", "Calle Imaginaria, Av. 9696 Mz. TTTT Lt. 98",200, 121,"(01)9820672", "939762688"),
+(null,  "ApexNet", "19607676332", "ApexNet@gmail.com", "Av. Sueños, Calle 9797 Mz. UUUU Lt. 99",200, 106,"(01)3792341", "955206685"),
+(null,  "PulseTech", "11819513209", "PulseTech@gmail.com", "Calle del Arcoíris, Av. 9898 Mz. VVVV Lt. 100",200, 88,"(01)1007388", "974224404"),
+(null,  "InfinitiLogic", "17371236729", "InfinitiLogic@gmail.com", "Av. Encanto, Calle 9999 Mz. WWWW Lt. 101",100, 22,"(01)1020306", "995267393"),
+(null,  "LinkGenius", "14109149814", "LinkGenius@gmail.com", "Calle Mágica, Av. 10000 Mz. XXXX Lt. 102",200, 81,"(01)4650517", "973880229"),
+(null,  "DigiSavvy", "14182919193", "DigiSavvy@gmail.com", "Av. Felicidad, Calle 10101 Mz. YYYY Lt. 103",200, 93,"(01)2625674", "979365665"),
+(null, "ZenithSoft", "19331626230", "ZenithSoft@gmail.com", "Calle Imaginación, Av. 10202 Mz. ZZZZ Lt. 104",200, 104,"(01)6486561", "995069338"),
+(null,"ByteForge", "13669482706", "ByteForge@gmail.com", "Av. Estrella, Calle 10303 Mz. AAAA Lt. 105",200, 139,"(01)1238944", "949101632"),
+(null, "FusionWise", "13491673368", "FusionWise@gmail.com", "Calle Ensueño, Av. 10404 Mz. BBBB Lt. 106",100, 22,"(01)2228438", "989438436"),
+(null,  "StellarTech", "14476661447", "StellarTech@gmail.com", "Av. Aventura, Calle 10505 Mz. CCCC Lt. 107",200, 120,"(01)3589571", "965141137"),
+(null,"TitanForge", "15011325853", "TitanForge@gmail.com", "Calle Sueños, Av. 10606 Mz. DDDD Lt. 108",200, 112,"(01)8771476", "929214716"),
+(null,  "NetWise", "13854222614", "NetWise@gmail.com", "Av. Maravilla, Calle 10707 Mz. EEEE Lt. 109",200, 17,"(01)9913273", "932268026"),
+(null,  "Innovonix", "16510572311", "Innovonix@gmail.com", "Calle Ilusión, Av. 10808 Mz. FFFF Lt. 110",200, 101,"(01)8032970", "947637209"),
+(null,  "SurgeSoft", "13030519769", "SurgeSoft@gmail.com", "Av. Imaginación, Calle 10909 Mz. GGGG Lt. 111",200, 103,"(01)6075764", "941062176"),
+(null,  "Nexaro", "10170925749", "Nexaro@gmail.com", "Calle Fantasía, Av. 11010 Mz. HHHH Lt. 112",200, 129,"(01)9864277", "955097780"),
+(null,  "SkyBridge", "11636037173", "SkyBridge@gmail.com", "Av. Magia, Calle 11111 Mz. IIII Lt. 113",200, 110,"(01)8842394", "905783358"),
+(null,  "Synthronix", "10416009002", "Synthronix@gmail.com", "Calle Encanto, Av. 11212 Mz. JJJJ Lt. 114",200, 1,"(01)2396278", "941864256"),
+(null,  "Neocortex", "19837107147", "Neocortex@gmail.com", "Av. Esperanza, Calle 11313 Mz. KKKK Lt. 115",200, 4,"(01)8123147", "966719351"),
+(null,  "Intellitronix", "12845540248", "Intellitronix@gmail.com", "Calle Victoria, Av. 11414 Mz. LLLL Lt. 116",200, 125,"(01)2285757", "954318193"),
+(null,  "Cyberconix", "15796903674", "Cyberconix@gmail.com", "Av. Alegría, Calle 11515 Mz. MMMM Lt. 117",200, 33,"(01)3316650", "997063829"),
+(null, "Nanotechia", "16293810410", "Nanotechia@gmail.com", "Calle Imaginaria, Av. 11616 Mz. NNNN Lt. 118",100, 22,"(01)3412179", "956199456"),
+(null, "Genesystech", "12416544113", "Genesystech@gmail.com", "Av. Sueños, Calle 11717 Mz. OOOO Lt. 119",200, 117,"(01)2082222", "906676386"),
+(null,  "Cybrosys", "17912419507", "Cybrosys@gmail.com", "Calle del Arcoíris, Av. 11818 Mz. PPPP Lt. 120",200, 65,"(01)6064214", "998689980"),
+(null,  "Technorion", "13176255367", "Technorion@gmail.com", "Av. Encanto, Calle 11919 Mz. QQQQ Lt. 121",200, 106,"(01)4112468", "922112200"),
+(null,  "Veritasoft", "18760592269", "Veritasoft@gmail.com", "Calle Mágica, Av. 12020 Mz. RRRR Lt. 122",200, 74,"(01)7012849", "982587876"),
+(null,  "Sensitech", "14528816851", "Sensitech@gmail.com", "Av. Felicidad, Calle 12121 Mz. SSSS Lt. 123",200, 52,"(01)1843808", "904551680"),
+(null, "Cogentrix", "13925214926", "Cogentrix@gmail.com", "Calle Imaginación, Av. 12222 Mz. TTTT Lt. 124",200, 27,"(01)2093843", "991039568"),
+(null, "Metronix", "19648568465", "Metronix@gmail.com", "Av. Estrella, Calle 12323 Mz. UUUU Lt. 125",100, 22,"(01)6612503", "980505402"),
+(null, "Alphapulse", "11385837171", "Alphapulse@gmail.com", "Calle Ensueño, Av. 12424 Mz. VVVV Lt. 126",200, 81,"(01)3816454", "926508518"),
+(null,  "Synergonix", "14176925558", "Synergonix@gmail.com", "Av. Aventura, Calle 12525 Mz. WWWW Lt. 127",200, 81,"(01)6077192", "977819619"),
+(null, "Intelligenix", "19420334800", "Intelligenix@gmail.com", "Calle Sueños, Av. 12626 Mz. XXXX Lt. 128",200, 57,"(01)1616672", "934235464"),
+(null, "Hyperlinkia", "16116978631", "Hyperlinkia@gmail.com", "Av. Maravilla, Calle 12727 Mz. YYYY Lt. 129",200, 69,"(01)3300896", "942612972"),
+(null, "Infinitronix", "15758774722", "Infinitronix@gmail.com", "Calle Ilusión, Av. 12828 Mz. ZZZZ Lt. 130",100, 22,"(01)2229774", "909830150"),
+(null, "Nexogen", "12613037358", "Nexogen@gmail.com", "Av. Imaginación, Calle 12929 Mz. AAAA Lt. 131",200, 80,"(01)5241500", "970764633"),
+(null,  "Helionix", "12714583283", "Helionix@gmail.com", "Calle Fantasía, Av. 13030 Mz. BBBB Lt. 132",200, 44,"(01)8682103", "946273298"),
+(null, "Cybrosphere", "11595551424", "Cybrosphere@gmail.com", "Av. Magia, Calle 13131 Mz. CCCC Lt. 133",200, 126,"(01)3340838", "958833221"),
+(null,  "DataFusion", "18615274130", "DataFusion@gmail.com", "Calle Encanto, Av. 13232 Mz. DDDD Lt. 134",200, 43,"(01)7259772", "936510253"),
+(null,"InnovioTech", "18358923254", "InnovioTech@gmail.com", "Av. Esperanza, Calle 13333 Mz. EEEE Lt. 135",100, 22,"(01)9524422", "996833973"),
+(null,  "Quantumsoft", "13257640561", "Quantumsoft@gmail.com", "Av. Maravilla, Calle 6767 Mz. QQQ Lt. 69",200, 70,"(01)1512296", "984119341"),
+(null, "Nexiscape", "13970978914", "Nexiscape@gmail.com", "Calle Ilusión, Av. 6868 Mz. RRR Lt. 70",200, 39,"(01)4209372", "904827904"),
+(null,  "Syntektronix", "11737033001", "Syntektronix@gmail.com", "Av. Imaginación, Calle 6969 Mz. SSS Lt. 71",200, 125,"(01)6061128", "971844320"),
+(null, "Cordia", "18732375033", "Cordia@gmail.com", "Calle Fantasía, Av. 7070 Mz. TTT Lt. 72",200, 139,"(01)7390188", "965602874"),
+(null, "Robotentic", "13398452861", "Robotentic@gmail.com", "Av. Magia, Calle 7171 Mz. UUU Lt. 73",200, 21,"(01)3677227", "984958675"),
+(null, "SolBets", "17596399859", "SolBets@gmail.com", "Calle Encanto, Av. 7272 Mz. VVV Lt. 74",200, 109,"(01)7795585", "949503672"),
+(null,  "Systpost", "10839178892", "Systpost@gmail.com", "Av. Esperanza, Calle 7373 Mz. WWW Lt. 75",200, 4,"(01)5052236", "992769599"),
+(null, "OnlyOne", "18660460849", "OnlyOne@gmail.com", "Calle Victoria, Av. 7474 Mz. XXX Lt. 76",200, 31,"(01)6261380", "989930771"),
+(null,  "SkyGame", "11482663360", "SkyGame@gmail.com", "Av. Alegría, Calle 7575 Mz. YYY Lt. 77",200, 84,"(01)8825808", "949350919"),
+(null,"PixelPro Games", "16415402292", "PixelProGames@gmail.com", "Calle Imaginaria, Av. 7676 Mz. ZZZ Lt. 78",200, 67,"(01)1948561", "949155340"),
+(null,  "Dreamland Entertainment", "11833046228", "DreamlandEntertainment@gmail.com", "Av. Sueños, Calle 7777 Mz. AAAA Lt. 79",100, 22,"(01)7097484", "996089579"),
+(null, "Galactic Games Inc.", "13949556619", "GalacticGamesInc.@gmail.com", "Calle del Arcoíris, Av. 7878 Mz. BBBB Lt. 80",200, 36,"(01)4694960", "966285579"),
+(null, "Horizon Gaming Co.", "11377356497", "HorizonGamingCo.@gmail.com", "Av. Encanto, Calle 7979 Mz. CCCC Lt. 81",200, 13,"(01)6488212", "979428438"),
+(null,  "Velocity Studios", "19346425831", "VelocityStudios@gmail.com", "Calle Mágica, Av. 8080 Mz. DDDD Lt. 82",100, 22,"(01)2701680", "979902120"),
+(null,  "Gravity Games", "17408641454", "GravityGames@gmail.com", "Av. Felicidad, Calle 8181 Mz. EEEE Lt. 83",200, 82,"(01)4067514", "960998311"),
+(null,  "Chromatic Creations", "19438330697", "ChromaticCreations@gmail.com", "Calle Imaginación, Av. 8282 Mz. FFFF Lt. 84",200, 16,"(01)3435979", "997273500"),
+(null,"FusionPlay", "18890351215", "FusionPlay@gmail.com", "Av. Estrella, Calle 8383 Mz. GGGG Lt. 85",200, 86,"(01)6985009", "999163044"),
+(null, "Elemental Entertainment", "16839334784", "ElementalEntertainment@gmail.com", "Calle Ensueño, Av. 8484 Mz. HHHH Lt. 86",200, 78,"(01)6244940", "945924992"),
+(null, "Mystic Gaming Solutions", "13168134567", "MysticGamingSolutions@gmail.com", "Av. Aventura, Calle 8585 Mz. IIII Lt. 87",200, 71,"(01)5838081", "907903550"),
+(null, "NeoArcade", "12852404043", "NeoArcade@gmail.com", "Calle Sueños, Av. 8686 Mz. JJJJ Lt. 88",200, 51,"(01)2034765", "930088256"),
+(null,  "Quantum Games", "12560100571", "QuantumGames@gmail.com", "Av. Maravilla, Calle 8787 Mz. KKKK Lt. 89",200, 143,"(01)3556940", "935814683"),
+(null,  "Starlight Interactive", "16306132114", "StarlightInteractive@gmail.com", "Calle Ilusión, Av. 8888 Mz. LLLL Lt. 90",200, 122,"(01)8361430", "952710413"),
+(null,  "Electric Playground", "12089576585", "ElectricPlayground@gmail.com", "Av. Imaginación, Calle 8989 Mz. MMMM Lt. 91",200, 82,"(01)6645031", "988246229"),
+(null,  "Digital Dreamers", "12107453458", "DigitalDreamers@gmail.com", "Calle Fantasía, Av. 9090 Mz. NNNN Lt. 92",200, 129,"(01)4439970", "917046179"),
+(null,  "Cyberspace Studios", "10975385815", "CyberspaceStudios@gmail.com", "Av. Magia, Calle 9191 Mz. OOOO Lt. 93",100, 22,"(01)9694835", "909947916"),
+(null, "Beyond Reality Gaming", "12926537383", "BeyondRealityGaming@gmail.com", "Calle Encanto, Av. 9292 Mz. PPPP Lt. 94",200, 143,"(01)9027814", "938863805"),
+(null,  "Virtual Visions", "15189118633", "VirtualVisions@gmail.com", "Av. Esperanza, Calle 9393 Mz. QQQQ Lt. 95",200, 139,"(01)7418095", "911817080"),
+(null,  "Moonlit Games", "17858420958", "MoonlitGames@gmail.com", "Calle Victoria, Av. 9494 Mz. RRRR Lt. 96",200, 107,"(01)9661588", "942283164"),
+(null, "Spectral Games Inc.", "14338695044", "SpectralGamesInc.@gmail.com", "Av. Alegría, Calle 9595 Mz. SSSS Lt. 97",100, 22,"(01)2971978", "929532544"),
+(null,  "NovaTech Consoles", "17303413385", "NovaTechConsoles@gmail.com", "Calle Imaginaria, Av. 9696 Mz. TTTT Lt. 98",200, 116,"(01)3389927", "944837820"),
+(null,  "Titan Gaming Systems", "16878214557", "TitanGamingSystems@gmail.com", "Av. Sueños, Calle 9797 Mz. UUUU Lt. 99",200, 33,"(01)8568248", "988592516"),
+(null,  "Skyline Entertainment", "10449576688", "SkylineEntertainment@gmail.com", "Calle del Arcoíris, Av. 9898 Mz. VVVV Lt. 100",200, 77,"(01)5047311", "962915335"),
+(null,  "Quantum Console Co.", "10187418454", "QuantumConsoleCo.@gmail.com", "Av. Encanto, Calle 9999 Mz. WWWW Lt. 101",200, 32,"(01)5147425", "986161431"),
+(null, "Stellar Gaming Inc.", "14937938315", "StellarGamingInc.@gmail.com", "Calle Mágica, Av. 10000 Mz. XXXX Lt. 102",200, 47,"(01)9916675", "924653218"),
+(null, "FuturePlay Consoles", "12832073222", "FuturePlayConsoles@gmail.com", "Av. Felicidad, Calle 10101 Mz. YYYY Lt. 103",200, 79,"(01)2671193", "952594695"),
+(null, "Zenith Gaming Solutions", "16050624404", "ZenithGamingSolutions@gmail.com", "Calle Imaginación, Av. 10202 Mz. ZZZZ Lt. 104",200, 116,"(01)2815972", "979789760"),
+(null, "Infinity Console Systems", "14927446985", "InfinityConsoleSystems@gmail.com", "Av. Estrella, Calle 10303 Mz. AAAA Lt. 105",200, 49,"(01)2179108", "939174045"),
+(null, "Phoenix Entertainment Co.", "11164497949", "PhoenixEntertainmentCo.@gmail.com", "Calle Ensueño, Av. 10404 Mz. BBBB Lt. 106",200, 55,"(01)3104132", "964972428");
 
 
 
-insert into Productos values
-("54902", "iPhone X", "El iPhone X presenta una pantalla Super Retina de 5.8 pulgadas, una cámara dual avanzada y reconocimiento facial con Face ID. Potenciado por un chip A11 Bionic para un rendimiento superior.","96098", "2017-08-30", "2024-11-25", 641, "C001"),
-("51788", "Samsung Galaxy S20", "El Samsung Galaxy S20 es un teléfono inteligente con una pantalla Dynamic AMOLED de 6.2 pulgadas, cámara de triple lente y capacidad de grabación de videos en 8K. Además, cuenta con una batería de larga duración.","84867", "2008-01-08", "2028-12-05", 686, "C001"),
-("96805", "Google Pixel 5", "El Google Pixel 5 es un teléfono Android con una pantalla OLED de 6 pulgadas, cámara dual con capacidad de grabación de videos en 4K y un lector de huellas dactilares trasero. Ofrece una experiencia de software limpia y actualizaciones rápidas.","45656", "2018-06-23", "2029-10-14", 646, "C001"),
-("49390", "OnePlus 9 Pro", "El OnePlus 9 Pro es un teléfono con una pantalla Fluid AMOLED de 6.7 pulgadas, cámara cuádruple de alta resolución y carga rápida Warp Charge. Con un potente rendimiento y una interfaz de usuario personalizable.","60746", "2005-10-27", "2028-05-11", 585, "C001"),
-("22592", "Xiaomi Mi 11", "El Xiaomi Mi 11 cuenta con una pantalla AMOLED de 6.81 pulgadas, una cámara triple con capacidad de grabación de videos en 8K y carga rápida de 55W. Además, incorpora un potente procesador y altavoces estéreo.","35891", "2005-09-04", "2031-03-05", 591, "C001"),
-("17522", "Huawei P40 Pro", "El Huawei P40 Pro ofrece una pantalla OLED de 6.58 pulgadas, cámara cuádruple Leica de alta resolución y carga inalámbrica rápida. Con un diseño elegante y potentes capacidades fotográficas.","88383", "2020-06-24", "2033-05-23", 769, "C001"),
-("92535", "Motorola Moto G Power", "El Motorola Moto G Power cuenta con una batería de larga duración que te permite disfrutar de hasta 3 días de uso sin necesidad de recargar. Con una pantalla de 6.4 pulgadas y un sistema de cámara triple.","84867", "2010-08-13", "2028-09-23", 841, "C001"),
-("64998", "Sony Xperia 1 II", "El Sony Xperia 1 II es un teléfono de gama alta con una pantalla OLED de 6.5 pulgadas y una cámara cuádruple Zeiss de alta calidad. Además, cuenta con una potente configuración de audio y una gran capacidad de almacenamiento.","47246", "2006-03-18", "2035-02-27", 609, "C001"),
-("18814", "LG Velvet", "El LG Velvet es un elegante teléfono con una pantalla P-OLED de 6.8 pulgadas y una cámara triple versátil. Con una gran calidad de audio y resistencia al agua y polvo.","67188", "2017-06-20", "2029-02-19", 769, "C001"),
-("61675", "Nokia 9 PureView", "El Nokia 9 PureView destaca por su cámara penta de 5 lentes con tecnología ZEISS y capacidad de capturar imágenes en formato RAW. Cuenta con una pantalla de 5.99 pulgadas y un diseño de vidrio y metal.","47246", "2021-08-09", "2027-11-19", 500, "C001"),
-("78143", "ASUS ROG Phone 5", "El ASUS ROG Phone 5 está diseñado para los amantes de los juegos móviles, con una pantalla AMOLED de 6.78 pulgadas con frecuencia de actualización de 144Hz y un potente procesador Snapdragon 888. Incluye características gaming como gatillos AirTrigger y refrigeración avanzada.","12278", "2022-01-07", "2031-08-04", 863, "C001"),
-("90465", "Xiaomi Redmi Note 10 Pro", "El Xiaomi Redmi Note 10 Pro ofrece una pantalla AMOLED de 6.67 pulgadas, una cámara cuádruple de alta resolución y una batería de larga duración. Con un diseño elegante y un rendimiento confiable.","39042", "2018-08-25", "2023-09-01", 674, "C001"),
-("64650", "Oppo Find X3 Pro", "El Oppo Find X3 Pro cuenta con una pantalla AMOLED de 6.7 pulgadas y una cámara cuádruple con capacidades avanzadas de captura de imágenes. Con un potente procesador y carga rápida SuperVOOC 2.0.","26809", "2021-10-09", "2026-11-26", 691, "C001"),
-("21861", "ZTE Axon 30 Ultra", "El ZTE Axon 30 Ultra es un teléfono con una pantalla AMOLED de 6.67 pulgadas, una cámara triple de alta resolución y carga rápida de 66W. Con un diseño elegante y un rendimiento excepcional.","37985", "2009-02-26", "2026-04-22", 734, "C001"),
-("45513", "Realme 8 Pro", "El Realme 8 Pro cuenta con una pantalla Super AMOLED de 6.4 pulgadas, una cámara cuádruple de alta resolución y una batería de larga duración. Con un diseño llamativo y un rendimiento eficiente.","55082", "2019-07-10", "2029-07-07", 678, "C001"),
-("48012", "Vivo X60 Pro", "El Vivo X60 Pro ofrece una pantalla AMOLED de 6.56 pulgadas, una cámara cuádruple con estabilización de imagen gimbal y carga rápida de 33W. Con un diseño elegante y un enfoque en la fotografía.","78519", "2019-12-04", "2030-03-22", 748, "C001"),
-("78494", "HTC U12+", "El HTC U12+ cuenta con una pantalla Super LCD de 6 pulgadas, una cámara dual con efecto bokeh y resistencia al agua","17234", "2010-06-03", "2031-12-02", 755, "C001"),
-("21220", "Lenovo Legion Phone Duel", "El Lenovo Legion Phone Duel es un teléfono gaming con una pantalla AMOLED de 6.65 pulgadas, un procesador Snapdragon 865 Plus y una configuración de cámara dual. Cuenta con gatillos táctiles, sistema de refrigeración y una gran capacidad de almacenamiento.","22928", "2008-10-25", "2023-11-08", 621, "C001"),
-("53538", "Blackberry Key2", "El Blackberry Key2 presenta un teclado físico QWERTY junto con una pantalla IPS de 4.5 pulgadas. Además, ofrece un sistema de seguridad robusto, una cámara dual y una batería de larga duración.","43712", "2009-07-12", "2035-09-23", 850, "C001"),
-("37097", "Honor 20 Pro", "El Honor 20 Pro es un teléfono con una pantalla OLED de 6.26 pulgadas, una cámara cuádruple con capacidad de zoom óptico y una batería de alta capacidad. Con un diseño elegante y un rendimiento eficiente.","75605", "2015-12-30", "2029-01-07", 722, "C001"),
-("25637", "Meizu 17 Pro", "El Meizu 17 Pro cuenta con una pantalla Super AMOLED de 6.6 pulgadas, una cámara cuádruple de alta resolución y carga rápida de 30W. Con un diseño elegante y una interfaz de usuario personalizable.","41026", "2015-11-14", "2027-08-19", 804, "C001"),
-("25493", "Panasonic Toughbook A3", "El Panasonic Toughbook A3 es un teléfono resistente con una pantalla de 10.1 pulgadas, diseñado para soportar condiciones difíciles y ambientes extremos. Incluye una batería de larga duración y conectividad 4G LTE.","42258", "2019-07-10", "2030-08-20", 653, "C001"),
-("52656", "CAT S62 Pro", "El CAT S62 Pro es un teléfono robusto con una pantalla de 5.7 pulgadas y una cámara térmica integrada. Cuenta con resistencia al agua y polvo, así como también una gran durabilidad en entornos exigentes.","91236", "2008-05-11", "2023-07-18", 695, "C001"),
-("18199", "Alcatel 3X", "El Alcatel 3X ofrece una pantalla IPS de 6.52 pulgadas, una cámara triple versátil y una batería de alta capacidad. Con un diseño moderno y un rendimiento equilibrado.","37914", "2018-07-12", "2033-10-21", 712, "C001"),
-("49798", "Infinix Zero 8", "El Infinix Zero 8 cuenta con una pantalla IPS de 6.85 pulgadas, una cámara cuádruple de alta resolución y carga rápida de 33W. Con un diseño llamativo y una gran relación calidad-precio.","31962", "2019-06-12", "2028-02-29", 790, "C001"),
-("74481", "Sharp Aquos R3", "El Sharp Aquos R3 presenta una pantalla IGZO de 6.2 pulgadas, una cámara dual con capacidad de grabación de videos en 4K y un procesador Snapdragon 855. Con un diseño elegante y un enfoque en la calidad de visualización.","64283", "2009-07-17", "2028-02-25", 683, "C001"),
-("55525", "Motorola Razr 5G", "El Motorola Razr 5G es un teléfono plegable con una pantalla Flex View de 6.2 pulgadas, una cámara de alta resolución y una gran capacidad de almacenamiento. Con un diseño icónico y funciones multitarea mejoradas.","54734", "2013-12-03", "2023-03-03", 703, "C001"),
-("29669", "Doogee S96 Pro", "El Doogee S96 Pro es un teléfono robusto con una pantalla de 6.22 pulgadas, una cámara cuádruple con visión nocturna y una batería de larg","42258", "2013-11-11", "2027-10-10", 861, "C001"),
-("99911", "MacBook Pro", "Una potente laptop diseñada por Apple que combina un rendimiento excepcional con una elegante y delgada carcasa de aluminio. Viene con una pantalla Retina de alta resolución, procesadores rápidos, amplia capacidad de almacenamiento y una duración prolongada de la batería.","28999", "2011-07-08", "2029-01-10", 507, "C002"),
-("39745", "Dell XPS 15", "Una laptop premium con un diseño sofisticado y una calidad de construcción excepcional. Cuenta con una pantalla InfinityEdge de borde delgado, procesadores potentes, gráficos dedicados, amplias opciones de almacenamiento y una experiencia de usuario fluida.","97620", "2009-06-05", "2031-02-23", 813, "C002"),
-("75529", "HP Spectre x360", "Una laptop convertible que combina estilo y funcionalidad. Con una pantalla táctil de 360 grados, este dispositivo se puede utilizar como una laptop o una tableta. Ofrece un diseño delgado y elegante, rendimiento rápido, una duración de la batería impresionante y una calidad de construcción premium.","26292", "2017-05-31", "2024-01-09", 664, "C002"),
-("97026", "Lenovo ThinkPad X1 Carbon", "Una laptop empresarial ultraligera y duradera diseñada para profesionales en movimiento. Viene con una pantalla de alta resolución, teclado cómodo, procesadores potentes, amplia capacidad de almacenamiento y una serie de características de seguridad avanzadas.","68326", "2017-02-10", "2026-12-31", 821, "C002"),
-("68463", "Microsoft Surface Book 3", "Un 2 en 1 que combina la versatilidad de una tablet con el rendimiento de una laptop. Con una pantalla desmontable de alta resolución y soporte para el Surface Pen, este dispositivo es ideal para artistas y profesionales creativos. También ofrece un rendimiento potente, batería de larga duración y una amplia variedad de opciones de conectividad.","43712", "2005-06-19", "2031-03-21", 822, "C002"),
-("36359", "Asus ROG Strix G15", "Una computadora portátil gaming diseñada para ofrecer un rendimiento excepcional en juegos. Cuenta con una pantalla de alta frecuencia de actualización, procesadores potentes, gráficos de alta gama, amplia capacidad de almacenamiento y un sistema de enfriamiento eficiente para sesiones de juego prolongadas.","53041", "2010-04-30", "2030-03-21", 610, "C002"),
-("50647", "Acer Predator Helios 300", "Otra opción popular para juegos, esta laptop ofrece un rendimiento sólido a un precio más asequible. Viene con una pantalla de alta resolución, procesadores potentes, gráficos dedicados, amplia capacidad de almacenamiento y un diseño agresivo con iluminación personalizable.","33388", "2007-06-27", "2032-07-15", 862, "C002"),
-("45025", "Raspberry Pi 4", "Un miniordenador de placa única que es popular entre los entusiastas de la informática y los proyectos de bricolaje. Aunque es pequeño, ofrece un rendimiento impresionante para tareas básicas y proyectos de IoT (Internet de las cosas). Tiene múltiples puertos, capacidad de reproducción de video en 4K y se puede personalizar según las necesidades del usuario.","82282", "2013-04-06", "2034-01-13", 595, "C002"),
-("75446", "Refrigerador", null,"97620", "2021-09-01", "2027-03-12", 638, "C003"),
-("12605", "Lavadora", null,"61771", "2012-01-16", "2031-05-06", 763, "C003"),
-("12847", "Secadora", null,"39625", "2014-02-11", "2035-04-14", 643, "C003"),
-("34706", "Lavavajillas", null,"94581", "2006-03-11", "2028-04-26", 824, "C003"),
-("51297", "Horno", null,"18191", "2013-11-03", "2030-02-21", 792, "C003"),
-("59377", "Estufa", null,"88634", "2021-06-22", "2023-10-28", 840, "C003"),
-("42344", "Microondas", null,"58834", "2005-11-22", "2034-05-20", 551, "C003"),
-("64710", "Licuadora", null,"51185", "2017-03-16", "2024-05-04", 872, "C003"),
-("43409", "Batidora", null,"45242", "2010-01-18", "2033-10-02", 623, "C003"),
-("63638", "Tostadora", null,"39786", "2017-07-04", "2028-11-04", 570, "C003"),
-("55225", "Cafetera", null,"79465", "2010-05-26", "2029-02-02", 810, "C003"),
-("52947", "Freidora eléctrica", null,"39786", "2017-05-09", "2030-06-29", 660, "C003"),
-("93700", "Aspiradora", null,"31539", "2007-12-26", "2025-08-27", 531, "C003"),
-("36745", "Plancha", null,"51299", "2007-01-10", "2027-05-25", 633, "C003"),
-("73873", "Hervidor eléctrico", null,"95121", "2023-02-15", "2026-01-11", 770, "C003"),
-("53585", "Dispensador de agua", null,"83983", "2010-06-15", "2031-07-28", 501, "C003"),
-("87519", "Máquina de hacer pan", null,"35891", "2009-12-26", "2026-03-25", 546, "C003"),
-("78649", "Procesador de alimentos", null,"51918", "2019-09-01", "2033-09-24", 544, "C003"),
-("93896", "Parrilla eléctrica", null,"44812", "2019-07-22", "2026-03-30", 824, "C003"),
-("80789", "Robot aspirador", null,"25669", "2013-01-11", "2035-07-24", 657, "C003"),
-("82862", "Máquina de café espresso", null,"82282", "2018-06-04", "2025-01-29", 780, "C003"),
-("76014", "Deshumidificador", null,"47092", "2011-03-12", "2034-03-18", 871, "C003"),
-("36926", "Ventilador", null,"21382", "2009-07-03", "2031-03-27", 704, "C003"),
-("48507", "Aire acondicionado", null,"96098", "2021-04-27", "2034-02-20", 647, "C003"),
-("33643", "Calentador de agua", null,"53188", "2023-02-01", "2030-11-29", 696, "C003"),
-("25949", "Purificador de aire", null,"51299", "2011-04-03", "2027-12-16", 870, "C003"),
-("30259", "Robot de cocina", null,"42258", "2008-12-04", "2026-04-21", 585, "C003"),
-("17783", "Máquina de helados", null,"57184", "2008-10-15", "2033-01-17", 534, "C003"),
-("55601", "Extractor de jugos", null,"33388", "2011-04-26", "2023-06-09", 646, "C003"),
-("25337", "Licuadora de inmersión", null,"24865", "2018-10-09", "2034-11-29", 800, "C003"),
-("80373", "Procesador (CPU)", "Es el cerebro de la computadora, encargado de ejecutar las instrucciones y realizar los cálculos necesarios para el funcionamiento del sistema.","67546", "2015-06-17", "2028-08-11", 892, "C004"),
-("53571", "Tarjeta madre (placa base)", "Es la principal placa de circuito impreso donde se conectan todos los componentes de la computadora. Proporciona las conexiones y circuitos necesarios para que los componentes se comuniquen entre sí.","42258", "2012-08-22", "2027-11-26", 689, "C004"),
-("86312", "Memoria RAM", "Es la memoria de acceso aleatorio donde se almacenan los datos y programas que están siendo utilizados activamente por la computadora. Cuanta más RAM tenga una computadora, más capacidad tendrá para ejecutar múltiples tareas simultáneamente.","80978", "2009-03-10", "2024-03-10", 732, "C004"),
-("28273", "Disco duro o SSD", "Es el dispositivo de almacenamiento principal de la computadora. El disco duro utiliza discos magnéticos para almacenar datos, mientras que los SSD (Unidades de Estado Sólido) utilizan memoria flash. Ambos almacenan de forma permanente los archivos y programas de la computadora.","54711", "2015-01-27", "2027-05-22", 823, "C004"),
-("38727", "Tarjeta de video (GPU)", "Es responsable de generar y renderizar las imágenes en la pantalla. Las tarjetas de video dedicadas son especialmente importantes para tareas gráficamente intensivas, como juegos o diseño gráfico.","51918", "2011-09-10", "2035-11-15", 826, "C004"),
-("57094", "Fuente de alimentación", "Proporciona energía eléctrica a todos los componentes de la computadora. Se conecta a la toma de corriente y distribuye la energía de manera segura y estable a los demás componentes.","63053", "2012-06-29", "2035-09-15", 672, "C004"),
-("28162", "Ventilador y disipador de calor", "Estos componentes trabajan en conjunto para mantener la temperatura de la computadora bajo control. Los ventiladores ayudan a extraer el aire caliente del interior del equipo y el disipador de calor disipa el calor generado por el procesador y otros componentes.","45242", "2010-03-26", "2032-08-29", 512, "C004"),
-("26697", "Tarjeta de red", "Permite la conexión a redes de datos, ya sea por cable (Ethernet) o de forma inalámbrica (Wi-Fi), para facilitar la comunicación y acceso a Internet.","55082", "2006-05-18", "2025-02-20", 517, "C004"),
-("49898", "Tarjeta de sonido", "Proporciona capacidades de audio a la computadora, permitiendo la reproducción y grabación de sonidos a través de altavoces, auriculares o micrófonos.","39023", "2010-08-04", "2034-09-23", 775, "C004"),
-("53252", "Teclado", "Dispositivo de entrada que permite al usuario introducir caracteres y comandos en la computadora mediante la pulsación de teclas.","52829", "2019-03-03", "2034-07-05", 770, "C004"),
-("62315", "Ratón", "Dispositivo de entrada que permite mover el cursor en la pantalla y seleccionar objetos mediante botones y desplazamiento.","11875", "2017-09-08", "2027-03-17", 555, "C004"),
-("55227", "Monitor", "Es el dispositivo de salida principal de la computadora, donde se muestran las imágenes y texto generados por la tarjeta de video.","91236", "2015-01-25", "2030-11-04", 749, "C004");
+
+insert into Productos (cod_unico_prod, nombre_prod, descripcion_prod, cod_prov, fecha_ingreso, fecha_salida, stk_prod, cod_categoria) values
+("32535", "Motorola Moto G Power", "El Motorola Moto ema de cámara triple.",2, "2010-08-13", "2028-09-23", 841, "C001");
+
+insert into Productos (cod_unico_prod, nombre_prod, descripcion_prod, cod_prov, fecha_ingreso, fecha_salida, stk_prod, cod_categoria) values
+("64994", "Sony Xperia 1 II", "El Sony Xperia 1 II es configuración de audio y una gran capacidad de almacenamiento.",2, "2023-03-21", "2021-02-27", 609, "C001");
 
 
-
+/*insert into Productos values ("18814", "LG Velvet", "El LG Velvet es un elegante t polvo.",2, "2017-06-20", "2029-02-19", 841, "C001");*/
+/*
+insert into Productos values ("61675", "Nokia 9 PureView", "El Nokia 9 PureView de y un diseño de vidrio y metal.",2, "2021-08-09", "2027-11-19", 500, "C001");
+insert into Productos values ("78143", "ASUS ROG Phone 5", "El ASUS ROG Phone 5 es Snapdragon 888. Incluye características gaming como gatillos AirTrigger y refrigeración avanzada.",2, "2022-01-07", "2031-08-04", 863, "C001");
+insert into Productos values ("90465", "Xiaomi Redmi Note 10 Pro", "El Xiaomi Redm diseño elegante y un rendimiento confiable.",3, "2018-08-25", "2023-09-01", 674, "C001");
+insert into Productos values ("64650", "Oppo Find X3 Pro", "El Oppo Find X3 Pro cu 2.0.",3, "2021-10-09", "2026-11-26", 691, "C001");
+insert into Productos values ("21861", "ZTE Axon 30 Ultra", "El ZTE Axon 30 Ultra  y un rendimiento excepcional.",3, "2009-02-26", "2026-04-22", 734, "C001");
+insert into Productos values ("45513", "Realme 8 Pro", "El Realme 8 Pro cuenta con eficiente.",3, "2019-07-10", "2029-07-07", 678, "C001");
+insert into Productos values ("48012", "Vivo X60 Pro", "El Vivo X60 Pro ofrece una pan image gimbal y carga rápida de 33W. Con un diseño elegante y un enfoque en la fotografía.",3, "2019-12-04", "2030-03-22", 748, "C001");
+insert into Productos values ("78494", "HTC U12+", "El HTC U12+ cuenta con una pantall resis al agua",4, "2010-06-03", "2031-12-02", 755, "C001");
+insert into Productos values ("21220", "Lenovo Legion Phone Duel", "El Lenovo Legion. Cuenta con gatillos táctiles, sistema de refrigeración y una gran capacidad de almacenamiento.",4, "2008-10-25", "2023-11-08", 621, "C001");
+insert into Productos values ("53538", "Blackberry Key2", "El Blackberry Key2 presen y una batería de larga duración.",4, "2009-07-12", "2035-09-23", 850, "C001");
+insert into Productos values ("37097", "Honor 20 Pro", "El Honor 20 Pro es un teléfo diseño elegante y un rendimiento eficiente.",4, "2015-12-30", "2029-01-07", 722, "C001");
+insert into Productos values ("25637", "Meizu 17 Pro", "El Meizu 17 Pro cuenta con u interfaz de usuario personalizable.",4, "2015-11-14", "2027-08-19", 804, "C001");
+insert into Productos values ("25493", "Panasonic Toughbook A3", "El Panasonic Tough de larga duración y conectividad 4G LTE.",4, "2019-07-10", "2030-08-20", 653, "C001");
+insert into Productos values ("52656", "CAT S62 Pro", "El CAT S62 Pro es un teléfono gran durabilidad en entornos exigentes.",4, "2008-05-11", "2023-07-18", 695, "C001");
+insert into Productos values ("18199", "Alcatel 3X", "El Alcatel 3X ofrece una panta.",4, "2018-07-12", "2033-10-21", 712, "C001");
+insert into Productos values ("49798", "Infinix Zero 8", "El Infinix Zero 8 cuenta c gran relación calidad-precio.",4, "2019-06-12", "2028-02-29", 790, "C001");
+insert into Productos values ("74481", "Sharp Aquos R3", "El Sharp Aquos R3 presenta un diseño elegante y un enfoque en la calidad de visualización.",5, "2009-07-17", "2028-02-25", 683, "C001");
+insert into Productos values ("55525", "Motorola Razr 5G", "El Motorola Razr 5G es un  cámar de alta resolución y una gran capacidad de almacenamiento. Con un diseño icónico y funciones multitarea mejoradas.",5, "2013-12-03", "2023-03-03", 703, "C001");
+insert into Productos values ("29669", "Doogee S96 Pro", "El Doogee S96 Pro es un telé con v nocturna y una batería de larg",5, "2013-11-11", "2027-10-10", 861, "C001");
+insert into Productos values ("99911", "MacBook Pro", "Una potente laptop diseñada po prolongada de la batería.",5, "2011-07-08", "2029-01-10", 507, "C002");
+insert into Productos values ("39745", "Dell XPS 15", "Una laptop premium con un dise.",5, "2009-06-05", "2031-02-23", 813, "C002");
+insert into Productos values ("75529", "HP Spectre x360", "Una laptop convertible que, una duración de la batería impresionante y una calidad de construcción premium.",5, "2017-05-31", "2024-01-09", 664, "C002");
+insert into Productos values ("97026", "Lenovo ThinkPad X1 Carbon", "Una laptop empre seguridad avanzadas.",5, "2017-02-10", "2026-12-31", 821, "C002");
+insert into Productos values ("68463", "Microsoft Surface Book 3", "Un 2 en 1 que com  conectividad.",5, "2005-06-19", "2031-03-21", 822, "C002");
+insert into Productos values ("36359", "Asus ROG Strix G15", "Una computadora portáti  prolongadas.",5, "2010-04-30", "2030-03-21", 610, "C002");
+insert into Productos values ("50647", "Acer Predator Helios 300", "Otra opción popul y un diseño agresivo con iluminación personalizable.",5, "2007-06-27", "2032-07-15", 862, "C002");
+insert into Productos values ("45025", "Raspberry Pi 4", "Un miniordenador de placa ú las cosas). Tiene múltiples puertos, capacidad de reproducción de video en 4K y se puede personalizar según las necesidades del usuario.",5, "2013-04-06", "2034-01-13", 595, "C002");
+insert into Productos values ("80373", "Procesador (CPU)", "Es el cerebro de la comput funci del sistema.",6, "2015-06-17", "2028-08-11", 892, "C004");
+insert into Productos values ("53571", "Tarjeta madre (placa base)", "Es la pri sí.",6, "2012-08-22", "2027-11-26", 689, "C004");
+insert into Productos values ("86312", "Memoria RAM", "Es la memoria de acceso  ejecutar múltiples tareas simultáneamente.",6, "2009-03-10", "2024-03-10", 732, "C004");
+insert into Productos values ("28273", "Disco duro o SSD", "Es el dispositas de la computadora.",7, "2015-01-27", "2027-05-22", 823, "C004");
+insert into Productos values ("38727", "Tarjeta de video (GPU)", "Es responsabl gráfico.",6, "2011-09-10", "2035-11-15", 826, "C004");
+insert into Productos values ("57094", "Fuente de alimentación", "Proporciona e demás componentes.",6, "2012-06-29", "2035-09-15", 672, "C004");
+insert into Productos values ("28162", "Ventilador y disipador de calor", "Esto el disipador de calor disipa el calor generado por el procesador y otros componentes.",7, "2010-03-26", "2032-08-29", 512, "C004");
+insert into Productos values ("26697", "Tarjeta de red", "Permite la conexión a.",7, "2006-05-18", "2025-02-20", 517, "C004");
+insert into Productos values ("49898", "Tarjeta de sonido", "Proporciona capacidades d través de altavoces, auriculares o micrófonos.",7, "2010-08-04", "2034-09-23", 775, "C004");
+insert into Productos values ("53252", "Teclado", "Dispositivo de entrada que permite .",8, "2019-03-03", "2034-07-05", 770, "C004");
+insert into Productos values ("62315", "Ratón", "Dispositivo de entrada que permite mo8", "2017-09-08", "2027-03-17", 555, "C004");
+insert into Productos values ("55227", "Monitor", "Es el dispositivo de salida princip la tarjeta de video",8, "2015-01-25", "2030-11-04", 749, "C004");
+*/
 
 
 drop table if exists Usuario;
@@ -615,4 +582,5 @@ inner join Pais pa on p.id_pais = pa.id_pais
 INNER JOIN Tipo tip ON p.nacionalidad_prov = tip.id_tip
 order by p.cod_prov asc;
 */
+
 

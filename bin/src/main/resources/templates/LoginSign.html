@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Login.css">
+    <title>InventoryGenius - Login</title>    
+    <style>
+		body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: #f1f1f1;
+    font-family: Arial, sans-serif;
+}
+
+section {
+    width: 400px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.container { padding: 20px; }
+
+.user { display: flex; flex-direction: column; align-items: center;
+}
+
+.formBx { width: 100%; }
+
+form { display: flex; flex-direction: column; align-items: center;
+}
+
+h2 { font-size: 24px; margin-bottom: 40px; }
+
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    transition: 0.5s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-bottom: 1px solid #4caf50;
+    outline: none; /* Agregado para eliminar el contorno al enfocar */
+}
+
+
+input[type="submit"] {
+    background: #069370;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+input[type="submit"]:hover{ background: #14c599; }
+
+p.signup { font-size: 14px; margin-top: 15px; }
+
+a { color: #069370; text-decoration: none; }
+	</style>
+</head>
+<body>
+
+    <section>
+        <div class="container">
+            <div class="user signiBx">
+                <div class="formBx">
+                    <form action="">
+                        <h2>Mi Cuenta</h2>
+                        <input type="text" placeholder="Usuario">
+                        <input type="password" placeholder="Contraseña">
+                        <input type="submit" value="Acceder">
+                        <a href="/home/HomeAcount">navbar</a>
+                        <p class="singup">No tienes una cuenta? <a href="/home/NewAcount" onclick="toogleForm();">Crear</a></p>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+
+</body>
+</html>

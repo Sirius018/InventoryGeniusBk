@@ -159,7 +159,7 @@
         <div class="menu-toggle"></div>
         <nav>
             <ul>
-                <li><a class="active" href="/home/config"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                <li><a class="active" href="/home/HomeAcount"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
                 <li class="nav-item dropdown">
                     <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -181,69 +181,79 @@
     </div>
 </header>
 
-<form class="content-navbar">
+<form action="/empresa/guardar" method="post" th:object="${empresa}" class="content-navbar">
+
     <div class="row">
-        <div class="col">
-            <label for="inputId">Orden</label>
-            <input type="text" class="form-control" id="inputId" placeholder="">
-        </div>
-        <div class="col">
-            <label for="inputCodio">Codigo</label>
-            <input type="text" class="form-control" id="inputCodio" placeholder="">
+        <div class="col col-md-3">
+            <label for="id_emp">Orden</label>
+            <input type="text" th:field="*{id_emp}" class="form-control" id="id_emp" placeholder="Código" readonly>
         </div>
     </div>
 
     <div class="row">
         <div class="col">
-            <label for="inputEmpresa">Empresa</label>
-            <input type="text" class="form-control" id="inputEmpresa" placeholder="">
+            <label for="cod_unico_emp">Código</label>
+            <input type="text" th:field="*{cod_unico_emp}" class="form-control" id="cod_unico_emp" placeholder="(obligatorio)" pattern="[0-9]{6}" required>
+            <div class="invalid-feedback">Ingresa un código de 6 dígitos numéricos.</div>
         </div>
         <div class="col">
-            <label for="inputRuc">Ruc</label>
-            <input type="text" class="form-control" id="inputRuc" placeholder="">
+            <label for="nombre_emp">Empresa</label>
+            <input type="text" th:field="*{nombre_emp}" class="form-control" id="nombre_emp" placeholder="(obligatorio)" pattern="[a-zA-Z0-9]+" required>
+            <div class="invalid-feedback">Ingresa un nombre válido (solo letras y números).</div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <label for="ruc_emp">RUC</label>
+            <input type="text" th:field="*{ruc_emp}" class="form-control" id="ruc_emp" placeholder="(obligatorio)" pattern="[0-9]{11}" required>
+            <div class="invalid-feedback">Ingresa un RUC de 11 dígitos numéricos.</div>
+        </div>
+        <div class="col">
+            <label for="correo_emp">Correo</label>
+            <input type="email" th:field="*{correo_emp}" class="form-control" id="correo_emp" placeholder="(obligatorio)" required>
+            <div class="invalid-feedback">Ingresa un correo válido (ejemplo: adasd@gmail.com).</div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col">
+            <label for="direccion_emp">Dirección</label>
+            <input type="text" th:field="*{direccion_emp}" class="form-control" id="direccion_emp" placeholder="(obligatorio)" pattern="[a-zA-Z0-9]+" required>
+            <div class="invalid-feedback">Ingresa una dirección válida (solo letras y números).</div>
+        </div>
+        <div class="col">
+            <label for="inputTel">Teléfono</label>
+            <input type="text" th:field="*{telefono_one_emp}" class="form-control" id="inputTel" placeholder="">
         </div>
     </div>
 
     <div class="row">
         <div class="col">
-            <label for="inputDescripcion">Correo</label>
-            <input type="text" class="form-control" id="inputDescripcion" placeholder="">
+            <label for="telefono_two_emp">Movil</label>
+            <input type="text" th:field="*{telefono_two_emp}" class="form-control" id="telefono_two_emp" placeholder="">
         </div>
         <div class="col">
-            <label for="inputE-mail">E-mail</label>
-            <input type="email" class="form-control" id="inputE-mail" placeholder="">
+            <label for="id_pais">País</label>
+            <select id="" class="form-control" th:field="*{id_pais}">
+                <option th:each="p : ${lstPais}" th:value="${p.id_pais}" th:text="${p.nombre_pais}"></option>
+            </select>
         </div>
     </div>
 
-
-
-    <div class="row">
-        <div class="col">
-            <label for="inputDireccion">Direccion</label>
-            <input type="text" class="form-control" id="inputDireccion" placeholder="">
-        </div>
-        <div class="form-group col-md-6">
-            <label for="Pais">Pais</label>
-            <input type="text" class="form-control" id="Pais" placeholder="">
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="form-group col-md-6">
-            <label for="Telf">Telf</label>
-            <input type="text" class="form-control" id="Telf" placeholder="">
-        </div>
-
-        <div class="form-group col-md-6">
-            <label for="Telf2">Telf2</label>
-            <input type="text" class="form-control" id="Telf2" placeholder="">
-        </div>
-    </div>
 
     <br>
-    <button type="submit" class="btn btn-success">Registrar</button>
+    <button th:text="${boton}" type="submit" class="btn btn-success"></button>
+    </br>
+    <div th:class="${clase}" role="alert" th:text="${mensaje}"></div>
 
 </form>
+
+
+
+
 
 <div class="container">
     <table id="tablaEmpresas" class="table table-bordered " >
@@ -256,8 +266,9 @@
             <th scope="col"class="bg-success">E-mail</th>
             <th scope="col"class="bg-success">Direccion</th>
             <th scope="col"class="bg-success">Pais</th>
-            <th scope="col"class="bg-success">Telefono 1</th>
-            <th scope="col"class="bg-success">Telefono 2</th>
+            <th scope="col"class="bg-success">Teléfono</th>
+            <th scope="col"class="bg-success">Movil</th>
+            <th scope="col"class="bg-success"></th>
         </tr>
         </thead>
         <tbody>
@@ -271,6 +282,12 @@
             <td th:text="${pr.id_pais}"></td>
             <td th:text="${pr.telefono_one_emp}"></td>
             <td th:text="${pr.telefono_two_emp}"></td>
+            <td>
+                <form action="/buscarempresa"  method="post">
+                    <input type="hidden" name="id_emp" th:value="${pr.id_emp}">
+                    <button class="btn btn-primary">Seleccionar</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -278,6 +295,9 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
+
+
 
 </body>
 </html>

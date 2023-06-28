@@ -255,12 +255,13 @@
     <br>
     <button th:text="${boton}" type="submit" class="btn btn-success"></button>
     </br>
-    <div th:class="${clase}" role="alert" th:text="${mensaje}"></div>
+
+    <a href="/proveedor/listadopdf" class="btn btn-success">PDF</a>
 </form>
 
-
-
-
+<div class="container">
+    <div th:class="${clase}" role="alert" th:text="${mensaje}"></div>	
+</div>
 
 <div class="container">
     <table id="tablaEmpresas" class="table table-bordered">
