@@ -186,62 +186,70 @@
 <form action="/proveedor/guardar" method="post" th:object="${proveedor}" class="content-navbar">
     <div class="row">
         <div class="col">
-            <label for="inputEmpresa">Código Proveedor</label>
+            <label for="cod_prov">Código Proveedor</label>
             <input type="text" th:field="*{cod_prov}"
                    class="form-control" id="inputCod" placeholder="00000" readonly>
         </div>
         <div class="col">
-            <label for="inputEmpresa">Proveedor</label>
+            <label for="nombre_prov">Proveedor</label>
             <input type="text" th:field="*{nombre_prov}"
-                   class="form-control" id="inputCod" placeholder="">
+                   class="form-control" id="nombre_prov" placeholder="Obligatorio (máximo 250 caracteres)" required maxlength="250">
+            <small class="text-danger" id="nombreProvError"></small>
+            <small class="text-danger" th:if="${#fields.hasErrors('nombre_prov')}" th:errors="*{nombre_prov}"></small>
         </div>
     </div>
     <div class="row">
         <div class="col">
-            <label for="inputRuc">Ruc</label>
+            <label for="ruc_prov">Ruc</label>
             <input type="text" th:field="*{ruc_prov}"
-                   class="form-control" id="inputCod" placeholder="11 digitos (obligatorio)">
+                   class="form-control" id="ruc_prov" placeholder="11 dígitos (obligatorio)" pattern="\d{11}" required>
+            <small class="text-danger" id="rucProvError"></small>
+            <small class="text-danger" th:if="${#fields.hasErrors('ruc_prov')}" th:errors="*{ruc_prov}"></small>
         </div>
         <div class="col">
-            <label for="inputDescripcion">Correo</label>
-            <input type="text" th:field="*{correo_prov}"
-                   class="form-control" id="inputCod" placeholder="(obligatorio)">
+            <label for="correo_prov">Correo</label>
+            <input type="email" th:field="*{correo_prov}"
+                   class="form-control" id="correo_prov" placeholder="Obligatorio (ejemplo: adasd@gmail.com)" required>
+            <small class="text-danger" id="correoProvError"></small>
+            <small class="text-danger" th:if="${#fields.hasErrors('correo_prov')}" th:errors="*{correo_prov}"></small>
         </div>
     </div>
     <div class="row">
         <div class="col col-md-6">
-            <label for="inputE-mail">Direccion</label>
+            <label for="direccion_prov">Dirección</label>
             <input type="text" th:field="*{direccion_prov}"
-                   class="form-control" id="inputCod" placeholder="(obligatorio)">
+                   class="form-control" id="direccion_prov" placeholder="Obligatorio" required>
+            <small class="text-danger" id="direccionProvError"></small>
+            <small class="text-danger" th:if="${#fields.hasErrors('direccion_prov')}" th:errors="*{direccion_prov}"></small>
         </div>
         <div class="col col-md-3">
-            <label for="inputDireccion">Tipo</label>
-            <select id="inputTipo" class="form-control" th:field="*{id_tip}" >
+            <label for="id_tip">Tipo</label>
+            <select id="inputTipo" class="form-control" th:field="*{id_tip}">
                 <option th:each="t : ${lstTipo}" th:value="${t.id_tip}"
                         th:text="${t.tipo}"
-                > </option>
+                ></option>
             </select>
         </div>
         <div class="form-group col-md-3">
-            <label for="Pais">Pais</label>
-            <select id="inputPais" class="form-control" th:field="*{id_pais}" >
+            <label for="Pais">País</label>
+            <select id="inputPais" class="form-control" th:field="*{id_pais}">
                 <option th:each="p : ${lstPais}" th:value="${p.id_pais}"
                         th:text="${p.nombre_pais}"
-                > </option>
+                ></option>
             </select>
         </div>
     </div>
 
     <div class="row">
         <div class="form-group col-md-6">
-            <label for="Telf">Telefono</label>
+            <label for="telefono_one_prov">Teléfono</label>
             <input type="text" th:field="*{telefono_one_prov}"
-                   class="form-control" id="inputCod" placeholder="(01)xxxxxxx)">
+                   class="form-control" id="telefono_one_prov" placeholder="(01)xxxxxxx">
         </div>
         <div class="form-group col-md-6">
-            <label for="Telf">Otro Telefono</label>
+            <label for="telefono_two_prov">Otro Teléfono</label>
             <input type="text" th:field="*{telefono_two_prov}"
-                   class="form-control" id="inputCod" placeholder="9xxxxxxxx">
+                   class="form-control" id="telefono_two_prov" placeholder="9xxxxxxxx">
         </div>
     </div>
 
@@ -250,6 +258,7 @@
     </br>
     <div th:class="${clase}" role="alert" th:text="${mensaje}"></div>
 </form>
+
 
 
 
