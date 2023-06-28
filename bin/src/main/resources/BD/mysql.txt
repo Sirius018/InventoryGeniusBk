@@ -111,7 +111,8 @@ insert into Empresa values
 (null, 979057, "Skyline Software Solutions", "15544476167", null, "SkylineSoftwareSolutions@gmail.com", "Calle Real, Av. 222 Mz. F Lt. 6", 134, "(01)3151288", "980351786"),
 (null, 295867, "Summit Industries", "17477047808", null, "SummitIndustries@gmail.com", "Av. Progreso, Calle 333 Mz. G Lt. 7", 27, "(01)8888139", "956057250"),
 (null, 445447, "Quantum Innovations", "14133750798", null, "QuantumInnovations@gmail.com", "Calle Flores, Av. 444 Mz. H Lt. 8", 98, "(01)6176577", "982188302"),
-(null, 244088, "Stellar Management Group", "15331899277", null, "StellarManagementGroup@gmail.com", "Av. Esperanza, Calle 555 Mz. I Lt. 9", 25, "(01)6703326", "959520712"),
+(null, 244088, "Stellar Management Group", "15331899277", null, "StellarManagementGroup@gmail.com", "Av. Esperanza, Calle 555 Mz. I Lt. 9", 25, "(01)6703326", "959520712");
+/*
 (null, 127384, "Redwood Consulting", "13323638851", null, "RedwoodConsulting@gmail.com", "Calle Victoria, Av. 666 Mz. J Lt. 10", 22, "(01)7660600", "922070164"),
 (null, 827546, "Crestwood Industries", "16437491819", null, "CrestwoodIndustries@gmail.com", "Av. Paz, Calle 777 Mz. K Lt. 11", 7, "(01)6729032", "985219899"),
 (null, 219121, "FusionTech Solutions", "11561680854", null, "FusionTechSolutions@gmail.com", "Calle del Mar, Av. 888 Mz. L Lt. 12", 116, "(01)4429984", "940498446"),
@@ -238,7 +239,7 @@ insert into Empresa values
 (null, 585391, "Infinity Computing Solutions", "10331343444", null, "InfinityComputingSolutions@gmail.com", "Av. Magia, Calle 13131 Mz. CCCC Lt. 133", 23, "(01)9082114", "929162859"),
 (null, 201731, "Cyberspace Computing Co.", "13841282156", null, "CyberspaceComputingCo.@gmail.com", "Calle Encanto, Av. 13232 Mz. DDDD Lt. 134", 70, "(01)8034673", "921644224"),
 (null, 891672, "Nebula Technologies", "17639788361", null, "NebulaTechnologies@gmail.com", "Av. Esperanza, Calle 13333 Mz. EEEE Lt. 135", 62, "(01)9421555", "930351289");
-
+*/
 
 DROP TABLE IF EXISTS Proveedores;
 CREATE TABLE Proveedores (
@@ -266,8 +267,8 @@ CREATE TABLE Productos (
   nombre_prod VARCHAR(100) NOT NULL,
   descripcion_prod VARCHAR(500) DEFAULT NULL,
   cod_prov int,
-  fecha_ingreso DATETIME,
-  fecha_salida DATETIME,
+  fecha_ingreso varchar(10),
+  fecha_salida varchar(10),
   stk_prod INT,
   cod_categoria VARCHAR(4),
   PRIMARY KEY (cod_unico_prod),
@@ -289,7 +290,8 @@ insert into Proveedores values
 (null, "Synthetix", "10518005870", "Synthetix@gmail.com", "Calle Encanto, Av. 7272 Mz. VVV Lt. 74",100, 22,"(01)6991407", "974720836"),
 (null,  "Innovent", "14263111895", "Innovent@gmail.com", "Av. Esperanza, Calle 7373 Mz. WWW Lt. 75",200, 65,"(01)6330284", "907934297"),
 (null,  "Mindware", "13961938423", "Mindware@gmail.com", "Calle Victoria, Av. 7474 Mz. XXX Lt. 76",200, 82,"(01)1669528", "960695142"),
-(null,  "Intellisys", "15545797619", "Intellisys@gmail.com", "Av. Alegría, Calle 7575 Mz. YYY Lt. 77",200, 21,"(01)9485994", "900702210"),
+(null,  "Intellisys", "15545797619", "Intellisys@gmail.com", "Av. Alegría, Calle 7575 Mz. YYY Lt. 77",200, 21,"(01)9485994", "900702210");
+/*
 (null,  "Optimumtech", "18886786076", "Optimumtech@gmail.com", "Calle Imaginaria, Av. 7676 Mz. ZZZ Lt. 78",200, 4,"(01)7947123", "967242633"),
 (null,  "Neotec", "16952149937", "Neotec@gmail.com", "Av. Sueños, Calle 7777 Mz. AAAA Lt. 79",200, 32,"(01)1903086", "994587540"),
 (null, "Smartsoft", "19449952632", "Smartsoft@gmail.com", "Calle del Arcoíris, Av. 7878 Mz. BBBB Lt. 80",100, 22,"(01)5264401", "999005290"),
@@ -386,7 +388,7 @@ insert into Proveedores values
 (null, "Zenith Gaming Solutions", "16050624404", "ZenithGamingSolutions@gmail.com", "Calle Imaginación, Av. 10202 Mz. ZZZZ Lt. 104",200, 116,"(01)2815972", "979789760"),
 (null, "Infinity Console Systems", "14927446985", "InfinityConsoleSystems@gmail.com", "Av. Estrella, Calle 10303 Mz. AAAA Lt. 105",200, 49,"(01)2179108", "939174045"),
 (null, "Phoenix Entertainment Co.", "11164497949", "PhoenixEntertainmentCo.@gmail.com", "Calle Ensueño, Av. 10404 Mz. BBBB Lt. 106",200, 55,"(01)3104132", "964972428");
-
+*/
 
 
 
@@ -394,25 +396,25 @@ insert into Productos (cod_unico_prod, nombre_prod, descripcion_prod, cod_prov, 
 ("32535", "Motorola Moto G Power", "El Motorola Moto ema de cámara triple.",2, "2010-08-13", "2028-09-23", 841, "C001");
 
 insert into Productos (cod_unico_prod, nombre_prod, descripcion_prod, cod_prov, fecha_ingreso, fecha_salida, stk_prod, cod_categoria) values
-("64994", "Sony Xperia 1 II", "El Sony Xperia 1 II es configuración de audio y una gran capacidad de almacenamiento.",2, "2023-03-21", "2021-02-27", 609, "C001");
+("64994", "Sony Xperia 1 II", "El Sony Xperia 1 II es configuración de audio y una gran capacidad de almacenamiento.",2, "2023-03-21", "2021-02-27", 609, "C001"),
+("18814", "LG Velvet", "El LG Velvet es un elegante t polvo.",2, "2017-06-20", "2029-02-19", 841, "C001"),
+("61675", "Nokia 9 PureView", "El Nokia 9 PureView de y un diseño de vidrio y metal.",2, "2021-08-09", "2027-11-19", 500, "C001"),
+("78143", "ASUS ROG Phone 5", "El ASUS ROG Phone 5 es Snapdragon 888. Incluye características gaming como gatillos AirTrigger y refrigeración avanzada.",2, "2022-01-07", "2031-08-04", 863, "C001"),
+("90465", "Xiaomi Redmi Note 10 Pro", "El Xiaomi Redm diseño elegante y un rendimiento confiable.",3, "2018-08-25", "2023-09-01", 674, "C001"),
+("64650", "Oppo Find X3 Pro", "El Oppo Find X3 Pro cu 2.0.",3, "2021-10-09", "2026-11-26", 691, "C001"),
+("21861", "ZTE Axon 30 Ultra", "El ZTE Axon 30 Ultra  y un rendimiento excepcional.",3, "2009-02-26", "2026-04-22", 734, "C001"),
+("45513", "Realme 8 Pro", "El Realme 8 Pro cuenta con eficiente.",3, "2019-07-10", "2029-07-07", 678, "C001");
 
 
-/*insert into Productos values ("18814", "LG Velvet", "El LG Velvet es un elegante t polvo.",2, "2017-06-20", "2029-02-19", 841, "C001");*/
 /*
-insert into Productos values ("61675", "Nokia 9 PureView", "El Nokia 9 PureView de y un diseño de vidrio y metal.",2, "2021-08-09", "2027-11-19", 500, "C001");
-insert into Productos values ("78143", "ASUS ROG Phone 5", "El ASUS ROG Phone 5 es Snapdragon 888. Incluye características gaming como gatillos AirTrigger y refrigeración avanzada.",2, "2022-01-07", "2031-08-04", 863, "C001");
-insert into Productos values ("90465", "Xiaomi Redmi Note 10 Pro", "El Xiaomi Redm diseño elegante y un rendimiento confiable.",3, "2018-08-25", "2023-09-01", 674, "C001");
-insert into Productos values ("64650", "Oppo Find X3 Pro", "El Oppo Find X3 Pro cu 2.0.",3, "2021-10-09", "2026-11-26", 691, "C001");
-insert into Productos values ("21861", "ZTE Axon 30 Ultra", "El ZTE Axon 30 Ultra  y un rendimiento excepcional.",3, "2009-02-26", "2026-04-22", 734, "C001");
-insert into Productos values ("45513", "Realme 8 Pro", "El Realme 8 Pro cuenta con eficiente.",3, "2019-07-10", "2029-07-07", 678, "C001");
-insert into Productos values ("48012", "Vivo X60 Pro", "El Vivo X60 Pro ofrece una pan image gimbal y carga rápida de 33W. Con un diseño elegante y un enfoque en la fotografía.",3, "2019-12-04", "2030-03-22", 748, "C001");
-insert into Productos values ("78494", "HTC U12+", "El HTC U12+ cuenta con una pantall resis al agua",4, "2010-06-03", "2031-12-02", 755, "C001");
-insert into Productos values ("21220", "Lenovo Legion Phone Duel", "El Lenovo Legion. Cuenta con gatillos táctiles, sistema de refrigeración y una gran capacidad de almacenamiento.",4, "2008-10-25", "2023-11-08", 621, "C001");
-insert into Productos values ("53538", "Blackberry Key2", "El Blackberry Key2 presen y una batería de larga duración.",4, "2009-07-12", "2035-09-23", 850, "C001");
-insert into Productos values ("37097", "Honor 20 Pro", "El Honor 20 Pro es un teléfo diseño elegante y un rendimiento eficiente.",4, "2015-12-30", "2029-01-07", 722, "C001");
-insert into Productos values ("25637", "Meizu 17 Pro", "El Meizu 17 Pro cuenta con u interfaz de usuario personalizable.",4, "2015-11-14", "2027-08-19", 804, "C001");
-insert into Productos values ("25493", "Panasonic Toughbook A3", "El Panasonic Tough de larga duración y conectividad 4G LTE.",4, "2019-07-10", "2030-08-20", 653, "C001");
-insert into Productos values ("52656", "CAT S62 Pro", "El CAT S62 Pro es un teléfono gran durabilidad en entornos exigentes.",4, "2008-05-11", "2023-07-18", 695, "C001");
+("78494", "HTC U12+", "El HTC U12+ cuenta con una pantall resis al agua",4, "2010-06-03", "2031-12-02", 755, "C001"),
+("21220", "Lenovo Legion Phone Duel", "El Lenovo Legion. Cuenta con gatillos táctiles, sistema de refrigeración y una gran capacidad de almacenamiento.",4, "2008-10-25", "2023-11-08", 621, "C001"),
+("53538", "Blackberry Key2", "El Blackberry Key2 presen y una batería de larga duración.",4, "2009-07-12", "2035-09-23", 850, "C001"),
+("37097", "Honor 20 Pro", "El Honor 20 Pro es un teléfo diseño elegante y un rendimiento eficiente.",4, "2015-12-30", "2029-01-07", 722, "C001"),
+("25637", "Meizu 17 Pro", "El Meizu 17 Pro cuenta con u interfaz de usuario personalizable.",4, "2015-11-14", "2027-08-19", 804, "C001"),
+("25493", "Panasonic Toughbook A3", "El Panasonic Tough de larga duración y conectividad 4G LTE.",4, "2019-07-10", "2030-08-20", 653, "C001"),
+("52656", "CAT S62 Pro", "El CAT S62 Pro es un teléfono gran durabilidad en entornos exigentes.",4, "2008-05-11", "2023-07-18", 695, "C001");
+
 insert into Productos values ("18199", "Alcatel 3X", "El Alcatel 3X ofrece una panta.",4, "2018-07-12", "2033-10-21", 712, "C001");
 insert into Productos values ("49798", "Infinix Zero 8", "El Infinix Zero 8 cuenta c gran relación calidad-precio.",4, "2019-06-12", "2028-02-29", 790, "C001");
 insert into Productos values ("74481", "Sharp Aquos R3", "El Sharp Aquos R3 presenta un diseño elegante y un enfoque en la calidad de visualización.",5, "2009-07-17", "2028-02-25", 683, "C001");
@@ -441,36 +443,114 @@ insert into Productos values ("55227", "Monitor", "Es el dispositivo de salida p
 */
 
 
-drop table if exists Usuario;
+DROP TABLE IF EXISTS Usuario;
 CREATE TABLE Usuario (
-  `cod_uni_User` INT PRIMARY KEY,
-  `cod_order` INT,
+  `cod_order` INT AUTO_INCREMENT,
   `Usuario` VARCHAR(50),
-  `password` VARCHAR(50)
+  `password` VARCHAR(50),
+  PRIMARY KEY (cod_order)
 );
 
-INSERT INTO Usuario (cod_uni_User, cod_order, Usuario, password) VALUES
-(1, 1, 'admin', 'admin'),
-(2, 2, 'Noob', 'asd'),
-(3, 3, 'midd', '123'),
-(4, 4, 'nuton', 'buton');
+INSERT INTO Usuario (Usuario, password) VALUES
+('admin', 'admin'),
+('Noob', 'asd'),
+('midd', '123'),
+('nuton', 'buton');
 
 
 
-drop table if exists Voucher_servicio;
+
+DROP TABLE IF EXISTS Voucher_servicio;
 CREATE TABLE Voucher_servicio (
-  cod_Vta_Voucher INT PRIMARY KEY,
-  cod_unico_prod char(5),
-  cod_unico_prov VARCHAR(4),
-  igv SMALLINT DEFAULT 5,
-  costo_total_igv smallint,
-  costo_total_servicio SMALLINT,
-  foreign key (cod_unico_prod) REFERENCES Productos (cod_unico_prod)
+  cod_Vta_Voucher INT PRIMARY KEY auto_increment,
+  cod_unico_prod VARCHAR(5),
+  cod_prov INT,
+  fecha_ingreso varchar(10),
+  fecha_salida varchar(10),
+  igv DECIMAL(10, 2) default 0.2,
+  costo_total_unidad DECIMAL(10, 2) default 0.2,
+  coste_total_dias int default 10,
+  costo_total_servicio DECIMAL(10, 2),
+  FOREIGN KEY (cod_prov) REFERENCES Proveedores (cod_prov),
+  FOREIGN KEY (cod_unico_prod) REFERENCES Productos(cod_unico_prod)
 );
 
 
+/*INSERT INTO Voucher_servicio (cod_Vta_Voucher, cod_unico_prod, cod_prov, igv, costo_total_igv, costo_total_servicio)
+VALUES (null, '18814', 2, 2, 100, 500);*/
 
 
+DELIMITER //
+
+CREATE TRIGGER insertar_voucher AFTER INSERT ON Productos
+FOR EACH ROW
+BEGIN
+    DECLARE v_costo_total_unidad DECIMAL(10, 2);
+    DECLARE v_coste_total_dias INT;
+    DECLARE v_costo_total_servicio DECIMAL(10, 2);
+
+    SET v_costo_total_unidad = NEW.stk_prod * 0.2;
+    SET v_coste_total_dias = DATEDIFF(NEW.fecha_salida, NEW.fecha_ingreso) * 10;
+    SET v_costo_total_servicio = v_costo_total_unidad + v_coste_total_dias;
+
+    INSERT INTO Voucher_servicio (cod_unico_prod, cod_prov, fecha_ingreso, fecha_salida, costo_total_unidad, coste_total_dias, costo_total_servicio)
+    VALUES (NEW.cod_unico_prod, NEW.cod_prov, NEW.fecha_ingreso, NEW.fecha_salida, v_costo_total_unidad, v_coste_total_dias, v_costo_total_servicio);
+END //
+
+DELIMITER ;
+
+
+
+
+
+
+
+/*
+insert into Productos (cod_unico_prod, nombre_prod, descripcion_prod, cod_prov, fecha_ingreso, fecha_salida, stk_prod, cod_categoria) values
+("48012", "Vivo X60 Pro", "El Vivo X60 Pro ofrece una pan imageafía.",3, "2019-12-04", "2030-03-22", 748, "C001");
+*/
+/*
+use BD_DAW2023;
+SELECT * FROM Tipo;
+SELECT * FROM Pais;
+SELECT * FROM Categoria;
+SELECT* FROM Empresa;
+SELECT * FROM Proveedores;
+SELECT * FROM Productos;
+SELECT * FROM Usuario;
+SELECT* from Voucher_servicio;
+
+SELECT count(*) FROM Proveedores;
+
+SELECT * FROM Usuario WHERE Usuario in ('Noob') AND password in ('asd');
+
+
+/*
+SELECT em.id_emp, em.cod_unico_emp, em.nombre_emp, em.ruc_emp, em.descripcion_emp, em.correo_emp, em.direccion_emp, tp.tipo, pa.nombre_pais, em.telefono_one_emp, em.telefono_two_emp
+FROM Empresa em
+INNER JOIN Pais pa ON em.id_pais = pa.id_pais
+INNER JOIN Tipo tp ON em.nacionalidad_emp = tp.id_tip
+order by em.id_emp asc;
+*/
+
+/*
+select pro.cod_unico_prod, pro.nombre_prod , pro.descripcion_prod, pro.fecha_ingreso, pro.fecha_salida, pro.stk_prod, cat.categoria
+from Productos pro inner join Categoria cat
+on pro.cod_categoria = cat.cod_categoria
+*/
+
+
+/*
+SELECT  p.cod_prov, p.nombre_prov, p.ruc_prov, p.descripcion_prov, p.correo_prov, p.direccion_prov, tip.tipo ,pa.nombre_pais, p.telefono_one_prov, p.telefono_two_prov
+FROM Proveedores p
+inner join Pais pa on p.id_pais = pa.id_pais
+INNER JOIN Tipo tip ON p.nacionalidad_prov = tip.id_tip
+order by p.cod_prov asc;
+*/
+
+
+/*INSERT INTO Usuario (cod_uni_User, cod_order, Usuario, password) VALUES
+(1, 1, 'asdasd', 'asdasd'),*/
 
 /*
 DROP TRIGGER IF EXISTS calcular_precio_dias;
@@ -529,58 +609,3 @@ BEGIN
 END;
 DELIMITER ;
 */
-
-
-
-
-
-
-
-
-
-
-/*
-INSERT INTO Productos (cod_unico_prod, nombre_prod, descripcion_prod,cod_unico_prov, fecha_ingreso, fecha_salida, stk_prod, cod_categoria)
-VALUES ("11111", "sofa", NULL, "96098", "2023-05-05", "2023-09-05", 100, "C004");
-
--- Los triggers se ejecutarán automáticamente después de la inserción en la tabla Productos
-
-
-use BD_DAW2023;
-SELECT * FROM Tipo;
-SELECT * FROM Pais;
-SELECT * FROM Categoria;
-SELECT* FROM Empresa;
-SELECT * FROM Proveedores;
-SELECT * FROM Productos;
-SELECT * FROM Usuario;
-SELECT* from Voucher_servicio;
-
-
-
-
-
-/*
-SELECT em.id_emp, em.cod_unico_emp, em.nombre_emp, em.ruc_emp, em.descripcion_emp, em.correo_emp, em.direccion_emp, tp.tipo, pa.nombre_pais, em.telefono_one_emp, em.telefono_two_emp
-FROM Empresa em
-INNER JOIN Pais pa ON em.id_pais = pa.id_pais
-INNER JOIN Tipo tp ON em.nacionalidad_emp = tp.id_tip
-order by em.id_emp asc;
-*/
-
-/*
-select pro.cod_unico_prod, pro.nombre_prod , pro.descripcion_prod, pro.fecha_ingreso, pro.fecha_salida, pro.stk_prod, cat.categoria
-from Productos pro inner join Categoria cat
-on pro.cod_categoria = cat.cod_categoria
-*/
-
-
-/*
-SELECT  p.cod_prov, p.nombre_prov, p.ruc_prov, p.descripcion_prov, p.correo_prov, p.direccion_prov, tip.tipo ,pa.nombre_pais, p.telefono_one_prov, p.telefono_two_prov
-FROM Proveedores p
-inner join Pais pa on p.id_pais = pa.id_pais
-INNER JOIN Tipo tip ON p.nacionalidad_prov = tip.id_tip
-order by p.cod_prov asc;
-*/
-
-

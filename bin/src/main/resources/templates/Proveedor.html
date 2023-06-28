@@ -25,7 +25,6 @@
 
         :root{
             --bg-aside:#1D2F3D;
-            --tip-letra-footer: font-family: 'Geologica', sans-serif;
         }
         li{
             list-style: none;
@@ -165,18 +164,18 @@
                 <li class="nav-item dropdown">
                     <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        Registro
+                        Registros
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoProveedores">Proveedores</a></li>
-                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoProducto">productos</a></li>
-                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresas</a></li>
+                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoProveedores">Proveedor</a></li>
+                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoProducto">Productos</a></li>
+                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresa</a></li>
 
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Servicios</a></li>
                 <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i> Contactos</a></li>
-                <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Login</a></li>
+                <li><a href="/home/Acount"><i class="fa fa-sign-out" aria-hidden="true"></i> Login</a></li>
             </ul>
         </nav>
         <div class="clearfix"></div>
@@ -186,7 +185,7 @@
 <form action="/proveedor/guardar" method="post" th:object="${proveedor}" class="content-navbar">
     <div class="row">
         <div class="col">
-            <label for="cod_prov">Código Proveedor</label>
+            <label for="inputCod">Código Proveedor</label>
             <input type="text" th:field="*{cod_prov}"
                    class="form-control" id="inputCod" placeholder="00000" readonly>
         </div>
@@ -209,7 +208,7 @@
         <div class="col">
             <label for="correo_prov">Correo</label>
             <input type="email" th:field="*{correo_prov}"
-                   class="form-control" id="correo_prov" placeholder="Obligatorio (ejemplo: adasd@gmail.com)" required>
+                   class="form-control" id="correo_prov" placeholder="Obligatorio (ejemplo: nombre@gmail.com)" required>
             <small class="text-danger" id="correoProvError"></small>
             <small class="text-danger" th:if="${#fields.hasErrors('correo_prov')}" th:errors="*{correo_prov}"></small>
         </div>
@@ -255,13 +254,16 @@
 
     <br>
     <button th:text="${boton}" type="submit" class="btn btn-success"></button>
+    <a href="/proveedor/listadopdf" class="btn btn-success" target="_blank">PDF</a>
+    <a href="/home/HomeAcount/listadoProducto" class="btn btn-success">Nuevo</a>
     </br>
-    <div th:class="${clase}" role="alert" th:text="${mensaje}"></div>
+
+
 </form>
 
-
-
-
+<div class="container">
+    <div th:class="${clase}" role="alert" th:text="${mensaje}"></div>	
+</div>
 
 <div class="container">
     <table id="tablaEmpresas" class="table table-bordered">

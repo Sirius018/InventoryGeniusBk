@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/Login.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
     <title>InventoryGenius - New Acount</title>
     <style>
-		body {
+body {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,14 +27,10 @@ section {
 }
 
 .container { padding: 20px; }
-
-.user { display: flex; flex-direction: column; align-items: center;
-}
-
+.user { display: flex; flex-direction: column; align-items: center; }
 .formBx { width: 100%; }
 
-form { display: flex; flex-direction: column; align-items: center;
-}
+form { display: flex; flex-direction: column; align-items: center; }
 
 h2 { font-size: 24px; margin-bottom: 40px; }
 
@@ -67,40 +65,43 @@ input[type="submit"]:hover{ background: #14c599; }
 p.signup { font-size: 14px; margin-top: 15px; }
 
 a { color: #069370; text-decoration: none; }
+
+#smsAlert {
+    width: 100%;
+    text-align: center;
+}
 	</style>
 </head>
 <body>
 
     <section>
-        <div class="container">            
-            <div class="user signupBx">                
+        <div class="container">
+            <div class="user signupBx">
                 <div class="formBx">
-                    <form action="">
+                    <form action="/home/NewAcount/Create" method="post" th:object="${usuario}">
                         <h2>Crear una Cuenta</h2>
-                        <input type="text" placeholder="Nombre Usuario">
-                        <input type="password" placeholder="Crear Contraseña">
-                        <input type="password" placeholder="Confirmar Contraseña">
+                        <input id="nameUserNew" type="text" name="userName" placeholder="Nombre Usuario">
+                        <input id="passUserNew" type="password" name="passwordUser" placeholder="Crear Contraseña">
                         <input type="submit" value="Crear">
-                        <p class="singup">Ya tienes una cuenta? <a href="/home/Acount" onclick="toogleForm();">Ingresar</a></p>
+                        <p class="signup">¿Ya tienes una cuenta? <a href="/home/Acount" onclick="toggleForm();">Ingresar</a></p>
                     </form>
                 </div>
             </div>
         </div>
+        <br>
+        <div id="smsAlert"  th:class="${clase}" role="alert">
+            <p th:text="${mensaje}"></p>
+        </div>
+
+
     </section>
 
-
-
-    <script>
-        function toogleForm(){
-            /* section = document.querySelector('section'); */
+<script>
+    function toogleForm(){
             container = document.querySelector('.container');
-
             container.classList.toogle('active');
-            /* section.classList.toogle('active'); */
-
-        }
-    </script>
-    
+    }
+</script>
 
 </body>
 </html>
