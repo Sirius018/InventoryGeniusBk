@@ -163,18 +163,18 @@
                 <li class="nav-item dropdown">
                     <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                        Registro
+                        Registros
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoProveedores">Proveedores</a></li>
-                          <li><a class="dropdown-item" href="/home/HomeAcount/listadoProducto">productos</a></li>
-                          <li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresas</a></li>
+                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoProveedores">Proveedor</a></li>
+                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoProducto">Productos</a></li>
+                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresas</a></li>
 
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Servicios</a></li>
                 <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i> Contactos</a></li>
-                <li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Login</a></li>
+                <li><a href="/home/Acount"><i class="fa fa-sign-out" aria-hidden="true"></i> Login</a></li>
             </ul>
         </nav>
         <div class="clearfix"></div>
@@ -198,8 +198,8 @@
         </div>
         <div class="col">
             <label for="nombre_emp">Empresa</label>
-            <input type="text" th:field="*{nombre_emp}" class="form-control" id="nombre_emp" placeholder="(obligatorio)" pattern="[a-zA-Z0-9]+" required>
-            <div class="invalid-feedback">Ingresa un nombre válido (solo letras y números).</div>
+            <input type="text" th:field="*{nombre_emp}" class="form-control" id="nombre_emp" placeholder="(obligatorio)" pattern="[a-zA-Z0-9\s]{0,100}">
+            <div class="invalid-feedback">Ingresa un nombre válido (solo letras, números y espacios en blanco).</div>
         </div>
     </div>
 
@@ -221,9 +221,10 @@
     <div class="row">
         <div class="col">
             <label for="direccion_emp">Dirección</label>
-            <input type="text" th:field="*{direccion_emp}" class="form-control" id="direccion_emp" placeholder="(obligatorio)" pattern="[a-zA-Z0-9]+" required>
-            <div class="invalid-feedback">Ingresa una dirección válida (solo letras y números).</div>
+            <input type="text" th:field="*{direccion_emp}" class="form-control" id="direccion_emp" placeholder="(obligatorio)" pattern="[a-zA-Z0-9\s]+" required>
+            <div class="invalid-feedback">Ingresa una dirección válida (solo letras, números y espacios en blanco).</div>
         </div>
+
         <div class="col">
             <label for="inputTel">Teléfono</label>
             <input type="text" th:field="*{telefono_one_emp}" class="form-control" id="inputTel" placeholder="">

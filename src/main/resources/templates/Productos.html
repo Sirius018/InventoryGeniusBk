@@ -161,18 +161,18 @@
 				<li class="nav-item dropdown">
 					<a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">
 						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-						Registro
+						Registros
 					</a>
 					<ul class="dropdown-menu">
-						<li><a class="dropdown-item" href="/home/HomeAcount/listadoProveedores">Proveedores</a></li>
-                          <li><a class="dropdown-item" href="/home/HomeAcount/listadoProducto">productos</a></li>
-                          <li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresas</a></li>
+						<li><a class="dropdown-item" href="/home/HomeAcount/listadoProveedores">Proveedor</a></li>
+						<li><a class="dropdown-item" href="/home/HomeAcount/listadoProducto">Productos</a></li>
+						<li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresas</a></li>
 
 					</ul>
 				</li>
 				<li><a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Servicios</a></li>
 				<li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i> Contactos</a></li>
-				<li><a href="index.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Login</a></li>
+				<li><a href="/home/Acount"><i class="fa fa-sign-out" aria-hidden="true"></i> Login</a></li>
 			</ul>
 		</nav>
 		<div class="clearfix"></div>
@@ -189,10 +189,11 @@
 		</div>
 		<div class="col">
 			<label for="inpProducto">Producto</label>
-			<input type="text" th:field="*{nombre_prod}" class="form-control" id="inpProducto" placeholder="(obligatorio)" maxlength="100" required>
+			<input type="text" th:field="*{nombre_prod}" class="form-control" id="inpProducto" placeholder="(obligatorio)" pattern="[a-zA-Z0-9\s]+" maxlength="100" required>
 			<small class="text-danger" id="productoError"></small>
 			<small class="text-danger" th:if="${#fields.hasErrors('nombre_prod')}" th:errors="*{nombre_prod}"></small>
 		</div>
+
 	</div>
 
 	<div class="row">
@@ -232,7 +233,7 @@
 		</div>
 
 		<div class="col col-md-3">
-			<label for="">Categoria</label>
+			<label for="">Categoría</label>
 			<select class="form-control" th:field="*{cod_categoria}">
 				<option th:each="c : ${lstCategoria}" th:value="${c.cod_categoria}"
 						th:text="${c.categoria}"
