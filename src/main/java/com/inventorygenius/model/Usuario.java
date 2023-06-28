@@ -11,9 +11,6 @@ import lombok.Data;
 @Table(name="Usuario")
 public class Usuario {
     @Id
-    @Column(name = "cod_uni_User")
-    private int codUniUser;
-
     @Column(name = "cod_order")
     private int codOrder;
 

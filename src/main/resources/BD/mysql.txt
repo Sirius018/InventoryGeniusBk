@@ -106,7 +106,8 @@ insert into Empresa values
 (null, 932802, "Innovatec Solutions", "18076062221", null, "InnovatecSolutions@gmail.com", "Av. Libertad, Calle 123 Mz. A Lt. 1", 75, "(01)2022467", "953030253"),
 (null, 629230, "Elite Marketing Group", "13813086703", null, "EliteMarketingGroup@gmail.com", "Calle Primavera, Av. 456 Mz. B Lt. 2", 22, "(01)7830302", "970831167"),
 (null, 333871, "Blue Wave Technologies", "17236143787", null, "BlueWaveTechnologies@gmail.com", "Av. del Sol, Calle 789 Mz. C Lt. 3", 119, "(01)3533150", "941749562"),
-(null, 594859, "Nexus Consulting Services", "19316246677", null, "NexusConsultingServices@gmail.com", "Calle Principal, Av. 10 Mz. D Lt. 4", 43, "(01)3401011", "989367573"),
+(null, 594859, "Nexus Consulting Services", "19316246677", null, "NexusConsultingServices@gmail.com", "Calle Principal, Av. 10 Mz. D Lt. 4", 43, "(01)3401011", "989367573");
+/*
 (null, 322816, "Apex Enterprises", "10974619268", null, "ApexEnterprises@gmail.com", "Av. Central, Calle 111 Mz. E Lt. 5", 134, "(01)9505320", "991459884"),
 (null, 979057, "Skyline Software Solutions", "15544476167", null, "SkylineSoftwareSolutions@gmail.com", "Calle Real, Av. 222 Mz. F Lt. 6", 134, "(01)3151288", "980351786"),
 (null, 295867, "Summit Industries", "17477047808", null, "SummitIndustries@gmail.com", "Av. Progreso, Calle 333 Mz. G Lt. 7", 27, "(01)8888139", "956057250"),
@@ -238,7 +239,7 @@ insert into Empresa values
 (null, 585391, "Infinity Computing Solutions", "10331343444", null, "InfinityComputingSolutions@gmail.com", "Av. Magia, Calle 13131 Mz. CCCC Lt. 133", 23, "(01)9082114", "929162859"),
 (null, 201731, "Cyberspace Computing Co.", "13841282156", null, "CyberspaceComputingCo.@gmail.com", "Calle Encanto, Av. 13232 Mz. DDDD Lt. 134", 70, "(01)8034673", "921644224"),
 (null, 891672, "Nebula Technologies", "17639788361", null, "NebulaTechnologies@gmail.com", "Av. Esperanza, Calle 13333 Mz. EEEE Lt. 135", 62, "(01)9421555", "930351289");
-
+*/
 
 DROP TABLE IF EXISTS Proveedores;
 CREATE TABLE Proveedores (
@@ -286,7 +287,8 @@ insert into Proveedores values
 (null,  "Alphatech", "14066496267", "Alphatech@gmail.com", "Av. Imaginación, Calle 6969 Mz. SSS Lt. 71",200, 141,"(01)7581209", "903003048"),
 (null,  "Cognify", "13928497483", "Cognify@gmail.com", "Calle Fantasía, Av. 7070 Mz. TTT Lt. 72",200, 132,"(01)8620598", "933913413"),
 (null,  "Novatek", "16350631887", "Novatek@gmail.com", "Av. Magia, Calle 7171 Mz. UUU Lt. 73",200, 103,"(01)3585816", "959844844"),
-(null, "Synthetix", "10518005870", "Synthetix@gmail.com", "Calle Encanto, Av. 7272 Mz. VVV Lt. 74",100, 22,"(01)6991407", "974720836"),
+(null, "Synthetix", "10518005870", "Synthetix@gmail.com", "Calle Encanto, Av. 7272 Mz. VVV Lt. 74",100, 22,"(01)6991407", "974720836");
+/*
 (null,  "Innovent", "14263111895", "Innovent@gmail.com", "Av. Esperanza, Calle 7373 Mz. WWW Lt. 75",200, 65,"(01)6330284", "907934297"),
 (null,  "Mindware", "13961938423", "Mindware@gmail.com", "Calle Victoria, Av. 7474 Mz. XXX Lt. 76",200, 82,"(01)1669528", "960695142"),
 (null,  "Intellisys", "15545797619", "Intellisys@gmail.com", "Av. Alegría, Calle 7575 Mz. YYY Lt. 77",200, 21,"(01)9485994", "900702210"),
@@ -386,7 +388,7 @@ insert into Proveedores values
 (null, "Zenith Gaming Solutions", "16050624404", "ZenithGamingSolutions@gmail.com", "Calle Imaginación, Av. 10202 Mz. ZZZZ Lt. 104",200, 116,"(01)2815972", "979789760"),
 (null, "Infinity Console Systems", "14927446985", "InfinityConsoleSystems@gmail.com", "Av. Estrella, Calle 10303 Mz. AAAA Lt. 105",200, 49,"(01)2179108", "939174045"),
 (null, "Phoenix Entertainment Co.", "11164497949", "PhoenixEntertainmentCo.@gmail.com", "Calle Ensueño, Av. 10404 Mz. BBBB Lt. 106",200, 55,"(01)3104132", "964972428");
-
+*/
 
 
 
@@ -441,19 +443,20 @@ insert into Productos values ("55227", "Monitor", "Es el dispositivo de salida p
 */
 
 
-drop table if exists Usuario;
+DROP TABLE IF EXISTS Usuario;
 CREATE TABLE Usuario (
-  `cod_uni_User` INT PRIMARY KEY,
-  `cod_order` INT,
+  `cod_order` INT AUTO_INCREMENT,
   `Usuario` VARCHAR(50),
-  `password` VARCHAR(50)
+  `password` VARCHAR(50),
+  PRIMARY KEY (cod_order)
 );
 
-INSERT INTO Usuario (cod_uni_User, cod_order, Usuario, password) VALUES
-(1, 1, 'admin', 'admin'),
-(2, 2, 'Noob', 'asd'),
-(3, 3, 'midd', '123'),
-(4, 4, 'nuton', 'buton');
+INSERT INTO Usuario (Usuario, password) VALUES
+('admin', 'admin'),
+('Noob', 'asd'),
+('midd', '123'),
+('nuton', 'buton');
+
 
 
 
@@ -469,8 +472,23 @@ CREATE TABLE Voucher_servicio (
 );
 
 
+/*
+DELIMITER //
+CREATE TRIGGER trg_insert_usuario
+BEFORE INSERT ON Usuario
+FOR EACH ROW
+BEGIN
+    DECLARE last_cod_uni INT;
+    DECLARE last_cod_order INT;
+    SELECT MAX(cod_uni_User), MAX(cod_order) INTO last_cod_uni, last_cod_order FROM Usuario;
+    SET NEW.cod_uni_User = last_cod_uni + 1;
+    SET NEW.cod_order = last_cod_order + 1;
+END//
+DELIMITER ;*/
 
 
+/*INSERT INTO Usuario (cod_uni_User, cod_order, Usuario, password) VALUES
+(1, 1, 'asdasd', 'asdasd'),*/
 
 /*
 DROP TRIGGER IF EXISTS calcular_precio_dias;
@@ -556,8 +574,9 @@ SELECT * FROM Productos;
 SELECT * FROM Usuario;
 SELECT* from Voucher_servicio;
 
+SELECT count(*) FROM Proveedores;
 
-
+SELECT * FROM Usuario WHERE Usuario in ('Noob') AND password in ('asd');
 
 
 /*
