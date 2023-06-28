@@ -267,8 +267,8 @@ CREATE TABLE Productos (
   nombre_prod VARCHAR(100) NOT NULL,
   descripcion_prod VARCHAR(500) DEFAULT NULL,
   cod_prov int,
-  fecha_ingreso DATETIME,
-  fecha_salida DATETIME,
+  fecha_ingreso varchar(10),
+  fecha_salida varchar(10),
   stk_prod INT,
   cod_categoria VARCHAR(4),
   PRIMARY KEY (cod_unico_prod),
@@ -404,8 +404,9 @@ insert into Productos (cod_unico_prod, nombre_prod, descripcion_prod, cod_prov, 
 ("64650", "Oppo Find X3 Pro", "El Oppo Find X3 Pro cu 2.0.",3, "2021-10-09", "2026-11-26", 691, "C001"),
 ("21861", "ZTE Axon 30 Ultra", "El ZTE Axon 30 Ultra  y un rendimiento excepcional.",3, "2009-02-26", "2026-04-22", 734, "C001"),
 ("45513", "Realme 8 Pro", "El Realme 8 Pro cuenta con eficiente.",3, "2019-07-10", "2029-07-07", 678, "C001");
+
+
 /*
-("48012", "Vivo X60 Pro", "El Vivo X60 Pro ofrece una pan image gimbal y carga rápida de 33W. Con un diseño elegante y un enfoque en la fotografía.",3, "2019-12-04", "2030-03-22", 748, "C001"),
 ("78494", "HTC U12+", "El HTC U12+ cuenta con una pantall resis al agua",4, "2010-06-03", "2031-12-02", 755, "C001"),
 ("21220", "Lenovo Legion Phone Duel", "El Lenovo Legion. Cuenta con gatillos táctiles, sistema de refrigeración y una gran capacidad de almacenamiento.",4, "2008-10-25", "2023-11-08", 621, "C001"),
 ("53538", "Blackberry Key2", "El Blackberry Key2 presen y una batería de larga duración.",4, "2009-07-12", "2035-09-23", 850, "C001"),
@@ -459,31 +460,93 @@ INSERT INTO Usuario (Usuario, password) VALUES
 
 
 
-drop table if exists Voucher_servicio;
+DROP TABLE IF EXISTS Voucher_servicio;
 CREATE TABLE Voucher_servicio (
-  cod_Vta_Voucher INT PRIMARY KEY,
-  cod_unico_prod char(5),
-  cod_unico_prov VARCHAR(4),
-  igv SMALLINT DEFAULT 5,
-  costo_total_igv smallint,
-  costo_total_servicio SMALLINT,
-  foreign key (cod_unico_prod) REFERENCES Productos (cod_unico_prod)
+  cod_Vta_Voucher INT PRIMARY KEY auto_increment,
+  cod_unico_prod VARCHAR(5),
+  cod_prov INT,
+  fecha_ingreso varchar(10),
+  fecha_salida varchar(10),
+  igv DECIMAL(10, 2) default 0.2,
+  costo_total_unidad DECIMAL(10, 2) default 0.2,
+  coste_total_dias int default 10,
+  costo_total_servicio DECIMAL(10, 2),
+  FOREIGN KEY (cod_prov) REFERENCES Proveedores (cod_prov),
+  FOREIGN KEY (cod_unico_prod) REFERENCES Productos(cod_unico_prod)
 );
 
 
-/*
+/*INSERT INTO Voucher_servicio (cod_Vta_Voucher, cod_unico_prod, cod_prov, igv, costo_total_igv, costo_total_servicio)
+VALUES (null, '18814', 2, 2, 100, 500);*/
+
+
 DELIMITER //
-CREATE TRIGGER trg_insert_usuario
-BEFORE INSERT ON Usuario
+
+CREATE TRIGGER insertar_voucher AFTER INSERT ON Productos
 FOR EACH ROW
 BEGIN
-    DECLARE last_cod_uni INT;
-    DECLARE last_cod_order INT;
-    SELECT MAX(cod_uni_User), MAX(cod_order) INTO last_cod_uni, last_cod_order FROM Usuario;
-    SET NEW.cod_uni_User = last_cod_uni + 1;
-    SET NEW.cod_order = last_cod_order + 1;
-END//
-DELIMITER ;*/
+    DECLARE v_costo_total_unidad DECIMAL(10, 2);
+    DECLARE v_coste_total_dias INT;
+    DECLARE v_costo_total_servicio DECIMAL(10, 2);
+
+    SET v_costo_total_unidad = NEW.stk_prod * 0.2;
+    SET v_coste_total_dias = DATEDIFF(NEW.fecha_salida, NEW.fecha_ingreso) * 10;
+    SET v_costo_total_servicio = v_costo_total_unidad + v_coste_total_dias;
+
+    INSERT INTO Voucher_servicio (cod_unico_prod, cod_prov, fecha_ingreso, fecha_salida, costo_total_unidad, coste_total_dias, costo_total_servicio)
+    VALUES (NEW.cod_unico_prod, NEW.cod_prov, NEW.fecha_ingreso, NEW.fecha_salida, v_costo_total_unidad, v_coste_total_dias, v_costo_total_servicio);
+END //
+
+DELIMITER ;
+
+
+
+
+
+
+
+/*
+insert into Productos (cod_unico_prod, nombre_prod, descripcion_prod, cod_prov, fecha_ingreso, fecha_salida, stk_prod, cod_categoria) values
+("48012", "Vivo X60 Pro", "El Vivo X60 Pro ofrece una pan imageafía.",3, "2019-12-04", "2030-03-22", 748, "C001");
+*/
+/*
+use BD_DAW2023;
+SELECT * FROM Tipo;
+SELECT * FROM Pais;
+SELECT * FROM Categoria;
+SELECT* FROM Empresa;
+SELECT * FROM Proveedores;
+SELECT * FROM Productos;
+SELECT * FROM Usuario;
+SELECT* from Voucher_servicio;
+
+SELECT count(*) FROM Proveedores;
+
+SELECT * FROM Usuario WHERE Usuario in ('Noob') AND password in ('asd');
+
+
+/*
+SELECT em.id_emp, em.cod_unico_emp, em.nombre_emp, em.ruc_emp, em.descripcion_emp, em.correo_emp, em.direccion_emp, tp.tipo, pa.nombre_pais, em.telefono_one_emp, em.telefono_two_emp
+FROM Empresa em
+INNER JOIN Pais pa ON em.id_pais = pa.id_pais
+INNER JOIN Tipo tp ON em.nacionalidad_emp = tp.id_tip
+order by em.id_emp asc;
+*/
+
+/*
+select pro.cod_unico_prod, pro.nombre_prod , pro.descripcion_prod, pro.fecha_ingreso, pro.fecha_salida, pro.stk_prod, cat.categoria
+from Productos pro inner join Categoria cat
+on pro.cod_categoria = cat.cod_categoria
+*/
+
+
+/*
+SELECT  p.cod_prov, p.nombre_prov, p.ruc_prov, p.descripcion_prov, p.correo_prov, p.direccion_prov, tip.tipo ,pa.nombre_pais, p.telefono_one_prov, p.telefono_two_prov
+FROM Proveedores p
+inner join Pais pa on p.id_pais = pa.id_pais
+INNER JOIN Tipo tip ON p.nacionalidad_prov = tip.id_tip
+order by p.cod_prov asc;
+*/
 
 
 /*INSERT INTO Usuario (cod_uni_User, cod_order, Usuario, password) VALUES
@@ -546,59 +609,3 @@ BEGIN
 END;
 DELIMITER ;
 */
-
-
-
-
-
-
-
-
-
-
-/*
-INSERT INTO Productos (cod_unico_prod, nombre_prod, descripcion_prod,cod_unico_prov, fecha_ingreso, fecha_salida, stk_prod, cod_categoria)
-VALUES ("11111", "sofa", NULL, "96098", "2023-05-05", "2023-09-05", 100, "C004");
-
--- Los triggers se ejecutarán automáticamente después de la inserción en la tabla Productos
-
-
-use BD_DAW2023;
-SELECT * FROM Tipo;
-SELECT * FROM Pais;
-SELECT * FROM Categoria;
-SELECT* FROM Empresa;
-SELECT * FROM Proveedores;
-SELECT * FROM Productos;
-SELECT * FROM Usuario;
-SELECT* from Voucher_servicio;
-
-SELECT count(*) FROM Proveedores;
-
-SELECT * FROM Usuario WHERE Usuario in ('Noob') AND password in ('asd');
-
-
-/*
-SELECT em.id_emp, em.cod_unico_emp, em.nombre_emp, em.ruc_emp, em.descripcion_emp, em.correo_emp, em.direccion_emp, tp.tipo, pa.nombre_pais, em.telefono_one_emp, em.telefono_two_emp
-FROM Empresa em
-INNER JOIN Pais pa ON em.id_pais = pa.id_pais
-INNER JOIN Tipo tp ON em.nacionalidad_emp = tp.id_tip
-order by em.id_emp asc;
-*/
-
-/*
-select pro.cod_unico_prod, pro.nombre_prod , pro.descripcion_prod, pro.fecha_ingreso, pro.fecha_salida, pro.stk_prod, cat.categoria
-from Productos pro inner join Categoria cat
-on pro.cod_categoria = cat.cod_categoria
-*/
-
-
-/*
-SELECT  p.cod_prov, p.nombre_prov, p.ruc_prov, p.descripcion_prov, p.correo_prov, p.direccion_prov, tip.tipo ,pa.nombre_pais, p.telefono_one_prov, p.telefono_two_prov
-FROM Proveedores p
-inner join Pais pa on p.id_pais = pa.id_pais
-INNER JOIN Tipo tip ON p.nacionalidad_prov = tip.id_tip
-order by p.cod_prov asc;
-*/
-
-
