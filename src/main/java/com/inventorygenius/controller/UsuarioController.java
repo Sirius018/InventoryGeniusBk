@@ -19,7 +19,7 @@ public class UsuarioController {
                         Model model) {
         Usuario usuario = repoUsuario.findByUsuarioAndPassword(userName, password);
         if (usuario != null) {
-            return "/home/Acount";
+            return "Home_Acount";
         } else {
             model.addAttribute("error", "Usuario y/o contraseña incorrectos");
             return "loginSign";

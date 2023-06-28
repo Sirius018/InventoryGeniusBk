@@ -71,25 +71,25 @@ a { color: #069370; text-decoration: none; }
 </head>
 <body>
 
-    <section>
-        <div class="container">
-            <div class="user signiBx">
-                <div class="formBx">
-                    <form action="">
-                        <h2>Mi Cuenta</h2>
-                        <input id="userName" type="text" placeholder="Usuario">
-                        <input id="PasswordUser" type="password" placeholder="Contraseña">
-                        <input type="submit" value="Acceder">
-                        <a href="/home/HomeAcount">navbar</a>
-                        <p class="singup">No tienes una cuenta? <a href="/home/NewAcount" onclick="toogleForm();">Crear</a></p>
-                        
-                    </form>
-                </div>
+<section>
+    <div class="container">
+        <div class="user signiBx">
+            <div class="formBx">
+                <form action="/home/Acount" method="post">
+                    <h2>Mi Cuenta</h2>
+                    <input id="userName" name="userName" type="text" placeholder="Usuario">
+                    <input id="PasswordUser" name="passwordUser" type="password" placeholder="Contraseña">
+                    <input type="submit" value="Acceder">
+                    <a href="/home/HomeAcount">navbar</a>
+                    <p class="singup">No tienes una cuenta? <a href="/home/NewAcount" onclick="toogleForm();">Crear</a></p>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
-  
+
+
 
 </body>
 </html>
