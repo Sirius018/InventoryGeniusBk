@@ -26,7 +26,7 @@ public class EmpresaController {
     public String guardarEmpresa(@ModelAttribute Empresa empresa, Model model ) {
         try {
             repoEmpresa.save(empresa);
-            model.addAttribute("mensaje","Actualización Exitosa");
+            model.addAttribute("mensaje","Operación Exitosa");
             model.addAttribute("clase","alert alert-success");
             model.addAttribute("boton","Registrar");
             model.addAttribute("listaEmpresa", repoEmpresa.findAll());

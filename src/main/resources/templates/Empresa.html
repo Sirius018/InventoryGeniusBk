@@ -221,9 +221,10 @@
     <div class="row">
         <div class="col">
             <label for="direccion_emp">Dirección</label>
-            <input type="text" th:field="*{direccion_emp}" class="form-control" id="direccion_emp" placeholder="(obligatorio)" pattern="[a-zA-Z0-9\s]+" required>
-            <div class="invalid-feedback">Ingresa una dirección válida (solo letras, números y espacios en blanco).</div>
+            <input type="text" th:field="*{direccion_emp}" class="form-control" id="direccion_emp" placeholder="(obligatorio)" pattern=".*" required>
+            <div class="invalid-feedback">Ingresa una dirección válida.</div>
         </div>
+
 
         <div class="col">
             <label for="inputTel">Teléfono</label>

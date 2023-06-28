@@ -85,7 +85,7 @@ public class ProveedorController {
 	public String guardarProveedor(@ModelAttribute Proveedor proveedor, Model model ) {
 		try {
 			repoProveedor.save(proveedor);
-			model.addAttribute("mensaje","Actualización Exitosa");
+			model.addAttribute("mensaje","Operación Exitosa");
 			model.addAttribute("clase","alert alert-success");
 			model.addAttribute("boton","Registrar");
 			model.addAttribute("listaProveedor", repoProveedor.findAll());

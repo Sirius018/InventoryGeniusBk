@@ -33,7 +33,7 @@ public class ProductoController {
 	public String guardarEmpresa(@ModelAttribute Producto producto, Model model ) {
 		try {
 			repoProducto.save(producto);
-			model.addAttribute("mensaje","Actualización Exitosa");
+			model.addAttribute("mensaje","Operación Exitosa");
 			model.addAttribute("clase","alert alert-success");
 			model.addAttribute("boton","Registrar");
 			model.addAttribute("listaProducto", repoProducto.findAll());
