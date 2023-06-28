@@ -168,7 +168,7 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/home/HomeAcount/listadoProveedores">Proveedor</a></li>
                         <li><a class="dropdown-item" href="/home/HomeAcount/listadoProducto">Productos</a></li>
-                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresas</a></li>
+                        <li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresa</a></li>
 
                     </ul>
                 </li>
@@ -198,7 +198,7 @@
         </div>
         <div class="col">
             <label for="nombre_emp">Empresa</label>
-            <input type="text" th:field="*{nombre_emp}" class="form-control" id="nombre_emp" placeholder="(obligatorio)" pattern="[a-zA-Z0-9\s]{0,100}">
+            <input type="text" th:field="*{nombre_emp}" class="form-control" id="nombre_emp" placeholder="(obligatorio)" pattern="[a-zA-Z0-9\s]{0,100}" required>
             <div class="invalid-feedback">Ingresa un nombre válido (solo letras, números y espacios en blanco).</div>
         </div>
     </div>
@@ -248,6 +248,8 @@
 
     <br>
     <button th:text="${boton}" type="submit" class="btn btn-success"></button>
+    <a href="/empresa/listadopdf" class="btn btn-success" target="_blank">PDF</a>
+    <a href="/home/HomeAcount/listadoEmpresa" class="btn btn-success">Nuevo</a>
     </br>
     <div th:class="${clase}" role="alert" th:text="${mensaje}"></div>
 

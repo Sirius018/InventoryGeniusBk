@@ -1,6 +1,11 @@
 package com.inventorygenius.controller;
 
+import java.io.OutputStream;
+
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +17,11 @@ import com.inventorygenius.model.Empresa;
 import com.inventorygenius.repository.IEmpresaRepository;
 import com.inventorygenius.repository.IPaisRepository;
 
+import jakarta.servlet.http.HttpServletResponse;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+
 @Controller
 public class EmpresaController {
     @Autowired
@@ -20,10 +30,40 @@ public class EmpresaController {
     @Autowired
     private IPaisRepository repoPais;
 
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private ResourceLoader resourceLoader;
+
+
+    @GetMapping("/empresa/listadopdf")
+    public void reporteProducto(HttpServletResponse response) {
+        // descargar directamente en un archivo
+        // response.setHeader("Content-Disposition", "attachment; filename=\"reporte.pdf\";");
+
+        // el pdf se muestre en pantalla
+        response.setHeader("Content-Disposition", "inline;");
+        // tipo de contenido
+        response.setContentType("application/pdf");
+        try {
+            // obtener el recurso a utilizar -> jasper
+            String ru = resourceLoader.getResource("classpath:reportes/ReporteEmpresa.jasper").getURI().getPath();
+            // combina el jasper + data / Ojo!!! null -> la conexión no tiene parámetros
+            JasperPrint jasperPrint = JasperFillManager.fillReport(ru, null, dataSource.getConnection());
+            // genera un archivo temporal
+            OutputStream outStream = response.getOutputStream();
+            // muestra el archivo
+            JasperExportManager.exportReportToPdfStream(jasperPrint, outStream);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @PostMapping("/empresa/guardar")
     public String guardarEmpresa(@ModelAttribute Empresa empresa, Model model ) {
+        model.addAttribute("boton","Registrar");
         try {
             repoEmpresa.save(empresa);
             model.addAttribute("mensaje","Operación Exitosa");

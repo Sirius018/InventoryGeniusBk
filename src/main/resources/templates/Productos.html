@@ -166,7 +166,7 @@
 					<ul class="dropdown-menu">
 						<li><a class="dropdown-item" href="/home/HomeAcount/listadoProveedores">Proveedor</a></li>
 						<li><a class="dropdown-item" href="/home/HomeAcount/listadoProducto">Productos</a></li>
-						<li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresas</a></li>
+						<li><a class="dropdown-item" href="/home/HomeAcount/listadoEmpresa">Empresa</a></li>
 
 					</ul>
 				</li>
@@ -243,6 +243,8 @@
 	</div>
 	<br>
 	<button th:text="${boton}" type="submit" class="btn btn-success"></button>
+	<a href="/producto/listadopdf" class="btn btn-success" target="_blank">PDF</a>
+	<a href="/home/HomeAcount/listadoProducto" class="btn btn-success">Nuevo</a>
 	</br>
 	<div th:class="${clase}" role="alert" th:text="${mensaje}"></div>
 	
