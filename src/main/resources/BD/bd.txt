@@ -1,0 +1,295 @@
+-- MySQL dump 10.13  Distrib 8.0.33, for Win64 (x86_64)
+--
+-- Host: localhost    Database: bd_daw2023
+-- ------------------------------------------------------
+-- Server version	8.0.33
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `categoria`
+--
+
+DROP TABLE IF EXISTS `categoria`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `categoria` (
+  `cod_categoria` varchar(4) NOT NULL,
+  `categoria` varchar(255) DEFAULT NULL,
+  `descripcion_cat` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`cod_categoria`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categoria`
+--
+
+LOCK TABLES `categoria` WRITE;
+/*!40000 ALTER TABLE `categoria` DISABLE KEYS */;
+INSERT INTO `categoria` VALUES ('C001','Teléfonos móviles','celulares'),('C002','Computadoras','laptops, computadoras de escritorio, tabletas'),('C003','Electrodomésticos','licuadoras, tostadoras, microondas'),('C004','Componentes e computadora','procesadores, tarjetas gráficas, placas base, memoria RAM'),('C005','Cámaras','cámaras digitales, cámaras de acción, cámaras de seguridad'),('C006','Electrónica de consumo','televisores, reproductores de DVD/Blu-ray, sistemas de sonido'),('C007','Dispositivos de almacenamiento','discos duros, unidades USB, tarjetas de memoria'),('C008','Videojuegos y consolas','consolas de videojuegos, controladores, juegos'),('C009','Audio y música','auriculares, altavoces, reproductores de música'),('C010','Dispositivos de realidad virtual','gafas de realidad virtual, controladores de movimiento'),('C011','Relojes inteligentes y dispositivos portátiles','smartwatches, rastreadores de fitness'),('C012','Sistemas de seguridad','cámaras de vigilancia, sistemas de alarma'),('C013','Energía solar y renovable','paneles solares, cargadores solares, luces solares'),('C014','Herramientas eléctricas','taladros, sierras eléctricas, lijadoras'),('C015','Electrodomésticos de cocina','neveras, lavadoras, lavavajillas'),('C016','Dispositivos de control remoto',' controles remotos universales, controles inteligentes para el hogar'),('C017','Dispositivos de seguimiento y localización',' GPS, rastreadores de mascotas, localizadores personales'),('C018','Dispositivos de comunicación',' routers, módems, teléfonos de voz por IP'),('C019','Dispositivos de impresión','impresoras, escáneres, impresoras 3D'),('C020','Electrónica automotriz','sistemas de entretenimiento para automóviles, sistemas de navegación, cámaras de retroceso'),('C021','Dispositivos de videoconferencia','cámaras web, sistemas de conferencias'),('C022','Dispositivos de sonido profesional',' mezcladoras de audio, amplificadores, altavoces de alta fidelidad'),('C023','Dispositivos de vigilancia y seguridad del hogar',' sensores de movimiento, sistemas de alarma, timbres con video'),('C024','Dispositivos de domótica','termostatos inteligentes, cerraduras electrónicas, luces inteligentes'),('C025','Electrodomésticos de cuidado personal','secadores de pelo, planchas para el cabello, afeitadoras eléctricas');
+/*!40000 ALTER TABLE `categoria` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `empresa`
+--
+
+DROP TABLE IF EXISTS `empresa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `empresa` (
+  `id_emp` int NOT NULL AUTO_INCREMENT,
+  `cod_unico_emp` int NOT NULL,
+  `nombre_emp` varchar(255) NOT NULL,
+  `ruc_emp` varchar(255) DEFAULT NULL,
+  `descripcion_emp` varchar(255) DEFAULT NULL,
+  `correo_emp` varchar(255) DEFAULT NULL,
+  `direccion_emp` varchar(255) NOT NULL,
+  `id_pais` int NOT NULL,
+  `telefono_one_emp` varchar(255) DEFAULT NULL,
+  `telefono_two_emp` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_emp`),
+  KEY `id_pais` (`id_pais`),
+  CONSTRAINT `empresa_ibfk_1` FOREIGN KEY (`id_pais`) REFERENCES `pais` (`id_pais`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `empresa`
+--
+
+LOCK TABLES `empresa` WRITE;
+/*!40000 ALTER TABLE `empresa` DISABLE KEYS */;
+INSERT INTO `empresa` VALUES (1,932802,'Innovatec Solutions','18076062221',NULL,'InnovatecSolutions@gmail.com','Av. Libertad, Calle 123 Mz. A Lt. 1',75,'(01)2022467','953030253'),(2,629230,'Elite Marketing Group','13813086703',NULL,'EliteMarketingGroup@gmail.com','Calle Primavera, Av. 456 Mz. B Lt. 2',22,'(01)7830302','970831167'),(3,333871,'Blue Wave Technologies','17236143787',NULL,'BlueWaveTechnologies@gmail.com','Av. del Sol, Calle 789 Mz. C Lt. 3',119,'(01)3533150','941749562'),(4,594859,'Nexus Consulting Services','19316246677',NULL,'NexusConsultingServices@gmail.com','Calle Principal, Av. 10 Mz. D Lt. 4',43,'(01)3401011','989367573'),(5,322816,'Apex Enterprises','10974619268',NULL,'ApexEnterprises@gmail.com','Av. Central, Calle 111 Mz. E Lt. 5',134,'(01)9505320','991459884'),(6,979057,'Skyline Software Solutions','15544476167',NULL,'SkylineSoftwareSolutions@gmail.com','Calle Real, Av. 222 Mz. F Lt. 6',134,'(01)3151288','980351786'),(7,295867,'Summit Industries','17477047808',NULL,'SummitIndustries@gmail.com','Av. Progreso, Calle 333 Mz. G Lt. 7',27,'(01)8888139','956057250'),(8,445447,'Quantum Innovations','14133750798',NULL,'QuantumInnovations@gmail.com','Calle Flores, Av. 444 Mz. H Lt. 8',98,'(01)6176577','982188302'),(9,244088,'Stellar Management Group','15331899277',NULL,'StellarManagementGroup@gmail.com','Av. Esperanza, Calle 555 Mz. I Lt. 9',25,'(01)6703326','959520712');
+/*!40000 ALTER TABLE `empresa` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pais`
+--
+
+DROP TABLE IF EXISTS `pais`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `pais` (
+  `id_pais` int NOT NULL AUTO_INCREMENT,
+  `nombre_pais` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_pais`)
+) ENGINE=InnoDB AUTO_INCREMENT=144 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pais`
+--
+
+LOCK TABLES `pais` WRITE;
+/*!40000 ALTER TABLE `pais` DISABLE KEYS */;
+INSERT INTO `pais` VALUES (1,'Canadá '),(2,'Estados Unidos'),(3,'México'),(4,'Belice'),(5,'Groenlandia'),(6,'Guatemala'),(7,'Belice'),(8,'Honduras'),(9,'El Salvador'),(10,'Nicaragua'),(11,'Costa Rica'),(12,'Panamá '),(13,'ultramar de Francia'),(14,'Reunión '),(15,'Mayotte.'),(16,'Colombia'),(17,'Venezuela'),(18,'Guyana'),(19,'Surinam'),(20,'Brasil'),(21,'Ecuador'),(22,'Perú'),(23,'Bolivia'),(24,'Chile'),(25,'Argentina'),(26,'Paraguay'),(27,'Uruguay'),(28,'Albania'),(29,'Alemania'),(30,'Andorra'),(31,'Armenia'),(32,'Austria'),(33,'Azerbaiyán'),(34,'Bélgica'),(35,'Bielorrusia'),(36,'Bosnia y Herzegovina'),(37,'Bulgaria'),(38,'Chipre'),(39,'Ciudad del Vaticano'),(40,'Croacia'),(41,'Dinamarca'),(42,'Eslovaquia'),(43,'Eslovenia'),(44,'España'),(45,'Estonia'),(46,'Finlandia'),(47,'Francia'),(48,'Georgia'),(49,'Grecia'),(50,'Hungría'),(51,'Irlanda'),(52,'Islandia'),(53,'Italia'),(54,'Kazajistán'),(55,'Letonia'),(56,'Liechtenstein'),(57,'Lituania'),(58,'Luxemburgo'),(59,'Macedonia del Norte'),(60,'Malta'),(61,'Moldavia'),(62,'Mónaco'),(63,'Montenegro'),(64,'Noruega'),(65,'Países Bajos'),(66,'Polonia'),(67,'Portugal'),(68,'Reino Unido'),(69,'República Checa'),(70,'Rumanía'),(71,'Rusia'),(72,'San Marino'),(73,'Serbia'),(74,'Suecia'),(75,'Suiza'),(76,'Turquía'),(77,'Ucrania'),(78,'Gibraltar'),(79,'Afganistán'),(80,'Arabia Saudita'),(81,'Armenia'),(82,'Azerbaiyán'),(83,'Bangladés'),(84,'Baréin'),(85,'Birmania'),(86,'Brunéi'),(87,'Bután'),(88,'Camboya'),(89,'Catar'),(90,'China'),(91,'Chipre'),(92,'Corea del Norte'),(93,'Corea del Sur'),(94,'Emiratos Árabes Unidos'),(95,'Filipinas'),(96,'Georgia'),(97,'India'),(98,'Indonesia'),(99,'Irak'),(100,'Irán'),(101,'Israel'),(102,'Japón'),(103,'Jordania'),(104,'Kazajistán'),(105,'Kirguistán'),(106,'Kuwait'),(107,'Laos'),(108,'Líbano'),(109,'Malasia'),(110,'Maldivas'),(111,'Mongolia'),(112,'Nepal'),(113,'Omán'),(114,'Pakistán'),(115,'Palestina'),(116,'Panamá'),(117,'Papúa'),(118,'Nueva Guinea'),(119,'Singapur'),(120,'Siria'),(121,'Sri Lanka'),(122,'Tailandia'),(123,'Tayikistán'),(124,'Timor Oriental'),(125,'Turkmenistán'),(126,'Turquía'),(127,'Uzbekistán'),(128,'Vietnam'),(129,'Yemen'),(130,'Australia'),(131,'Fiyi'),(132,'Islas Marshall'),(133,'Islas Salomón'),(134,'Kiribati'),(135,'Micronesia'),(136,'Nauru'),(137,'Nueva Zelanda'),(138,'Palaos'),(139,'Papúa Nueva Guinea'),(140,'Samoa'),(141,'Tonga'),(142,'Tuvalu'),(143,'Vanuatu');
+/*!40000 ALTER TABLE `pais` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `productos`
+--
+
+DROP TABLE IF EXISTS `productos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `productos` (
+  `cod_unico_prod` varchar(5) NOT NULL,
+  `nombre_prod` varchar(255) DEFAULT NULL,
+  `descripcion_prod` varchar(255) DEFAULT NULL,
+  `cod_prov` int DEFAULT NULL,
+  `fecha_ingreso` varchar(255) DEFAULT NULL,
+  `fecha_salida` varchar(255) DEFAULT NULL,
+  `stk_prod` int DEFAULT NULL,
+  `cod_categoria` varchar(4) DEFAULT NULL,
+  PRIMARY KEY (`cod_unico_prod`),
+  KEY `cod_categoria` (`cod_categoria`),
+  KEY `cod_prov` (`cod_prov`),
+  CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`cod_categoria`) REFERENCES `categoria` (`cod_categoria`),
+  CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`cod_prov`) REFERENCES `proveedores` (`cod_prov`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `productos`
+--
+
+LOCK TABLES `productos` WRITE;
+/*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+INSERT INTO `productos` VALUES ('11111','ssssss','asdasd 4asd56465 asd',1,'2023-11-02','2023-10-31',2,'C016'),('18814','LG Velvet','El LG Velvet es un elegante t polvo.',2,'2017-06-20','2029-02-19',841,'C001'),('21800','asdasdasd','modelo 2024',1,'2023-11-14','2023-11-23',1,'C015'),('21861','ZTE Axon 30 Ultra','El ZTE Axonral.',3,'2009-02-26','2026-04-22',734,'C001'),('32535','Motorola Moto G Power','El Motorola Moto e.',2,'2010-08-13','2028-09-23',841,'C001'),('45513','Realme 8 Pro','El Realme 8 Pro cuenta ce.',3,'2019-07-10','2029-07-07',678,'C001'),('55555','adsasdasdasd','aaaaaaaaaaaaa',1,'2023-11-16','2023-11-16',2,'C001'),('61675','Nokia 9 PureView','El Nokia 9drio y metal.',2,'2021-08-09','2027-11-19',500,'C001'),('64650','Oppo Find X3 Pro','El Oppo Find X3 Pro cu 2.0.',3,'2021-10-09','2026-11-26',691,'C001'),('64994','Sony Xperia 1 II','El Sony Xperia 1 IIo.',2,'2023-03-21','2021-02-27',609,'C001'),('78143','ASUS ROG Phone 5','El ASUS ROG Phone ua.',2,'2022-01-07','2031-08-04',863,'C001'),('90465','Xiaomi Redmi Note 10 Pro','El Xiaomle.',3,'2018-08-25','2023-09-01',674,'C001');
+/*!40000 ALTER TABLE `productos` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`root`@`localhost`*/ /*!50003 TRIGGER `insertar_voucher` AFTER INSERT ON `productos` FOR EACH ROW BEGIN
+    DECLARE v_costo_total_unidad DECIMAL(10, 2);
+    DECLARE v_coste_total_dias INT;
+    DECLARE v_costo_total_servicio DECIMAL(10, 2);
+
+    SET v_costo_total_unidad = NEW.stk_prod * 0.2;
+    SET v_coste_total_dias = DATEDIFF(NEW.fecha_salida, NEW.fecha_ingreso) * 10;
+    SET v_costo_total_servicio = v_costo_total_unidad + v_coste_total_dias;
+
+    INSERT INTO Voucher_servicio (cod_unico_prod, cod_prov, fecha_ingreso, fecha_salida, costo_total_unidad, coste_total_dias, costo_total_servicio)
+    VALUES (NEW.cod_unico_prod, NEW.cod_prov, NEW.fecha_ingreso, NEW.fecha_salida, v_costo_total_unidad, v_coste_total_dias, v_costo_total_servicio);
+END */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+
+--
+-- Table structure for table `proveedores`
+--
+
+DROP TABLE IF EXISTS `proveedores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `proveedores` (
+  `cod_prov` int NOT NULL AUTO_INCREMENT,
+  `nombre_prov` varchar(255) DEFAULT NULL,
+  `ruc_prov` varchar(255) DEFAULT NULL,
+  `correo_prov` varchar(255) DEFAULT NULL,
+  `direccion_prov` varchar(255) NOT NULL,
+  `id_tip` int NOT NULL,
+  `id_pais` int NOT NULL,
+  `telefono_one_prov` varchar(255) DEFAULT NULL,
+  `telefono_two_prov` varchar(255) DEFAULT NULL,
+  `cod_unico_prov` varchar(255) DEFAULT NULL,
+  `descripcion_prov` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`cod_prov`),
+  KEY `id_pais` (`id_pais`),
+  KEY `id_tip` (`id_tip`),
+  CONSTRAINT `proveedores_ibfk_1` FOREIGN KEY (`id_pais`) REFERENCES `pais` (`id_pais`),
+  CONSTRAINT `proveedores_ibfk_2` FOREIGN KEY (`id_tip`) REFERENCES `tipo` (`id_tip`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `proveedores`
+--
+
+LOCK TABLES `proveedores` WRITE;
+/*!40000 ALTER TABLE `proveedores` DISABLE KEYS */;
+INSERT INTO `proveedores` VALUES (1,'Technova','15282316985','Technova@gmail.com','Av. Maravilla, Calle 6767 Mz. QQQ Lt. 69',200,91,'(01)6661810','926778626',NULL,NULL),(2,'Nexisys','11559284896','Nexisys@gmail.com','Calle Ilusión, Av. 6868 Mz. RRR Lt. 70',200,46,'(01)7434927','901434423',NULL,NULL),(3,'Alphatech','14066496267','Alphatech@gmail.com','Av. Imaginación, Calle 6969 Mz. SSS Lt. 71',200,141,'(01)7581209','903003048',NULL,NULL),(4,'Cognify','13928497483','Cognify@gmail.com','Calle Fantasía, Av. 7070 Mz. TTT Lt. 72',200,132,'(01)8620598','933913413',NULL,NULL),(5,'Novatek','16350631887','Novatek@gmail.com','Av. Magia, Calle 7171 Mz. UUU Lt. 73',200,103,'(01)3585816','959844844',NULL,NULL),(6,'Synthetix','10518005870','Synthetix@gmail.com','Calle Encanto, Av. 7272 Mz. VVV Lt. 74',100,22,'(01)6991407','974720836',NULL,NULL),(7,'Innovent','14263111895','Innovent@gmail.com','Av. Esperanza, Calle 7373 Mz. WWW Lt. 75',200,65,'(01)6330284','907934297',NULL,NULL),(8,'Mindware','13961938423','Mindware@gmail.com','Calle Victoria, Av. 7474 Mz. XXX Lt. 76',200,82,'(01)1669528','960695142',NULL,NULL),(9,'Intellisys','15545797619','Intellisys@gmail.com','Av. Alegría, Calle 7575 Mz. YYY Lt. 77',200,21,'(01)9485994','900702210',NULL,NULL);
+/*!40000 ALTER TABLE `proveedores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `tipo`
+--
+
+DROP TABLE IF EXISTS `tipo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `tipo` (
+  `id_tip` int NOT NULL,
+  `tipo` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_tip`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tipo`
+--
+
+LOCK TABLES `tipo` WRITE;
+/*!40000 ALTER TABLE `tipo` DISABLE KEYS */;
+INSERT INTO `tipo` VALUES (100,'Nacional'),(200,'Internacional');
+/*!40000 ALTER TABLE `tipo` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `usuario`
+--
+
+DROP TABLE IF EXISTS `usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuario` (
+  `cod_order` int NOT NULL AUTO_INCREMENT,
+  `usuario` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`cod_order`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuario`
+--
+
+LOCK TABLES `usuario` WRITE;
+/*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
+INSERT INTO `usuario` VALUES (1,'admin','admin'),(2,'Noob','asd'),(3,'midd','123'),(4,'nuton','buton');
+/*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `voucher_servicio`
+--
+
+DROP TABLE IF EXISTS `voucher_servicio`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `voucher_servicio` (
+  `cod_Vta_Voucher` int NOT NULL AUTO_INCREMENT,
+  `cod_unico_prod` varchar(5) DEFAULT NULL,
+  `cod_prov` int DEFAULT NULL,
+  `fecha_ingreso` varchar(10) DEFAULT NULL,
+  `fecha_salida` varchar(10) DEFAULT NULL,
+  `igv` decimal(10,2) DEFAULT '0.20',
+  `costo_total_unidad` decimal(10,2) DEFAULT '0.20',
+  `coste_total_dias` int DEFAULT '10',
+  `costo_total_servicio` decimal(10,2) DEFAULT NULL,
+  PRIMARY KEY (`cod_Vta_Voucher`),
+  KEY `cod_prov` (`cod_prov`),
+  KEY `cod_unico_prod` (`cod_unico_prod`),
+  CONSTRAINT `voucher_servicio_ibfk_1` FOREIGN KEY (`cod_prov`) REFERENCES `proveedores` (`cod_prov`),
+  CONSTRAINT `voucher_servicio_ibfk_2` FOREIGN KEY (`cod_unico_prod`) REFERENCES `productos` (`cod_unico_prod`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `voucher_servicio`
+--
+
+LOCK TABLES `voucher_servicio` WRITE;
+/*!40000 ALTER TABLE `voucher_servicio` DISABLE KEYS */;
+INSERT INTO `voucher_servicio` VALUES (1,'11111',1,'2023-11-02','2023-10-31',0.20,0.40,-20,-19.60),(2,'55555',1,'2023-11-16','2023-11-16',0.20,0.40,0,0.40),(3,'21800',1,'2023-11-14','2023-11-23',0.20,0.20,90,90.20);
+/*!40000 ALTER TABLE `voucher_servicio` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'bd_daw2023'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-11-07 19:30:13
