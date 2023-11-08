@@ -30,21 +30,11 @@ import net.sf.jasperreports.engine.JasperPrint;
 public class ProductoController {
 	/*crear los objetos para el repositorio*/
 
-	@Autowired
-	private IProductoRepository repoProducto;
-
-	@Autowired
-	private IProveedorRepository repoProveedor;
-
-	@Autowired
-	private ICategoriaRepository repoCategoria;
-
-	@Autowired
-	private DataSource dataSource;
-
-	@Autowired
-	private ResourceLoader resourceLoader;
-
+	@Autowired private IProductoRepository repoProducto;
+	@Autowired 	private IProveedorRepository repoProveedor;
+	@Autowired 	private ICategoriaRepository repoCategoria; 
+	@Autowired 	private DataSource dataSource;
+	@Autowired 	private ResourceLoader resourceLoader;
 
 	@GetMapping("/producto/listadopdf")
 	public void reporteProducto(HttpServletResponse response) {
@@ -71,29 +61,35 @@ public class ProductoController {
 
 
 	@PostMapping("/producto/guardar")
-	public String guardarEmpresa(@ModelAttribute Producto producto, Model model) {
-		model.addAttribute("boton","Registrar");
-		try {
-			repoProducto.save(producto);
-			if (model.getAttribute("boton").equals("Actualizar")) {
-				model.addAttribute("mensaje", "Operación Exitosa");
-			} else if (model.getAttribute("boton").equals("Registrar")) {
-				model.addAttribute("mensaje", "Operación Exitosa");
-			}
-			model.addAttribute("clase", "alert alert-success");
-			model.addAttribute("boton", "Registrar");
-			model.addAttribute("listaProducto", repoProducto.findAll());
-			model.addAttribute("lstCategoria", repoCategoria.findAll());
-			model.addAttribute("lstProveedor", repoProveedor.findAll());
-		} catch (Exception e) {
-			model.addAttribute("listaProducto", repoProducto.findAll());
-			model.addAttribute("lstCategoria", repoCategoria.findAll());
-			model.addAttribute("lstProveedor", repoProveedor.findAll());
-			model.addAttribute("mensaje", "No se pudo registrar");
-			model.addAttribute("clase", "alert alert-danger");
-		}
-		return "Productos";
+	public String guardarProducto(@ModelAttribute Producto producto, Model model) {
+	    model.addAttribute("boton", "Registrar");
+	    try {
+	        if (repoProducto.existsByCodUnicoProd(producto.getCod_unico_prod())) {
+	            // Si el código único ya existe, muestra un mensaje de error
+	            model.addAttribute("mensaje", "El código único ya existe");
+	            model.addAttribute("clase", "alert alert-danger");
+	        } else {
+	            repoProducto.save(producto);
+	            model.addAttribute("mensaje", "Operación Exitosa");
+	            model.addAttribute("clase", "alert alert-success");
+	        }
+	        // Resto del código para agregar otros atributos al modelo y retornar la vista
+	        model.addAttribute("boton", "Registrar");
+	        model.addAttribute("listaProducto", repoProducto.findAll());
+	        model.addAttribute("lstCategoria", repoCategoria.findAll());
+	        model.addAttribute("lstProveedor", repoProveedor.findAll());
+	    } catch (Exception e) {
+	        // Manejar la excepción
+	        model.addAttribute("listaProducto", repoProducto.findAll());
+	        model.addAttribute("lstCategoria", repoCategoria.findAll());
+	        model.addAttribute("lstProveedor", repoProveedor.findAll());
+	        model.addAttribute("mensaje", "No se pudo registrar");
+	        model.addAttribute("clase", "alert alert-danger");
+	    }
+	    return "Productos";
 	}
+
+
 
 	@PostMapping("/buscarproducto")
 	public String buscarProveedor(@RequestParam (name= "cod_unico_prod") String cod_unico_prod, Model model) {

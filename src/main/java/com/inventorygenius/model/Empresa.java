@@ -1,5 +1,6 @@
 package com.inventorygenius.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -13,9 +14,11 @@ import lombok.Data;
 public class Empresa {
 	@Id
     private int id_emp;
-
-    private int cod_unico_emp;
+	
+	@Column(name = "cod_unico_emp")
+	private int cod_unico_emp;
     private String nombre_emp;
+    @Column(name = "ruc_emp")
     private String ruc_emp;
     private String descripcion_emp;
     private String correo_emp;
